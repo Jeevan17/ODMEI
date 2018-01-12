@@ -6,7 +6,23 @@
 	
 	$conn = mysqli_connect($dbhost, $dbuser, $dbpass,'cbit');
    
-	//session_start();
+	session_start();
+	if(isset($_SESSION['placement'])) {
+		unset($_SESSION['placement']);
+		session_destroy();
+		echo "<script language='javascript'>window.location='index.php';</script>";
+	}
+	if(isset($_SESSION['principal'])) {
+		unset($_SESSION['principal']);
+		session_destroy();
+		echo "<script language='javascript'>window.location='index.php';</script>";
+	}
+	if(isset($_SESSION['aec'])) {
+		unset($_SESSION['aec']);
+		session_destroy();
+		echo "<script language='javascript'>window.location='index.php';</script>";
+	}
+	
 	if(! $conn )
 	{
 		echo "Not connected to database." . mysqli_error();
@@ -37,7 +53,6 @@
 				
 		if(isset($_POST["submit"]))
 		{
-			//echo "<script>alert('1')</script>";
 			if($_POST['username']!=null&&$_POST['password']!=null)
 			{				
 				$uname = $_POST['username'];
@@ -63,13 +78,20 @@
 						switch($role)
 						{
 							case "Principal":
+								session_start();
+								$_SESSION['principal'] = 'principal';
 								echo "<script language='javascript'>window.location='principal.php';</script>";
 								break;
 							case "Placement":
+								session_start();
+								$_SESSION['placement'] = 'placement';
 								echo "<script language='javascript'>window.location='placement.php';</script>";
 								break;
 							case "AEC":
-								echo "<script language='javascript'>window.location='AEC.php';</script>";
+								session_start();
+								$_SESSION['aec'] = 'aec';
+								echo "<script
+								language='javascript'>window.location='aec.php';</script>";
 								break;
 							case "COE":
 								echo "<script language='javascript'>window.location='coe.php';</script>";

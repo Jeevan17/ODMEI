@@ -4,6 +4,10 @@
 	$dbpass = 'cbit';
 	
 	$conn = mysqli_connect($dbhost, $dbuser, $dbpass,'cbit');
+	session_start();
+	if(!isset($_SESSION['principal'])){
+		echo "<script language='javascript'>window.location='index.php';</script>";
+	}
    
 	if(! $conn )
 	{
@@ -16,6 +20,9 @@
 					<link rel='stylesheet' href='style.css'>
 				</head>
 				<body>
+					<form action='principal.php' method='POST'>
+						<input type='submit' style='float: right' value='Logout' name='logout'>
+					</form>
 					<center>
 						<form action='principal.php' method='POST'>
 							<h3>Enter Roll number
@@ -25,29 +32,39 @@
 						</form>
 						<br><br>
 		";
-						if(isset($_POST["submit"]))
-						{
-							if($_POST['rollno']!=null)
-							{
-								
-								$rno = $_POST['rollno'];
-								$sql = "select * from admission where rollno='$rno'";
-								$retval = mysqli_query($conn, $sql);
-								if(! $retval )
-								{
-									echo "<script>alert('Entered RollNo does not exist!')</script>";
-									die('Could not get data: ' . mysqli_error());
-								}
-								
-								while($row = mysqli_fetch_array($retval))
-								{
-									echo "<h1>Admission Details:</h1>
-									<table border='1'>
-										<tr>
-											<th rowspan='4'><img src='data:image/jpeg;base64,".base64_encode( $row['Photo'] )."' width=150px height=200px />
-											</th>
-												<th style='padding: 5px;font-size: 20px;'>Name</th>
-												<td style='padding: 10px;font-size: 20px;'>{$row['FirstName']}"." "."{$row['LastName']}</td>
+	if(isset($_POST["logout"]))
+	{
+		//session_name('placement');
+		unset($_SESSION['principal']);
+		session_destroy();
+		echo "<script language='javascript'>window.location='index.php';</script>";
+	}
+	if(isset($_POST["submit"]))
+	{
+		if($_POST['rollno']!=null)
+		{
+			session_start();
+			if(!isset($_SESSION['principal'])){
+				echo "<script language='javascript'>window.location='index.php';</script>";
+			}
+			$rno = $_POST['rollno'];
+			$sql = "select * from admission where rollno='$rno'";
+			$retval = mysqli_query($conn, $sql);
+			if(! $retval )
+			{
+				echo "<script>alert('Entered RollNo does not exist!')</script>";
+				die('Could not get data: ' . mysqli_error());
+			}
+							
+			while($row = mysqli_fetch_array($retval))
+			{
+				echo "<h1>Admission Details:</h1>
+					<table border='1'>
+					<tr>
+						<th rowspan='4'><img src='data:image/jpeg;base64,".base64_encode( $row['Photo'] )."' width=150px height=200px />
+						</th>
+						<th style='padding: 5px;font-size: 20px;'>Name</th>
+						<td style='padding: 10px;font-size: 20px;'>{$row['FirstName']}"." "."{$row['LastName']}</td>
 											<tr>
 												<th style='padding: 5px;font-size: 20px;'>Roll number</th>
 												<td style='padding: 10px;font-size: 20px;'>{$row['RollNo']}</td>

@@ -4,6 +4,12 @@
 	$dbpass = 'cbit';
 	
 	$conn = mysqli_connect($dbhost, $dbuser, $dbpass,'cbit');
+	//session_name('placement');
+	session_start();
+	if(!isset($_SESSION['placement'])) {
+		echo "<script language='javascript'>window.location='index.php';</script>";
+	}
+
    
 	if(! $conn )
 	{
@@ -16,13 +22,30 @@
 					<link rel='stylesheet' href='style.css'>
 				</head>
 				<body>
+					<form action='placement.php' method='POST'>
+						<input type='submit' style='float: right' value='Logout' name='logout'>
+					</form>
 					<center>
 						<form action='placement.php' method='POST'>
 							<input type='submit' name='submitcompanydetails' value='Enter Company Details'  class='sub_btn'>
 						</form>
 	";
+	if(isset($_POST["logout"]))
+	{
+		//session_name('placement');
+		unset($_SESSION['placement']);
+		session_destroy();
+		echo "<script language='javascript'>window.location='index.php';</script>";
+	}
 	if(isset($_POST["submitcompanydetails"]))
 	{
+		//session_start();
+		//if(isset($_SESSION['logout'])) : header("Location: index.php");  endif;
+		//session_name('placement');
+		session_start();
+		if(!isset($_SESSION['placement'])) {
+			echo "<script language='javascript'>window.location='index.php';</script>";
+		}	
 		echo"
 			<form action='placement.php' method='POST'>
 				<table>
@@ -55,6 +78,12 @@
 	
 	if(isset($_POST["submitcdetails"]))
 	{
+		//if(isset($_SESSION['logout'])) : header("Location: index.php"); endif;
+		//session_name('placement');
+		session_start();
+		if(!isset($_SESSION['placement'])) {
+			echo "<script language='javascript'>window.location='index.php';</script>";
+		}
 		$cname = $_POST['cname'];
 		$cdescription = $_POST['cdescription'];
 		$csalary = $_POST['csalary'];
@@ -77,6 +106,12 @@
 	";
 	if(isset($_POST["submitstudentdetails"]))
 	{
+		//if(isset($_SESSION['logout'])) : header("Location: index.php"); endif;
+		//session_name('placement');
+		session_start();
+		if(!isset($_SESSION['placement'])) {
+			echo "<script language='javascript'>window.location='index.php';</script>";
+		}
 		echo"
 			<form action='placement.php' method='POST'>
 				<table>
@@ -108,6 +143,7 @@
 								<option value='Not Placed'>Not Placed</option>
 								<option value='Not Attempted'>Not Attempted</option>
 								<option value='Not Interested'>Not Interested</option>
+								<option value='Not Eligible'>Not Eligible</option>
 							</select>
 						</td>
 					</tr>
@@ -119,6 +155,12 @@
 	}
 	if(isset($_POST["submitsdetails"]))
 	{
+		//if(isset($_SESSION['logout'])) : header("Location: index.php"); endif;
+		//session_name('placement');
+		session_start();
+		if(!isset($_SESSION['placement'])) {
+			echo "<script language='javascript'>window.location='index.php';</script>";
+		}
 		$srollno = $_POST['srollno'];
 		$scname = $_POST['scname'];
 		$ssdate = $_POST['ssdate'];
@@ -144,6 +186,12 @@
 	";
 	if(isset($_POST["submit"]))
 	{
+		//if(isset($_SESSION['logout'])) : header("Location: index.php"); endif;
+		//session_name('placement');
+		session_start();
+		if(!isset($_SESSION['placement'])) {
+			echo "<script language='javascript'>window.location='index.php';</script>";
+		}
 		$rno = $_POST['rollno'];
 		echo "<br><h1>Placement Details:<h1>";
 		$sql="select CompanyName, Result from std_placement_details	where RollNo='$rno'";
