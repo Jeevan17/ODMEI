@@ -13,4 +13,3 @@ Bootstrap 4
 
 Progressive Web Apps
   https://codelabs.developers.google.com/codelabs/your-first-pwapp/#0
-  hello
