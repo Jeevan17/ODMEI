@@ -1,5 +1,8 @@
 for Tabs and pills
   https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_pills_dynamic&stacked=h
+
+
+  https://www.w3schools.com/bootstrap4/tryit.asp?filename=trybs_nav_tabs_toggleable&stacked=h
   
   
 Bootstrap 3

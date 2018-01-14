@@ -25,10 +25,14 @@
 	
 	if(! $conn )
 	{
-		echo "Not connected to database." . mysqli_error();
+		echo "
+			<div class='alert alert-danger'>
+				<strong>Not connected to database." . mysqli_error();"</strong>
+			</div>";
 	}
 		echo "
-			<html>
+			<!DOCTYPE html>
+			<html lang='en'>
 				<head>
 					<title>CBIT MANAGEMENT SYSTEM</title>
 
