@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 15, 2018 at 02:14 PM
+-- Generation Time: Jan 17, 2018 at 03:26 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.8
 
@@ -178,6 +178,20 @@ INSERT INTO `staff` (`StaffID`, `Role`, `FullName`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `staff_teaches_courses`
+--
+
+CREATE TABLE `staff_teaches_courses` (
+  `StaffID` bigint(20) NOT NULL,
+  `CourseID` bigint(20) NOT NULL,
+  `Timeperiod` int(10) NOT NULL,
+  `YearandSem` enum('4/4 Sem-1','4/4 Sem-2','','') NOT NULL,
+  `BSP` int(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `student`
 --
 
@@ -323,6 +337,20 @@ INSERT INTO `student_details` (`RollNumber`, `MiddleName`, `AdmissionDate`, `Yea
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `student_enroll_courses`
+--
+
+CREATE TABLE `student_enroll_courses` (
+  `RollNumber` bigint(20) NOT NULL,
+  `YearandSem` enum('4/4 Sem-1','4/4 Sem-2','','') NOT NULL,
+  `CourseID` bigint(20) NOT NULL,
+  `Timeperiod` int(10) NOT NULL,
+  `SyllabusType` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `student_login`
 --
 
@@ -405,6 +433,24 @@ CREATE TABLE `student_takes_books` (
 INSERT INTO `student_takes_books` (`RollNumber`, `BookID`, `CheckedOutDate`, `ReturnedDate`, `DueAmount`) VALUES
 (160114733094, 2, '2018-01-02', '2018-01-03', 0),
 (160114733313, 1, '2018-01-01', '2018-01-04', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `timeperiod`
+--
+
+CREATE TABLE `timeperiod` (
+  `ID` int(10) NOT NULL,
+  `Timeperiod` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `timeperiod`
+--
+
+INSERT INTO `timeperiod` (`ID`, `Timeperiod`) VALUES
+(1, 'NOVEMBER-2017');
 
 --
 -- Indexes for dumped tables
@@ -513,6 +559,21 @@ ALTER TABLE `student_takes_books`
   ADD PRIMARY KEY (`RollNumber`,`BookID`),
   ADD KEY `BookID` (`BookID`);
 
+--
+-- Indexes for table `timeperiod`
+--
+ALTER TABLE `timeperiod`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `timeperiod`
+--
+ALTER TABLE `timeperiod`
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Constraints for dumped tables
 --
