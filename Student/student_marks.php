@@ -34,7 +34,7 @@
 	echo "
 			<body>
 			
-				<div class='container pt-2' >
+				<div class='container pt-2'>
 				  	<div class='row'>
 				  		<div class='col-sm-2'>
 				  		</div>
@@ -55,10 +55,10 @@
 				  	<div class='col-sm-8'>
 				  		<ul class='nav nav-tabs nav-justified'>
 						    <li class='nav-item'>
-						      <a class='nav-link active' href='Student.php'>Attendance</a>
+						      <a class='nav-link ' href='Student.php'>Attendance</a>
 						    </li>
 						    <li class='nav-item'>
-						      <a class='nav-link' href='student_marks.php'>Marks Details</a>
+						      <a class='nav-link active' href='student_marks.php'>Marks Details</a>
 						    </li>
 						    <li class='nav-item'>
 						      <a class='nav-link' href='student_admission.php'>Admission Details</a>
@@ -69,75 +69,7 @@
 					  	</ul>
 					  	<div class='tab-content'>
 					  		<div class='container tab-pane active'><br>
-					  			<div class='table-responsive'>
-						  			<table class='table table-bordered'>
-						  				<!--thead-->
-									      <tr>
-									        <th class='p-5 text-success'>Date</th>
-									        <th class='text-success'>1<br>(09:40-10:30)</th>
-									        <th class='text-success'>2<br>(10:30-11:20)</th>
-									        <th class='text-success'>3<br>(11:20-12:10)</th>
-									        <th class='text-success'>4<br>(12:10-01:00)</th>
-									        <th class='text-success'>5<br>(01:35-02:25)</th>
-									        <th class='text-success'>6<br>(02:25-03:15)</th>
-									        <th class='text-success'>7<br>(03:15-04:05)</th>
-									      </tr>
-									    <!--/thead-->
-									    <tbody>
-									      
-									      <tr>
-									        <td>18-01-2018</td>
-									        <td>Present</td>
-									        <td>Present</td>
-									        <td>-</td>
-									        <td>-</td>
-									        <td>Absent</td>
-									        <td>Absent</td>
-									        <td>-</td>
-									      </tr>
-									      <tr>
-									        <td>18-01-2018</td>
-									        <td>Present</td>
-									        <td>-</td>
-									        <td>Present</td>
-									        <td>-</td>
-									        <td>Absent</td>
-									        <td>-</td>
-									        <td>Absent</td>
-									      </tr>
-									      <tr>
-									        <td>18-01-2018</td>
-									        <td>Present</td>
-									        <td>-</td>
-									        <td>Present</td>
-									        <td>-</td>
-									        <td>Absent</td>
-									        <td>Absent</td>
-									        <td>-</td>
-									      </tr>
-									      <tr>
-									        <td>18-01-2018</td>
-									        <td>-</td>
-									        <td>Absent</td>
-									        <td>Absent</td>
-									        <td>Present</td>
-									        <td>Present</td>
-									        <td>-</td>
-									        <td>-</td>
-									      </tr>
-									      <tr>
-									        <td>18-01-2018</td>
-									        <td>-</td>
-									        <td>Present</td>
-									        <td>Present</td>
-									        <td>-</td>
-									        <td>Absent</td>
-									        <td>Absent</td>
-									        <td>-</td>
-									      </tr>
-									    </tbody>
-									</table>
-    							</div>
+					  			
     						</div>
     					</div>
 				  	</div>
