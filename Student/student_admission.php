@@ -69,7 +69,7 @@
 					  	</ul>
 					  	<div class='tab-content'>
 					  		<div class='container tab-pane active'><br>
-					  			
+					  			<div class='display-3'><mark>Admission Details</mark></div>
     						</div>
     					</div>
 				  	</div>

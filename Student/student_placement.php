@@ -69,7 +69,34 @@
 					  	</ul>
 					  	<div class='tab-content'>
 					  		<div class='container tab-pane active'><br>
-					  			
+								<div class='table-responsive'>
+									<table class='table'>
+									    <thead>
+										    <tr>
+									    	    <th>Logo</th>
+									        	<th>Company Name</th>
+									        	<th>Status</th>
+									    	</tr>
+									    </thead>
+									    <tbody>
+									    	<tr>
+									        	<td><img src='../images/Google.png' class='rounded' width='100px' height='50px'></td>
+									        	<td>Google</td>
+									        	<td>Placed</td>
+											</tr>
+									    	<tr>
+									        	<td><img src='../images/Microsoft.jpg' class='rounded' width='100px' height='50px'></td>
+									        	<td>Microsoft</td>
+									        	<td>Not Attempted</td>
+											</tr>
+									    	<tr>
+									        	<td><img src='../images/Apple.png' class='rounded' width='50px' height='50px'></td>
+									        	<td>Apple</td>
+									        	<td>Not Placed</td>
+											</tr>
+									    </tbody>
+									</table>
+								</div>					  								  			
     						</div>
     					</div>
 				  	</div>
@@ -109,7 +136,7 @@
 						        <td><h6>7.66</h6></td>
 						      </tr>
 						    </tbody>
-					  </table>
+					  	</table>
 				  	</div>
 				</div>
 			";

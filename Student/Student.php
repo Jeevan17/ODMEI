@@ -32,8 +32,7 @@
 			</head>
 			";
 	echo "
-			<body>
-			
+			<body>			
 				<div class='container pt-2' >
 				  	<div class='row'>
 				  		<div class='col-sm-2'>
@@ -70,8 +69,8 @@
 					  	<div class='tab-content'>
 					  		<div class='container tab-pane active'><br>
 					  			<div class='table-responsive'>
-						  			<table class='table table-bordered'>
-						  				<!--thead-->
+						  			<table class='table table-bordered table-hover'>
+						  				<thead>
 									      <tr>
 									        <th class='p-5 text-success'>Date</th>
 									        <th class='text-success'>1<br>(09:40-10:30)</th>
@@ -82,7 +81,7 @@
 									        <th class='text-success'>6<br>(02:25-03:15)</th>
 									        <th class='text-success'>7<br>(03:15-04:05)</th>
 									      </tr>
-									    <!--/thead-->
+									    </thead>
 									    <tbody>
 									      
 									      <tr>
