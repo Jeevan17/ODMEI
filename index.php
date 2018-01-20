@@ -4,7 +4,7 @@
 	$dbuser = 'admin';
 	$dbpass = 'cbit';
 	
-	$conn = mysqli_connect($dbhost, $dbuser, $dbpass,'cbit');
+	$conn = mysqli_connect($dbhost, $dbuser, $dbpass,'cbitdb');
    
 	session_start();
 	if(isset($_SESSION['placement'])) {
@@ -19,6 +19,11 @@
 	}
 	if(isset($_SESSION['aec'])) {
 		unset($_SESSION['aec']);
+		session_destroy();
+		echo "<script language='javascript'>window.location='index.php';</script>";
+	}
+	if(isset($_SESSION['staff'])) {
+		unset($_SESSION['staff']);
 		session_destroy();
 		echo "<script language='javascript'>window.location='index.php';</script>";
 	}
@@ -68,14 +73,14 @@
 									    <input type='password' class='form-control' id='pwd' placeholder='Enter Password' name='password' required>
 									</div>
 
-									<input type='submit' value='Login' name='submit' class='btn btn-outline-primary btn-block'></h4>
+									<input type='submit' value='Login' name='submit' class='btn btn-outline-primary btn-block'>
 								</form>
 					</div>
 		";
 				
 		if(isset($_POST["submit"]))
 		{
-			if($_POST['username']!=null&&$_POST['password']!=null)
+			if($_POST['username']!=null && $_POST['password']!=null)
 			{				
 				$uname = $_POST['username'];
 				$pword = $_POST['password'];
@@ -83,7 +88,7 @@
 				//$_SESSION["username"] = $_POST['username'];
 				//$_SESSION["password"]= $_POST['password'];
 				
-				$sql="SELECT * from login where Username='$uname' and Password=Password('$pword');";
+				$sql="SELECT * from login where Username='$uname' and Password='$pword'";
 				$retval = mysqli_query($conn, $sql);
 				if(mysqli_affected_rows($conn)==0)
 				{
@@ -104,10 +109,10 @@
 						$role=$row['Role'];
 						switch($role)
 						{
-							case "Principal":
+							case "principal":
 								session_start();
 								$_SESSION['principal'] = 'principal';
-								echo "<script language='javascript'>window.location='principal.php';</script>";
+								echo "<script language='javascript'>window.location='Principal/principal.php';</script>";
 								break;
 							case "Placement":
 								session_start();
@@ -117,20 +122,18 @@
 							case "AEC":
 								session_start();
 								$_SESSION['aec'] = 'aec';
-								echo "<script
-								language='javascript'>window.location='aec.php';</script>";
+								echo "<script language='javascript'>window.location='aec.php';</script>";
+								break;
+							case "staff":
+								session_start();
+								$_SESSION['staff'] = $uname;
+								echo "<script language='javascript'>window.location='Staff/Staff.php';</script>";
 								break;
 							case "COE":
 								echo "<script language='javascript'>window.location='coe.php';</script>";
 								break;
 							case "Library":
 								echo "<script language='javascript'>window.location='library.php';</script>";
-								break;
-							case "CSE":
-								echo "<script language='javascript'>window.location='cse.php';</script>";
-								break;
-							case "IT":
-								echo "<script language='javascript'>window.location='it.php';</script>";
 								break;
 						}
 					}

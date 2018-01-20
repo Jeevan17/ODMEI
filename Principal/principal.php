@@ -3,48 +3,84 @@
 	$dbuser = 'admin';
 	$dbpass = 'cbit';
 	
-	$conn = mysqli_connect($dbhost, $dbuser, $dbpass,'cbit');
+	$conn = mysqli_connect($dbhost, $dbuser, $dbpass,'cbitdb');
 	session_start();
 	if(!isset($_SESSION['principal'])){
-		echo "<script language='javascript'>window.location='index.php';</script>";
+		echo "<script language='javascript'>window.location='../index.php';</script>";
 	}
    
 	if(! $conn )
 	{
-		echo "Not connected to database." . mysqli_error();
+		echo "
+			<div class='alert alert-danger'>
+				<strong>Not connected to database." . mysqli_error();"</strong>
+			</div>";
 	}
 	echo "
-		<html>
-				<head>
-					<title>Principal CBIT</title>
+		<!DOCTYPE html>
+		<html lang='en'>
+			<head>
+			  <title>Principal</title>
+			  <meta charset='utf-8'>
+			  <meta name='viewport' content='width=device-width, initial-scale=1'>
+			  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css'>
+			  <link rel='stylesheet' href='../style.css'>
+			</head>
+			";
+	echo "
+			<body>
+				<div class='container pt-2'>
+				  	<div class='row'>
+				  		<div class='col-sm-2'>
+				  		</div>
+				  		<div class='col-sm-8'>
+				  			<center>
+				  			<!--h5 class='text-primary'> Chaitanya Bharathi Institute of Technology(Autonomous)<br>
+				  			<small class='text-info'>Accredited by NBA & NAAC, Approved by A.I.C.T.E., New Delhi, Affliated to Osmania University<br> Chaityana Bharathi(PO),Kokapeta(village), Gandipet, Hyderabad -500075, Telangana, India</small></h5-->
+				  			<img class='img-fluid' src='../images/header.jpg'>
+				  			</center>
+				  		</div>
+				  		<div class='col-sm-2 pl-5'>
+				  			<a href='../index.php' class='btn btn-danger btn-sm'>Logout</a>
+				  		</div>
+				  	</div>
+				</div>
+				<br>
+				<div class='container pt-3'>
+					<div class='row'>
+					  	<div class='col-sm-12'>
+					  		<ul class='nav nav-tabs nav-justified'>
+							    <li class='nav-item'>
+							      <a class='nav-link active ' href='principal.php'>Student Details</a>
+							    </li>
+							    <li class='nav-item'>
+							      <a class='nav-link ' href='placement_details.php'>Placement Details</a>
+							    </li>
+							    <li class='nav-item'>
+							      <a class='nav-link ' href='staff_details.php'>Staff Details</a>
+							    </li>
+							    <!--li class='nav-item'>
+							      <a class='nav-link' href='student_placement.php'>Placement Details</a>
+							    </li-->
+						  	</ul>
+						  	<div class='tab-content'>
+						  		<div class='container tab-pane active'><br>
+						  		<div>
 
+						  		</div>
+	    					</div>
+	    				</div>
+					</div>
+				</div>
 
-					<!--BootStrap-->
-						<meta charset='utf-8'>
-						<meta name='viewport' content='width=device-width, initial-scale=1'>
-  						<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css'>
-  						<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-  						<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js'></script>
- 						 <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js'></script>
-
- 					<!--BootStrap End-->
-
-
-
-					<link rel='stylesheet' href='style.css'>
-				</head>
-				<body>
+				<center>
 					<form action='principal.php' method='POST'>
-						<input type='submit' style='float: right' value='Logout' name='logout'>
+							<label for='rno'>Enter Roll Number</label>
+							<input type='text' class='form-control' id='rno' placeholder='eg:- 1601abcdefgh' name='rollno' required style=' width: 200px;     display: initial;'>
+						<input type='submit' value='Search' name='submit' class='btn ml-3 btn-outline-primary btn-sm'style='display: initial;'>
 					</form>
-					<center>
-						<form action='principal.php' method='POST'>
-							<h3>Enter Roll number
-							<input type='text' name='rollno' required class='log_text' placeholder='Enter Roll Number'>
-							<input type='submit' name='submit' value='search' class='sub_btn'>
-							</h3>
-						</form>
-						<br><br>
+				</center>
+				<br><br>
 		";
 	if(isset($_POST["logout"]))
 	{
