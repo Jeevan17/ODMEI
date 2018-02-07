@@ -1,3 +1,24 @@
+<?php
+  $dbhost = 'localhost';
+  $dbuser = 'admin';
+  $dbpass = 'cbit';
+  
+  $conn = mysqli_connect($dbhost, $dbuser, $dbpass,'cbitdb');
+  session_start();
+  if(!isset($_SESSION['principal'])){
+    echo "<script language='javascript'>window.location='../index.php';</script>";
+  }
+   
+  if(! $conn )
+  {
+    echo "
+      <div class='alert alert-danger'>
+        <strong>Not connected to database." . mysqli_error();"</strong>
+      </div>";
+  }
+?>
+
+
 <!DOCTYPE html>
   <html>
     <head>
@@ -38,7 +59,25 @@
               </ul>
               <div class='tab-content'>
                 <div class='container tab-pane active'><br><br>
-                  <div class='display-1'><mark>Table</mark></div>
+                  <div class='display-1'>
+
+                    <?php
+                      if(!isset($_SESSION['Placement']))
+                      {
+                        echo "<script language='javascript'>window.location='index.php';</script>";
+                      }
+                      $rno = $_POST['rollno'];
+                      $sql = "select * from student where RollNumber='$rno'";
+                      $retval = mysqli_query($conn, $sql);
+                      if(! $retval )
+                      {
+                        echo "<script>alert('Entered RollNo does not exist!')</script>";
+                        die('Could not get data: ' . mysqli_error());
+                      } 
+                    ?>
+
+
+                  </div>
                 </div>
               </div>
             </div>
