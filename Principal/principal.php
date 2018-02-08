@@ -15,7 +15,7 @@
 			<div class='alert alert-danger'>
 				<strong>Not connected to database." . mysqli_error();"</strong>
 			</div>";
-	}
+	}										
 ?>
 <!--***********************************************-->
 <!--HTML Code-->
@@ -93,97 +93,149 @@
 			{
 				echo "<script>alert('Entered RollNo does not exist!')</script>";
 				die('Could not get data: ' . mysqli_error());
-			}
-							
-			echo "
-				<hr>
-				<div class='container'>
-					<div class='row'>
-						<div class='col-sm-3'>
-							<ul class='nav nav-pills flex-column' role='tablist'>
-								<li class='nav-item'>
-									<a class='nav-link active' data-toggle='pill' href='#admission'>Admission Details</a>
-								</li>
-								<li class='nav-item'>
-									<a class='nav-link' data-toggle='pill' href='#Attendance'>Attendance</a>
-								</li>
-								<li class='nav-item'>
-									<a class='nav-link' data-toggle='pill' href='#marks'>Marks</a>
-								</li>
-								<li class='nav-item'>
-									<a class='nav-link' data-toggle='pill' href='#library'>Library</a>
-								</li>
-								<li class='nav-item'>
-									<a class='nav-link' data-toggle='pill' href='#placement'>Placement</a>
-								</li>
-							<ul>
-						</div>
-						<div class='col-sm-8'>
-							<div class='tab-content'>
-								<div id='admission' class='container tab-pane active'>";
-									while($row = mysqli_fetch_array($retval))
-									{
-										echo "<h1>Admission Details</h1>
-										<table class='table'>
-											<tbody>
-												<tr>
-													<th rowspan='5'><img src='data:image/jpeg;base64,".base64_encode( $row['Photo'] )."' width=150px height=200px /></th>
-													<th style='padding: 5px;font-size: 20px;'>Name</th>
-													<td style='padding: 10px;font-size: 20px;'>{$row['FirstName']}"." "."{$row['LastName']}</td>
-													<tr>
-														<th style='padding: 5px;font-size: 20px;'>Roll number</th>
-														<td style='padding: 10px;font-size: 20px;'>{$row['RollNumber']}</td>
-													</tr>
-													<tr>
-														<th style='padding: 5px;font-size: 20px;'>Admission No</th>
-														<td style='padding: 10px;font-size: 20px;'>{$row['AdmissionNumber']}</td>
-													</tr>
-													<tr>
-														<th style='padding: 5px;font-size: 20px;'>Phone Number</th>
-														<td style='padding: 10px;font-size: 20px;'>{$row['PhoneNumber']}</td>
-													</tr>
-													<tr>
-														<th style='padding: 5px;font-size: 20px;'>Email Id</th>
-														<td style='padding: 10px;font-size: 20px;'>{$row['Email']}</td>
-													</tr>
-												</tr>
-												
-											</tbody>
-										</table>";
-									}
-								echo "</div>
-								<div id='Attendance' class='container tab-pane fade'>
-								    <h1>Attendance Details<h1>";
+			}							
+?>			
+	<hr>
+	<div class='container'>
+		<div class='row'>
+			<div class='col-sm-3'>
+				<ul class='nav nav-pills flex-column' role='tablist'>
+					<li class='nav-item'>
+						<a class='nav-link active' data-toggle='pill' href='#admission'>Admission Details</a>
+					</li>
+					<li class='nav-item'>
+						<a class='nav-link' data-toggle='pill' href='#Attendance'>Attendance</a>
+					</li>
+					<li class='nav-item'>
+						<a class='nav-link' data-toggle='pill' href='#marks'>Marks</a>
+					</li>
+					<li class='nav-item'>
+						<a class='nav-link' data-toggle='pill' href='#library'>Library</a>
+					</li>
+					<li class='nav-item'>
+						<a class='nav-link' data-toggle='pill' href='#placement'>Placement</a>
+					</li>
+				<ul>
+			</div>
+			<div class='col-sm-8'>
+				<div class='tab-content'>
+					<div id='admission' class='container tab-pane active'>
+						
+						<?php
+						while($row = mysqli_fetch_array($retval))
+						{ ?>
+						
+							<h1>Admission Details</h1>
+							<table class='table'>
+								<tbody>
+									<tr>
+										<?php echo"
+										<th rowspan='5'><img src='data:image/jpeg;base64,".base64_encode( $row['Photo'] )."' width=150px height=200px /></th>";
+										?>
+										<th style='padding: 5px;font-size: 20px;'>Name</th>
+										<td style='padding: 10px;font-size: 20px;'>
+											<?php echo "{$row['FirstName']}"." "."{$row['LastName']}" ?>
+										</td>
+										
+										<tr>
+											<th style='padding: 5px;font-size: 20px;'>Roll number</th>
+											<td style='padding: 10px;font-size: 20px;'>
+												<?php echo "{$row['RollNumber']}";?>
+											</td>
+										</tr>
+										<tr>
+											<th style='padding: 5px;font-size: 20px;'>Admission No</th>
+											<td style='padding: 10px;font-size: 20px;'>
 
-									$sql="SELECT * from attendance where RollNumber='$rno'";
-									$retval = mysqli_query($conn, $sql);
-									echo "
-										<table class='table'>
-											<tbody>
-											<tr>
-												<th style='padding: 5px;font-size: 20px;'>Year and Sem</th>
-												<th style='padding: 5px;font-size: 20px;'>Attendance</th>
-											</tr>";
+												<?php echo "{$row['AdmissionNumber']}"; ?>
+											</td>
+										</tr>
+										<tr>
+											<th style='padding: 5px;font-size: 20px;'>Phone Number</th>
+											<td style='padding: 10px;font-size: 20px;'>
+												<?php echo "{$row['PhoneNumber']}"; ?>	
+											</td>
+										</tr>
+										<tr>
+											<th style='padding: 5px;font-size: 20px;'>Email Id</th>
+											<td style='padding: 10px;font-size: 20px;'>
+												<?php echo "{$row['Email']}"; ?>
+											</td>
+										</tr>
+									</tr>
+								</tbody>
+							</table>
+				  	<?php 
+				  		} 
+				  	?>
+					</div>
+					<div id='Attendance' class='container tab-pane fade'>
+					    <h1>Attendance Details<h1>
+						<?php 
+							$sql="SELECT * from attendance where RollNumber='$rno'";
+							$retval = mysqli_query($conn, $sql);
+							echo "
+								<table class='table'>
+									<tbody>
+										<tr>
+											<th style='padding: 5px;font-size: 20px;'>Year and Sem</th>
+											<th style='padding: 5px;font-size: 20px;'>Attendance</th>
+										</tr>";
 										while($row = mysqli_fetch_array($retval))
 										{
+											$Attendance=round(($row['TotalAttended']/$row['TotalClassesHeld'])*100);
 											echo "
 											<tr>
 												<td style='padding: 10px;font-size: 20px;'>{$row['YearandSem']}</td>
-												<td style='padding: 10px;font-size: 20px;'>{$row['Attendance']}</td>
+												<td style='padding: 10px;font-size: 20px;'>$Attendance</td>
 											</tr>
 											";
 										}
-									echo"
-										</tbody>
-										</table>
-								    </div>
-								    <div id='menu2' class='container tab-pane fade'><br>
-								      
-								    </div>
-								</div>
-							</div>
-						</div>
+								echo"
+									</tbody>
+								</table>
 					</div>";
+					?>
+					<div id='marks' class='container tab-pane fade'><br>
+						<?php
+							$sql="SELECT * FROM `student_marks_grade` WHERE RollNumber='$rno' ORDER by YearandSem";
+							$retval = mysqli_query($conn, $sql);
+							echo "
+								<table class='table'>
+									<tbody>
+										<tr>
+											<th style='padding: 5px;font-size: 20px;'>Year and Sem</th>
+											<th style='padding: 5px;font-size: 20px;'>SGPA</th>
+										</tr>";
+										$CGPA =0;
+										$count=0;
+										while($row = mysqli_fetch_array($retval))
+										{
+											$CGPA = $row['SGPA'] + $CGPA;
+											$count++;
+											echo "
+											<tr>
+												<td style='padding: 10px;font-size: 20px;'>{$row['YearandSem']}</td>
+												<td style='padding: 10px;font-size: 20px;'>{$row['SGPA']}</td>
+											</tr>
+											";
+										}
+										$CGPA=$CGPA/$count;
+								echo"
+										<tr>
+											<th style='font-size: 20px;' class='text-muted'>CGPA</th>
+											<td style='font-size: 20px;' class='text-primary'>$CGPA</td>
+										</tr>
+									</tbody>
+								</table>";
+						?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<?php
 		}
 	}
 	echo "
