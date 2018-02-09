@@ -298,6 +298,32 @@
 							";
 						?>
 					</div>
+					<div id='placement' class='container tab-pane fade'>
+						<?php
+							$sql="SELECT * FROM `student_attend_placements` where RollNumber='$rno'";
+							$retval = mysqli_query($conn, $sql);
+							echo "
+								<table class='table'>
+									<tbody>
+										<tr>
+											<th style='padding: 5px;font-size: 20px;'>Company Name</th>
+											<th style='padding: 5px;font-size: 20px;'>Result</th>
+										</tr>";
+										while($row = mysqli_fetch_array($retval))
+										{
+											echo "
+											<tr>
+												<td style='padding: 10px;font-size: 20px;'>{$row['CompanyName']}</td>
+												<td style='padding: 10px;font-size: 20px;'>{$row['Result']}</td>
+											</tr>
+											";
+										}
+								echo"
+									</tbody>
+								</table>
+							";
+						?>
+					</div>
 				</div>
 			</div>
 		</div>
