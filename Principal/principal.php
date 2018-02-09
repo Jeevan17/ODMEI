@@ -62,20 +62,20 @@
 					<div class='tab-content'>
 						<div class='container tab-pane active'><br>
 							<div>
-
+								<center>
+									<form action='principal.php' method='POST'>
+										<label for='rno'>Enter Roll Number</label>
+										<input type='text' class='form-control' id='rno' placeholder='eg:- 160114733313' name='rollno' required style=' width: 200px;     display: initial;'>
+										<input type='submit' value='Search' name='submit' class='btn ml-3 btn-outline-primary btn-sm'style='display: initial;'>
+									</form>
+								</center>
 						  	</div>
 	    				</div>
 	    			</div>
 				</div>
 			</div>
 
-			<center>
-				<form action='principal.php' method='POST'>
-					<label for='rno'>Enter Roll Number</label>
-					<input type='text' class='form-control' id='rno' placeholder='eg:- 160114733313' name='rollno' required style=' width: 200px;     display: initial;'>
-					<input type='submit' value='Search' name='submit' class='btn ml-3 btn-outline-primary btn-sm'style='display: initial;'>
-				</form>
-			</center>
+			
 <!--***********************************************-->
 <?php
 	if(isset($_POST["submit"]))
@@ -115,7 +115,7 @@
 					<li class='nav-item'>
 						<a class='nav-link' data-toggle='pill' href='#placement'>Placement</a>
 					</li>
-				<ul>
+				</ul>
 			</div>
 			<div class='col-sm-8'>
 				<div class='tab-content'>
