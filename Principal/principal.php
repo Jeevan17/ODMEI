@@ -196,7 +196,7 @@
 								</table>
 					</div>";
 					?>
-					<div id='marks' class='container tab-pane fade'><br>
+					<div id='marks' class='container tab-pane fade'>
 						<?php
 							$sql="SELECT * FROM `student_marks_grade` WHERE RollNumber='$rno' ORDER by YearandSem";
 							$retval = mysqli_query($conn, $sql);
@@ -227,7 +227,75 @@
 											<td style='font-size: 20px;' class='text-primary'>$CGPA</td>
 										</tr>
 									</tbody>
-								</table>";
+								</table>
+							";
+						?>
+					</div>
+					<div id='marks' class='container tab-pane fade'>
+						<?php
+							$sql="SELECT * FROM `student_marks_grade` WHERE RollNumber='$rno' ORDER by YearandSem";
+							$retval = mysqli_query($conn, $sql);
+							echo "
+								<table class='table'>
+									<tbody>
+										<tr>
+											<th style='padding: 5px;font-size: 20px;'>Year and Sem</th>
+											<th style='padding: 5px;font-size: 20px;'>SGPA</th>
+										</tr>";
+										$CGPA =0;
+										$count=0;
+										while($row = mysqli_fetch_array($retval))
+										{
+											$CGPA = $row['SGPA'] + $CGPA;
+											$count++;
+											echo "
+											<tr>
+												<td style='padding: 10px;font-size: 20px;'>{$row['YearandSem']}</td>
+												<td style='padding: 10px;font-size: 20px;'>{$row['SGPA']}</td>
+											</tr>
+											";
+										}
+										$CGPA=$CGPA/$count;
+								echo"
+										<tr>
+											<th style='font-size: 20px;' class='text-muted'>CGPA</th>
+											<td style='font-size: 20px;' class='text-primary'>$CGPA</td>
+										</tr>
+									</tbody>
+								</table>
+							";
+						?>
+					</div>
+					<div id='library' class='container tab-pane fade'>
+						<?php
+							$sql="SELECT library.Title,CheckedOutDate FROM `student_takes_books`, library where RollNumber='$rno' and library.BookID=student_takes_books.BookID";
+							$retval = mysqli_query($conn, $sql);
+							echo "
+								<table class='table'>
+									<tbody>
+										<tr>
+											<th style='padding: 5px;font-size: 20px;'>Books</th>
+											<th style='padding: 5px;font-size: 20px;'>Date</th>
+										</tr>";
+										$count=0;
+										while($row = mysqli_fetch_array($retval))
+										{
+											$count++;
+											echo "
+											<tr>
+												<td style='padding: 10px;font-size: 20px;'>{$row['Title']}</td>
+												<td style='padding: 10px;font-size: 20px;'>{$row['CheckedOutDate']}</td>
+											</tr>
+											";
+										}
+								echo"
+										<tr>
+											<th style='font-size: 20px;' class='text-muted'>Total</th>
+											<td style='font-size: 20px;' class='text-primary'>$count</td>
+										</tr>
+									</tbody>
+								</table>
+							";
 						?>
 					</div>
 				</div>
