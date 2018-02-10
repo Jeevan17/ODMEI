@@ -30,7 +30,6 @@
 
     <body>
       <div class="container">
-        
         <div class='row pt-1'>
           <div class='col-sm-2'>
           </div>
@@ -54,30 +53,68 @@
                   <a class='nav-link ' href='Company_details.php'>Company Details</a>
                 </li>
                 <li class='nav-item'>
-                  <a class='nav-link ' href='Student_details.php'>Student wise Details</a>
+                  <a class='nav-link ' href='Branch_details.php'>Branch wise Details</a>
                 </li>
               </ul>
               <div class='tab-content'>
                 <div class='container tab-pane active'><br><br>
-                  <div class='display-1'>
-
-                    <?php
-                      if(!isset($_SESSION['Placement']))
-                      {
-                        echo "<script language='javascript'>window.location='index.php';</script>";
+                  <h2>Placement Batch: <mark>2017-2018</mark></h2><br>
+                  <?php
+                    $sql="SELECT student_attend_placements.CompanyName, bsp_code.Branch ,count(bsp_code.Branch) as Count
+                      FROM student 
+                      INNER JOIN student_attend_placements ON student.RollNumber=student_attend_placements.RollNumber 
+                      INNER JOIN bsp_code ON student.BSP=bsp_code.BSP 
+                      where student_attend_placements.Result='Placed' and PBatch='2017-2018'
+                      GROUP BY student_attend_placements.CompanyName, bsp_code.Branch
+                      ORDER BY student_attend_placements.CompanyName";
+                    $retval = mysqli_query($conn, $sql);
+                    
+                    $data = array();
+                    $brch = array('CSE','ECE','IT');
+                    while($row = mysqli_fetch_array($retval))
+                    {
+                      for ($i=0; $i<3 ; $i++)
+                      { 
+                        $data[$row['CompanyName']][$brch[$i]] = '-';
                       }
-                      $rno = $_POST['rollno'];
-                      $sql = "select * from student where RollNumber='$rno'";
-                      $retval = mysqli_query($conn, $sql);
-                      if(! $retval )
+                      //$data[$row['CompanyName']][$row['Branch']] = (int)$row['Count'];
+                    }
+                    $retval = mysqli_query($conn, $sql);
+                    while($row = mysqli_fetch_array($retval))
+                    {
+                      $data[$row['CompanyName']][$row['Branch']] = (int)$row['Count'];
+                    }
+                    echo "
+                      <table class='table table-bordered table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl'>
+                        <thead class='thead-dark'>
+                          <tr>
+                            <th>Company Name</th>
+                            <th>CSE</th>
+                            <th>ECE</th>
+                            <th>IT</th>
+                          </tr>
+                        </thead>
+                        <tbody class='table-secondary'>
+                    ";
+                    foreach ($data as $companyname => $value)
+                    {
+                      echo "
+                        <tr>
+                          <td>$companyname</div>
+                      ";
+                      foreach ($value as $branch => $count)
                       {
-                        echo "<script>alert('Entered RollNo does not exist!')</script>";
-                        die('Could not get data: ' . mysqli_error());
-                      } 
-                    ?>
-
-
-                  </div>
+                        echo "
+                          <td>$count</td>
+                        ";  
+                      }
+                      echo "</tr>";
+                    }
+                    echo "</tbody>
+                      </table>
+                      ";
+                  ?>
+                </div>
                 </div>
               </div>
             </div>

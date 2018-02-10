@@ -86,12 +86,13 @@
 						<div class='col-sm-8'>
 							<div class='tab-content'>
 								<div id='placement' class='container tab-pane active'>
+									<h2>Placement Batch: <mark>2017-2018</mark></h2><br>
 									<?php
 										$sql="SELECT student_attend_placements.CompanyName, bsp_code.Branch ,count(bsp_code.Branch) as Count
 											FROM student 
 											INNER JOIN student_attend_placements ON student.RollNumber=student_attend_placements.RollNumber 
 											INNER JOIN bsp_code ON student.BSP=bsp_code.BSP 
-											where student_attend_placements.Result='Placed'
+											where student_attend_placements.Result='Placed' and PBatch='2017-2018'
 											GROUP BY student_attend_placements.CompanyName, bsp_code.Branch
 											ORDER BY student_attend_placements.CompanyName";
 										$retval = mysqli_query($conn, $sql);
@@ -147,11 +148,35 @@
 										<center>
 											<label for='cname'>Enter Company Name</label>
 											<input type='text' class='form-control' id='cname' placeholder='eg:- Google' name='company_name' required style=' width: 200px;     display: initial;'>
-											<input type='button' name='Search' value='Search' class='btn ml-3 btn-outline-primary btn-sm' style='display: initial;' onclick='loadDoc(company)'>
+											<input type='button' name='Search' value='Search' class='btn ml-3 btn-outline-primary btn-sm' style='display: initial;' onclick='loadCompany()'>
 											</form>
 										</center>
 								  	</div>
 								  	<div id='company_details'>
+								  	</div>
+								</div>
+								<div id='branch' class='container tab-pane fade'>
+									<div>
+										<center>
+											<label for='bname'>Enter Branch Name</label>
+											<input type='text' class='form-control' id='bname' placeholder='eg:- CSE' name='branch_name' required style=' width: 200px;     display: initial;'>
+											<input type='button' name='Search' value='Search' class='btn ml-3 btn-outline-primary btn-sm' style='display: initial;' onclick='loadBranch()'>
+											</form>
+										</center>
+								  	</div>
+								  	<div id='branch_details'>
+								  	</div>
+								</div>
+								<div id='year' class='container tab-pane fade'>
+									<div>
+										<center>
+											<label for='yname'>Enter Placement Batch</label>
+											<input type='text' class='form-control' id='yname' placeholder='eg:- 2017-2018' name='year_name' required style=' width: 200px;     display: initial;'>
+											<input type='button' name='Search' value='Search' class='btn ml-3 btn-outline-primary btn-sm' style='display: initial;' onclick='loadYear()'>
+											</form>
+										</center>
+								  	</div>
+								  	<div id='year_details'>
 								  	</div>
 								</div>
 	    					</div>
@@ -161,7 +186,7 @@
 			</div>
 			
 			<script>
-				function loadDoc(cFunction)
+				function loadCompany()
 				{
 					var xhttp;
 					xhttp=new XMLHttpRequest();
@@ -169,7 +194,7 @@
 				  	{    
 				  		if (this.readyState == 4 && this.status == 200) 
 					    {
-					    	cFunction(this);
+					    	document.getElementById("company_details").innerHTML = xhttp.responseText;
 					    }
 				  	};
 				  	var x = document.getElementById("cname").value; 
@@ -178,9 +203,39 @@
 					xhttp.send("cname="+x);
 					xhttp.send();
 				}
-				function company(xhttp)
+				function loadBranch()
 				{
-					document.getElementById("company_details").innerHTML = xhttp.responseText;
+					var xhttp;
+					xhttp=new XMLHttpRequest();
+				  	xhttp.onreadystatechange = function() 
+				  	{    
+				  		if (this.readyState == 4 && this.status == 200) 
+					    {
+					    	document.getElementById("branch_details").innerHTML = xhttp.responseText;
+					    }
+				  	};
+				  	var x = document.getElementById("bname").value; 
+					xhttp.open("POST", "Branch_Search.php", true);
+					xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+					xhttp.send("bname="+x);
+					xhttp.send();
+				}
+				function loadYear()
+				{
+					var xhttp;
+					xhttp=new XMLHttpRequest();
+				  	xhttp.onreadystatechange = function() 
+				  	{    
+				  		if (this.readyState == 4 && this.status == 200) 
+					    {
+					    	document.getElementById("year_details").innerHTML = xhttp.responseText;
+					    }
+				  	};
+				  	var x = document.getElementById("yname").value; 
+					xhttp.open("POST", "Year_Search.php", true);
+					xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+					xhttp.send("yname="+x);
+					xhttp.send();
 				}
 			</script>
 
