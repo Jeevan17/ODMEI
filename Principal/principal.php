@@ -126,7 +126,7 @@
 						{ ?>
 						
 							<h1>Admission Details</h1>
-							<table class='table'>
+							<table class='table table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl'>
 								<tbody>
 									<tr>
 										<?php echo"

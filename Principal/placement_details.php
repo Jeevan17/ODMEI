@@ -92,53 +92,54 @@
 											INNER JOIN student_attend_placements ON student.RollNumber=student_attend_placements.RollNumber 
 											INNER JOIN bsp_code ON student.BSP=bsp_code.BSP 
 											where student_attend_placements.Result='Placed'
-											GROUP BY student_attend_placements.CompanyName, bsp_code.Branch";
+											GROUP BY student_attend_placements.CompanyName, bsp_code.Branch
+											ORDER BY student_attend_placements.CompanyName";
 										$retval = mysqli_query($conn, $sql);
+										
+										$data = array();
+										$brch = array('CSE','ECE','IT');
+										while($row = mysqli_fetch_array($retval))
+										{
+											for ($i=0; $i<3 ; $i++)
+											{ 
+												$data[$row['CompanyName']][$brch[$i]] = '-';
+											}
+											//$data[$row['CompanyName']][$row['Branch']] = (int)$row['Count'];
+										}
+										$retval = mysqli_query($conn, $sql);
+										while($row = mysqli_fetch_array($retval))
+										{
+											$data[$row['CompanyName']][$row['Branch']] = (int)$row['Count'];
+										}
 										echo "
-											<table class='table table-bordered table-hover'>
-												<tbody>
+											<table class='table table-bordered table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl'>
+												<thead class='thead-dark'>
 													<tr>
-														<th style='padding: 5px;font-size: 20px;'>Company Name</th>
-														<th style='padding: 5px;font-size: 20px;'>CSE</th>
-														<th style='padding: 5px;font-size: 20px;'>ECE</th>
-														<th style='padding: 5px;font-size: 20px;'>IT</th>
-													</tr>";
-													while($row = mysqli_fetch_array($retval))
-													{
-														echo "<tr>";
-														switch ($row['Branch']) 
-														{
-															case 'CSE':
-																echo "
-																<td style='padding: 10px;font-size: 20px;'>{$row['CompanyName']}</td>
-																<td style='padding: 10px;font-size: 20px;'>{$row['Count']}</td>
-																<td style='padding: 10px;font-size: 20px;'>-</td>
-																<td style='padding: 10px;font-size: 20px;'>-</td>
-																";
-																break;
-															case 'ECE':
-																echo "
-																<td style='padding: 10px;font-size: 20px;'>{$row['CompanyName']}</td>
-																<td style='padding: 10px;font-size: 20px;'>-</td>
-																<td style='padding: 10px;font-size: 20px;'>{$row['Count']}</td>
-																<td style='padding: 10px;font-size: 20px;'>-</td>
-																";
-																break;
-															case 'IT':
-																echo "
-																<td style='padding: 10px;font-size: 20px;'>{$row['CompanyName']}</td>
-																<td style='padding: 10px;font-size: 20px;'>-</td>
-																<td style='padding: 10px;font-size: 20px;'>-</td>
-																<td style='padding: 10px;font-size: 20px;'>{$row['Count']}</td>
-																";
-																break;
-														}
-														echo "</tr>";
-													}
-													echo"
-												</tbody>
-											</table>
+														<th>Company Name</th>
+														<th>CSE</th>
+														<th>ECE</th>
+														<th>IT</th>
+													</tr>
+												</thead>
+												<tbody class='table-secondary'>
 										";
+										foreach ($data as $companyname => $value)
+										{
+											echo "
+												<tr>
+													<td>$companyname</div>
+											";
+											foreach ($value as $branch => $count)
+											{
+												echo "
+													<td>$count</td>
+												";	
+											}
+											echo "</tr>";
+										}
+										echo "</tbody>
+											</table>
+											";
 									?>
 								</div>
 	    					</div>
