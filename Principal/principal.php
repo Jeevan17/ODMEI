@@ -66,7 +66,7 @@
 									<form action='principal.php' method='POST'>
 										<label for='rno'>Enter Roll Number</label>
 										<input type='text' class='form-control' id='rno' placeholder='eg:- 160114733313' name='rollno' required style=' width: 200px;     display: initial;'>
-										<input type='submit' value='Search' name='submit' class='btn ml-3 btn-outline-primary btn-sm'style='display: initial;'>
+										<input type='submit' value='Search' name='submit' class='btn ml-3 btn-outline-primary btn-sm' style='display: initial;'>
 									</form>
 								</center>
 						  	</div>
@@ -170,24 +170,26 @@
 				  	?>
 					</div>
 					<div id='Attendance' class='container tab-pane fade'>
-					    <h1>Attendance Details<h1>
+					    <h1>Attendance Details</h1>
 						<?php 
 							$sql="SELECT * from attendance where RollNumber='$rno'";
 							$retval = mysqli_query($conn, $sql);
 							echo "
 								<table class='table'>
-									<tbody>
+									<thead>
 										<tr>
-											<th style='padding: 5px;font-size: 20px;'>Year and Sem</th>
-											<th style='padding: 5px;font-size: 20px;'>Attendance</th>
-										</tr>";
+											<th>Year and Sem</th>
+											<th>Attendance</th>
+										</tr>
+									</thead>
+									<tbody>";
 										while($row = mysqli_fetch_array($retval))
 										{
 											$Attendance=round(($row['TotalAttended']/$row['TotalClassesHeld'])*100);
 											echo "
 											<tr>
-												<td style='padding: 10px;font-size: 20px;'>{$row['YearandSem']}</td>
-												<td style='padding: 10px;font-size: 20px;'>$Attendance</td>
+												<td>{$row['YearandSem']}</td>
+												<td>$Attendance</td>
 											</tr>
 											";
 										}

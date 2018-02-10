@@ -142,17 +142,50 @@
 											";
 									?>
 								</div>
+								<div id='company' class='container tab-pane fade'>
+									<div>
+										<center>
+											<label for='cname'>Enter Company Name</label>
+											<input type='text' class='form-control' id='cname' placeholder='eg:- Google' name='company_name' required style=' width: 200px;     display: initial;'>
+											<input type='button' name='Search' value='Search' class='btn ml-3 btn-outline-primary btn-sm' style='display: initial;' onclick='loadDoc(company)'>
+											</form>
+										</center>
+								  	</div>
+								  	<div id='company_details'>
+								  	</div>
+								</div>
 	    					</div>
 	    				</div>
 					</div>
 				</div>
 			</div>
-<?php
-echo "
+			
+			<script>
+				function loadDoc(cFunction)
+				{
+					var xhttp;
+					xhttp=new XMLHttpRequest();
+				  	xhttp.onreadystatechange = function() 
+				  	{    
+				  		if (this.readyState == 4 && this.status == 200) 
+					    {
+					    	cFunction(this);
+					    }
+				  	};
+				  	var x = document.getElementById("cname").value; 
+					xhttp.open("POST", "Company_Search.php", true);
+					xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+					xhttp.send("cname="+x);
+					xhttp.send();
+				}
+				function company(xhttp)
+				{
+					document.getElementById("company_details").innerHTML = xhttp.responseText;
+				}
+			</script>
+
 			<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 			<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js'></script>
 			<script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js'></script>
 		</body>
 	</html>
-	";
-?>
