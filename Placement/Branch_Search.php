@@ -28,7 +28,6 @@
 			GROUP BY student_attend_placements.CompanyName
 			ORDER BY student_attend_placements.CompanyName";
 		$retval = mysqli_query($conn, $sql);
-		
 		echo "
 				<table class='table table-bordered table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl'>
 					<thead class='thead-dark'>

@@ -69,7 +69,6 @@
           xhttp.open("POST", "Company_Search.php", true);
           xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
           xhttp.send("cname="+x);
-          xhttp.send();
         }
       </script>    
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

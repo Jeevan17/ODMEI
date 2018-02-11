@@ -84,15 +84,37 @@
 														<div class="col-sm-4">
 															<input class="form-control" type="date" placeholder="" id="date" required>
 														</div>
+														<div class="col-sm-2 pt-2">
+															Program: 
+														</div>
+														<div class="col-sm-4">
+															<select class="form-control" id="Program">
+															    <option>BE</option>
+															    <option>MBA</option>
+															    <option>MCA</option>
+															</select>
+														</div>
+													</div>
+													<br>
+													<div class='row'>
 														<div class="col-sm-1 pt-2">
 															Year: 
 														</div>
 														<div class="col-sm-4">
-															<select class="form-control" id="sel1">
+															<select class="form-control" id="Year">
 															    <option>1</option>
 															    <option>2</option>
 															    <option>3</option>
 																<option>4</option>
+															</select>
+														</div>
+														<div class="col-sm-2 pt-2">
+															Semester: 
+														</div>
+														<div class="col-sm-4">
+															<select class="form-control" id="Semester">
+															    <option>1</option>
+															    <option>2</option>
 															</select>
 														</div>
 													</div>
@@ -102,17 +124,17 @@
 															Branch: 
 														</div>
 														<div class="col-sm-4">
-															<select class="form-control" id="sel1">
+															<select class="form-control" id="Branch">
 															    <option>CSE</option>
 															    <option>ECE</option>
 															    <option>IT</option>
 															</select>
 														</div>
-														<div class="col-sm-1 pt-2">
+														<div class="col-sm-2 pt-2">
 															Section: 
 														</div>
 														<div class="col-sm-4">
-															<select class="form-control" id="sel1">
+															<select class="form-control" id="Section">
 															    <option>1</option>
 															    <option>2</option>
 															    <option>3</option>
@@ -160,7 +182,10 @@
 															</tbody>
 														</table>
 													</div>
+													<center><button type="button" class="btn btn-outline-success" onclick="loadRnum()">Get Rollnumbers</button></center>
 												</form>
+												<div id='rollnumber'>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -171,8 +196,36 @@
 				</div>
 			</div>
 		</div>
-			<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-			  <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js'></script>
-			  <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js'></script>
+		<script>
+			function loadRnum()
+			{
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function()
+				{
+			    	if (this.readyState == 4 && this.status == 200)
+			    	{
+			    	  document.getElementById("rollnumber").innerHTML = xhttp.responseText;
+              		}
+				};
+				var program = document.getElementById("Program").value;
+				var year = document.getElementById("Year").value;
+				var semester = document.getElementById("Semester").value;
+				var branch = document.getElementById("Branch").value;
+				var section = document.getElementById("Section").value;
+				xhttp.open("POST", "Get_rollno.php", true);
+				xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xhttp.send("year="+year+"&program="+program+"&branch="+branch+"&section="+section+"&semester="+semester);
+			}
+		</script>
+		<script>
+			// function toggle(source) {
+			//   checkboxes = document.getElementsByName('rollnumber');
+			//   for(var checkbox in checkboxes)
+			//     checkbox.checked = source.checked;
+			// }
+		</script>
+		<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js'></script>
+		<script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js'></script>
 	</body>
 </html>

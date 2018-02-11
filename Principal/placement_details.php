@@ -201,7 +201,6 @@
 					xhttp.open("POST", "Company_Search.php", true);
 					xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 					xhttp.send("cname="+x);
-					xhttp.send();
 				}
 				function loadBranch()
 				{
@@ -218,7 +217,6 @@
 					xhttp.open("POST", "Branch_Search.php", true);
 					xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 					xhttp.send("bname="+x);
-					xhttp.send();
 				}
 				function loadYear()
 				{
@@ -235,7 +233,6 @@
 					xhttp.open("POST", "Year_Search.php", true);
 					xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 					xhttp.send("yname="+x);
-					xhttp.send();
 				}
 			</script>
 
