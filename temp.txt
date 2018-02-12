@@ -11,4 +11,4 @@ INNER JOIN student_attend_placements ON student.RollNumber=student_attend_placem
 INNER JOIN bsp_code ON student.BSP=bsp_code.BSP 
 where student_attend_placements.Result='Placed'
 GROUP BY student_attend_placements.CompanyName, bsp_code.Branch
-ORDER BY student_attend_placements.CompanyName
+ORDER BY student_attend_placements.CompanyName	

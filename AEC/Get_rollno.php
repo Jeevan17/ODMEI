@@ -28,12 +28,31 @@
 				where student.CurrentYandS='$year/4 Sem-$semester' AND student.BSP=(SELECT BSP from bsp_code where Branch='$branch' and Section='$section')";
 		$retval = mysqli_query($conn, $sql);
 		//echo "<input type='checkbox' onClick='toggle(this)' />Select All";
-		while($row = mysqli_fetch_array($retval))
-		{
-			echo "
-				<br><input type='checkbox' name='rollnumber' id='{$row['RollNumber']}'/>{$row['RollNumber']}
+		echo "
+			<hr>
+			<div class='row'>
+				<div class='col-sm-5'>
+					";
+					while($row = mysqli_fetch_array($retval))
+					{
+						echo "
+							<br><input type='checkbox' name='rollnumber' id='{$row['RollNumber']}'/>{$row['RollNumber']}
+						";
+					}
+		echo "
+				</div>
+				<div class='row'>
+					<div class='col-sm-2'>
+						<button type='button' class='btn btn-danger'>Present</button> 
+					</div>
+				</div>
+				<div class='row'>
+					<div class='col-sm-2'>
+						<button type='button' class='btn btn-info'>Absent</button> 
+					</div>
+				</div>
+			</div>
 			";
-		}
 			
 	}
 	

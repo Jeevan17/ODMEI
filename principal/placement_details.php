@@ -107,6 +107,7 @@
 											}
 											//$data[$row['CompanyName']][$row['Branch']] = (int)$row['Count'];
 										}
+										var_dump($data);
 										$retval = mysqli_query($conn, $sql);
 										while($row = mysqli_fetch_array($retval))
 										{
