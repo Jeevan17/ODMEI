@@ -77,11 +77,15 @@
 			}
 			else
 			{
+
 				$role=0;
 				while($row = mysqli_fetch_array($retval))
 				{
 					//echo "<script>alert('3')</script>";
-					session_start();
+					if(!isset($_SESSION)) 
+					{ 
+						session_start(); 
+					}
 					$_SESSION['student'] = $uname;
 					echo "<script language='javascript'>window.location='Student/Student.php';</script>";
 				}
