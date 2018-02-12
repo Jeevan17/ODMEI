@@ -83,7 +83,7 @@
 					//echo "<script>alert('3')</script>";
 					session_start();
 					$_SESSION['student'] = $uname;
-					echo "<script language='javascript'>window.location='Student/student.php';</script>";
+					echo "<script language='javascript'>window.location='Student/Student.php';</script>";
 				}
 			}	
 		}

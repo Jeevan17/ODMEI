@@ -107,7 +107,7 @@
 											}
 											//$data[$row['CompanyName']][$row['Branch']] = (int)$row['Count'];
 										}
-										var_dump($data);
+										//var_dump($data);
 										$retval = mysqli_query($conn, $sql);
 										while($row = mysqli_fetch_array($retval))
 										{
@@ -144,6 +144,7 @@
 											";
 									?>
 								</div>
+
 								<div id='company' class='container tab-pane fade'>
 									<div>
 										<center>
@@ -156,6 +157,7 @@
 								  	<div id='company_details'>
 								  	</div>
 								</div>
+								
 								<div id='branch' class='container tab-pane fade'>
 									<div>
 										<center>
