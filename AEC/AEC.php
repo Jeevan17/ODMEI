@@ -22,7 +22,7 @@
 <!DOCTYPE html>
 <html lang='en'>
 	<head>
-	  <title>Principal</title>
+	  <title>AEC</title>
 	  <meta charset='utf-8'>
 	  <meta name='viewport' content='width=device-width, initial-scale=1'>
 	  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css'>
@@ -82,14 +82,14 @@
 															Date: 
 														</div>
 														<div class="col-sm-4">
-															<input class="form-control" type="date" placeholder="" id="date" required>
+															<input class="form-control" type="date" placeholder="" id="date" required value="<?php echo date("Y-m-d");?>">
 														</div>
 														<div class="col-sm-2 pt-2">
 															Program: 
 														</div>
 														<div class="col-sm-4">
 															<select class="form-control" id="Program">
-															    <option>BE</option>
+															    <option selected="selected">BE</option>
 															    <option>MBA</option>
 															    <option>MCA</option>
 															</select>
@@ -105,7 +105,7 @@
 															    <option>1</option>
 															    <option>2</option>
 															    <option>3</option>
-																<option>4</option>
+																<option selected="selected">4</option>
 															</select>
 														</div>
 														<div class="col-sm-2 pt-2">
@@ -114,7 +114,7 @@
 														<div class="col-sm-4">
 															<select class="form-control" id="Semester">
 															    <option>1</option>
-															    <option>2</option>
+															    <option selected="selected">2</option>
 															</select>
 														</div>
 													</div>
@@ -125,7 +125,7 @@
 														</div>
 														<div class="col-sm-4">
 															<select class="form-control" id="Branch">
-															    <option>CSE</option>
+															    <option selected="selected">CSE</option>
 															    <option>ECE</option>
 															    <option>IT</option>
 															</select>
@@ -136,7 +136,7 @@
 														<div class="col-sm-4">
 															<select class="form-control" id="Section">
 															    <option>1</option>
-															    <option>2</option>
+															    <option selected="selected">2</option>
 															    <option>3</option>
 															</select>
 														</div>
@@ -182,9 +182,12 @@
 															</tbody>
 														</table>
 													</div>
-													<center><button type="button" class="btn btn-outline-success" onclick="loadRnum()">Get Rollnumbers</button></center>
+													<button type="button" class="btn btn-outline-success" onclick="loadRnum()">Get Rollnumbers</button>
 												</form>
+												<br>
 												<div id='rollnumber'>
+												</div>
+												<div id='test'>
 												</div>
 											</div>
 										</div>
@@ -197,6 +200,63 @@
 			</div>
 		</div>
 		<script>
+			function loadPresent()
+			{
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function()
+				{
+			    	if (this.readyState == 4 && this.status == 200)
+			    	{
+			    	  document.getElementById("test").innerHTML = xhttp.responseText;
+              		}
+				};
+				var rno = document.getElementsByName("rollnumber");
+				var time = document.getElementsByName("Attendance");
+			    var len = rno.length;
+			    var present = new Array();
+			    var absent = new Array();
+			    var timeperiod = new Array();
+			    for (var i=0; i<len; i++)
+			 	{
+			 	 	if(rno[i].checked==true)
+			 	 	{
+			 	 		present[i]=rno[i].value;
+			 	 	}
+			 	 	if(rno[i].checked==false)
+			 	 	{
+			 	 		absent[i]=rno[i].value;
+			 	 	}
+			 	}
+			 	len=time.length;
+			 	for (var i=0; i<len; i++)
+			 	{
+			 	 	if(time[i].checked==true)
+			 	 	{
+			 	 		timeperiod[i]='1';
+			 	 	}
+			 	 	if(time[i].checked==false)
+			 	 	{
+			 	 		timeperiod[i]='0';
+			 	 	}
+			 	}
+			 			
+			 // 	present.forEach(function(element) {
+				// 	alert('present:  '+element);
+				// });
+			 // 	absent.forEach(function(element) {
+				// 	alert('absent:  '+element);
+				// });
+				var course = document.getElementById('courses').value;
+				xhttp.open("POST", "Attendance.php", true);
+				xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xhttp.send("date="+date+"&present="+JSON.stringify(present)+"&absent="+JSON.stringify(absent)+"&timeperiod="+JSON.stringify(timeperiod)+"&course="+course+"&year="+year+"&program="+program+"&branch="+branch+"&section="+section+"&semester="+semester);
+				alert("Record Inserted");
+			}
+			function loadAbsent()
+			{
+				alert("absent");
+			}
+			
 			function loadRnum()
 			{
 				var xhttp = new XMLHttpRequest();
@@ -212,6 +272,7 @@
 				var semester = document.getElementById("Semester").value;
 				var branch = document.getElementById("Branch").value;
 				var section = document.getElementById("Section").value;
+				var date = document.getElementById("date").value;
 				xhttp.open("POST", "Get_rollno.php", true);
 				xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 				xhttp.send("year="+year+"&program="+program+"&branch="+branch+"&section="+section+"&semester="+semester);

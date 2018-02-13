@@ -24,6 +24,21 @@
 		$branch=$_POST["branch"];
 		$section=$_POST["section"];
 		$semester=$_POST["semester"];
+		$sql = "SELECT DISTINCT CourseName,courses.CourseID from courses
+				INNER JOIN timetable
+				ON courses.CourseID=timetable.CourseID
+				WHERE timetable.YearandSem='$year/4 Sem-$semester' AND timetable.BSP=(SELECT BSP from bsp_code where bsp_code.Branch='$branch' and bsp_code.Section='$section' and bsp_code.Program='BE')";
+		$retval = mysqli_query($conn, $sql);
+		echo "<select class='form-control' id='courses'>";
+		$courses = array();
+		while($row = mysqli_fetch_array($retval))
+		{
+			echo "
+				<option>{$row['CourseName']}</option>
+			";
+			$courses[$row['CourseID']]=$row['CourseName'];
+		}
+		echo "</select>";	
 		$sql="SELECT RollNumber FROM student
 				where student.CurrentYandS='$year/4 Sem-$semester' AND student.BSP=(SELECT BSP from bsp_code where Branch='$branch' and Section='$section')";
 		$retval = mysqli_query($conn, $sql);
@@ -31,29 +46,28 @@
 		echo "
 			<hr>
 			<div class='row'>
-				<div class='col-sm-5'>
+				<div class='col'>
 					";
 					while($row = mysqli_fetch_array($retval))
 					{
 						echo "
-							<br><input type='checkbox' name='rollnumber' id='{$row['RollNumber']}'/>{$row['RollNumber']}
+							<br><input type='checkbox' name='rollnumber' id='{$row['RollNumber']}' value='{$row['RollNumber']}'/>{$row['RollNumber']}
 						";
 					}
 		echo "
 				</div>
 				<div class='row'>
-					<div class='col-sm-2'>
-						<button type='button' class='btn btn-danger'>Present</button> 
+					<div class='col'>
+						<button type='button' class='btn btn-danger' onclick='loadPresent()'>Present</button> 
 					</div>
 				</div>
 				<div class='row'>
-					<div class='col-sm-2'>
-						<button type='button' class='btn btn-info'>Absent</button> 
+					<div class='col'>
+						<button type='button' class='btn btn-info' onclick='loadAbsent()'>Absent</button> 
 					</div>
 				</div>
 			</div>
-			";
-			
+			";	
 	}
 	
 ?>
