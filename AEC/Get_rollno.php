@@ -24,10 +24,11 @@
 		$branch=$_POST["branch"];
 		$section=$_POST["section"];
 		$semester=$_POST["semester"];
-		$sql = "SELECT DISTINCT CourseName,courses.CourseID from courses
+		$program = $_POST['program'];
+		$sql = "SELECT DISTINCT CourseName from courses
 				INNER JOIN timetable
 				ON courses.CourseID=timetable.CourseID
-				WHERE timetable.YearandSem='$year/4 Sem-$semester' AND timetable.BSP=(SELECT BSP from bsp_code where bsp_code.Branch='$branch' and bsp_code.Section='$section' and bsp_code.Program='BE')";
+				WHERE timetable.YearandSem='$year/4 Sem-$semester' AND timetable.BSP=(SELECT BSP from bsp_code where bsp_code.Branch='$branch' and bsp_code.Section='$section' and bsp_code.Program='$program')";
 		$retval = mysqli_query($conn, $sql);
 		echo "<select class='form-control' id='courses'>";
 		$courses = array();
@@ -36,7 +37,6 @@
 			echo "
 				<option>{$row['CourseName']}</option>
 			";
-			$courses[$row['CourseID']]=$row['CourseName'];
 		}
 		echo "</select>";	
 		$sql="SELECT RollNumber FROM student
@@ -58,12 +58,7 @@
 				</div>
 				<div class='row'>
 					<div class='col'>
-						<button type='button' class='btn btn-danger' onclick='loadPresent()'>Present</button> 
-					</div>
-				</div>
-				<div class='row'>
-					<div class='col'>
-						<button type='button' class='btn btn-info' onclick='loadAbsent()'>Absent</button> 
+						<button type='button' class='btn btn-info' onclick='loadPresent()'>Update Attendance</button> 
 					</div>
 				</div>
 			</div>

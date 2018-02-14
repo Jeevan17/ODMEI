@@ -210,12 +210,19 @@
 			    	  document.getElementById("test").innerHTML = xhttp.responseText;
               		}
 				};
+				var program = document.getElementById("Program").value;
+				var year = document.getElementById("Year").value;
+				var semester = document.getElementById("Semester").value;
+				var branch = document.getElementById("Branch").value;
+				var section = document.getElementById("Section").value;
+				var date = document.getElementById("date").value;
+				
 				var rno = document.getElementsByName("rollnumber");
 				var time = document.getElementsByName("Attendance");
 			    var len = rno.length;
 			    var present = new Array();
 			    var absent = new Array();
-			    var timeperiod = new Array();
+			    var timeslot = new Array();
 			    for (var i=0; i<len; i++)
 			 	{
 			 	 	if(rno[i].checked==true)
@@ -232,11 +239,11 @@
 			 	{
 			 	 	if(time[i].checked==true)
 			 	 	{
-			 	 		timeperiod[i]='1';
+			 	 		timeslot[i]='1';
 			 	 	}
 			 	 	if(time[i].checked==false)
 			 	 	{
-			 	 		timeperiod[i]='0';
+			 	 		timeslot[i]='0';
 			 	 	}
 			 	}
 			 			
@@ -249,7 +256,7 @@
 				var course = document.getElementById('courses').value;
 				xhttp.open("POST", "Attendance.php", true);
 				xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-				xhttp.send("date="+date+"&present="+JSON.stringify(present)+"&absent="+JSON.stringify(absent)+"&timeperiod="+JSON.stringify(timeperiod)+"&course="+course+"&year="+year+"&program="+program+"&branch="+branch+"&section="+section+"&semester="+semester);
+				xhttp.send("date="+date+"&present="+JSON.stringify(present)+"&absent="+JSON.stringify(absent)+"&timeslot="+JSON.stringify(timeslot)+"&course="+course+"&year="+year+"&program="+program+"&branch="+branch+"&section="+section+"&semester="+semester);
 				alert("Record Inserted");
 			}
 			function loadAbsent()
