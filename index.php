@@ -35,6 +35,9 @@
 					<div class='col-sm-2'>
 						<a href='Department_login.php' class="btn btn-outline-secondary btn-lg pt-4 pb-4 ">Department Login</a>
 					</div>
+					<div class='col-sm-2'>
+						<a href='student_login.php' class="btn btn-outline-primary btn-lg pt-4 pb-4 pl-4 pr-4">Staff Login</a>
+					</div>
 					<div class='col-sm-4'>
 					</div>
 				</div>
