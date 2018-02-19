@@ -47,7 +47,7 @@
 		<br>
 		<div class='container pt-3'>
 			<div class='row'>
-			  	<div class='col-sm-12'>
+			  	<div class='col-sm-12	'>
 			  		<ul class='nav nav-tabs nav-justified'>
 					    <li class='nav-item'>
 							<a class='nav-link ' href='AEC.php'>Attendance</a>
@@ -59,3 +59,107 @@
 							<a class='nav-link active' href='Mid_marks.php'>Mid Marks</a>
 						</li>
 					</ul>
+					<div class='col-sm-8'>
+						<div class='tab-content'>
+							<div id='Add_marks' class='container tab-pane active'>
+								<form>
+									<div class='row'>
+										<div class="col-sm-1 pt-4">
+											Date: 
+										</div>
+										<div class="col-sm-4 pt-3">
+											<input class="form-control" type="date" placeholder="" id="date" required value="<?php echo date("Y-m-d");?>">
+										</div>
+										<div class="col-sm-2 pt-4">
+											Program: 
+										</div>
+										<div class="col-sm-4 pt-3">
+											<select class="form-control" id="Program">
+											    <option selected="selected">BE</option>
+											    <option>MBA</option>
+											    <option>MCA</option>
+											</select>
+										</div>
+									</div>
+									<br>
+									<div class='row'>
+										<div class="col-sm-1 pt-2">
+											Year: 
+										</div>
+										<div class="col-sm-4">
+											<select class="form-control" id="Year">
+											    <option>1</option>
+											    <option>2</option>
+											    <option>3</option>
+												<option selected="selected">4</option>
+											</select>
+										</div>
+										<div class="col-sm-2 pt-2">
+											Semester: 
+										</div>
+										<div class="col-sm-4">
+											<select class="form-control" id="Semester">
+											    <option>1</option>
+											    <option selected="selected">2</option>
+											</select>
+										</div>
+										</div>
+											<br>
+											<div class='row'>
+											<div class="col-sm-1 pt-2">
+												Branch: 
+											</div>
+											<div class="col-sm-4">
+												<select class="form-control" id="Branch">
+												<option selected="selected">CSE</option>
+											    <option>ECE</option>
+											    <option>IT</option>
+												</select>
+											</div>
+											<div class="col-sm-2 pt-2">
+												Section: 
+											</div>
+											<div class="col-sm-4">
+												<select class="form-control" id="Section">
+												    <option>1</option>
+												    <option selected="selected">2</option>
+												    <option>3</option>
+												</select>
+											</div>
+										</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<br>
+					<button type="button" class="btn btn-outline-success" onclick="loadDetails()">Get Details</button>
+					<div id='getdet'>
+					</div>
+		<script>
+			function loadDetails()
+			{
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function()
+				{
+			    	if (this.readyState == 4 && this.status == 200)
+			    	{
+			    	  document.getElementById("getdet").innerHTML = xhttp.responseText;
+              		}
+				};
+				var program = document.getElementById("Program").value;
+				var year = document.getElementById("Year").value;
+				var semester = document.getElementById("Semester").value;
+				var branch = document.getElementById("Branch").value;
+				var section = document.getElementById("Section").value;
+				var date = document.getElementById("date").value;
+				xhttp.open("POST", "get_details.php", true);
+				xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xhttp.send("year="+year+"&program="+program+"&branch="+branch+"&section="+section+"&semester="+semester);
+			}
+		</script>
+
+		<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js'></script>
+		<script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js'></script>
+	</body>
+</html>
