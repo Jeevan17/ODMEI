@@ -36,61 +36,106 @@
 		<meta charset='utf-8'>
 		<meta name='viewport' content='width=device-width, initial-scale=1'>
 		<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css'>
-		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0-beta.3/lux/bootstrap.min.css">
 		<link rel='stylesheet' href='../style.css'>
     </head>
 	<body>
-		<header id="home">
-			<nav class="navbar navbar-expand-lg navbar-light bg-light">
-				<a class="navbar-brand" href="#"><img class='img-fluid' src='../images/header.jpg'></a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-				</button>
-
-				<div class="collapse navbar-collapse" id="navbarColor03">
-					<ul class="navbar-nav mr-auto ">
-				    	<li class="nav-item active">
-				        	<a class="nav-link" href="Student.php">Home <span class="sr-only">(current)</span></a>
-				      	<li>
-				      	<li class="nav-item">
-				        	<a class="nav-link" href="Attendance.php">Attendance</a>
-				      	</li>
-				      	<li class="nav-item">
-				        	<a class="nav-link" href="student_marks.php">Marks Details</a>
-				      	</li>
-				      	<li class="nav-item">
-				        	<a class="nav-link" href="student_admission.php">Admission Details</a>
-				      	</li>
-				      	<li class="nav-item">
-				        	<a class="nav-link" href="student_placement.php">Placement Details</a>
-				      	</li>
-				    </ul>
+		<div id="mySidenav" class="sidenav">
+			<div class="row">
+				<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+			</div>
+			<div class='row'>
+				<div class="col">
+					<h3>Student Profile</h3>
 				</div>
-			</nav>
-		</header>
-		
-		<table class="table table-hover">
-			<thead>
-		    	<tr>
-			      <th scope="col">Type</th>
-			      <th scope="col">Column heading</th>
-			      <th scope="col">Column heading</th>
-			      <th scope="col">Column heading</th>
-			    </tr>
-		  	</thead>
-		  	<tbody>
-			    <tr>
-			      <th scope="row">Active</th>
-			      <td>Column content</td>
-			      <td>Column content</td>
-			      <td>Column content</td>
-			    </tr>
-		  	</tbody>
-		</table> 
+				<div class="col-sm-5">
+					<center>
+						<a href='../student_login.php' class="btn btn-outline-dark pl-3 pr-3 pt-2 pb-2">Logout</a>
+					</center>
+				</div>
+			</div>
+        	<hr>
+        	<center>
+        		<?php
+        			echo "
+        				<img src='data:image/jpeg;base64,".base64_encode( $photo )."' width='150px' height='150px' class='rounded-circle' alt='photo' /> 
+        			";
+        		?>
+        	</center>
+        	<br>
+            <table class='table'>
+		  		<tbody>
+					<tr>
+				    	<td><h5>Name</h5></td>
+				        <td><h6><?php echo "$name" ?></h6></td>
+				    </tr>
+				    <tr>
+				    	<td><h5>RollNumber</h5></td>
+				        <td><h6><?php echo "$rno" ?></h6></td>
+				    </tr>
+				    <tr>
+				        <td><h5>Phone No</h5></td>
+				        <td><h6><?php echo "$phno" ?></h6></td>
+				    </tr>
+				    <tr>
+				        <td><h5>Email ID</h5></td>
+				        <td><h6><?php echo "$email" ?></h6></td>
+				    </tr>
+				    <tr>
+				        <td><h5>Attendance</h5></td>
+				        <td><h6>75%</h6></td>
+				    </tr>
+				    <tr>
+				        <td><h5>CGPA</h5></td>
+				        <td><h6>7.66</h6></td>
+				    </tr>
+				    <tr>
+				    </tr>
+				</tbody>
+			</table>
+          	<!--a href="#">About</a>
+		  	<a href="#">Services</a>
+		  	<a href="#">Clients</a>
+		  	<a href="#">Contact</a-->
+		</div>
+
+		<div id="main">
+			<div class='container pt-2' >
+			  	<div class='row'>
+			  		<div class='col-sm-2'>
+						<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+			  		</div>
+			  		<div class='col-sm-8'>
+			  			<center>
+			  			<!--h5 class='text-primary'> Chaitanya Bharathi Institute of Technology(Autonomous)<br>
+			  			<small class='text-info'>Accredited by NBA & NAAC, Approved by A.I.C.T.E., New Delhi, Affliated to Osmania University<br> Chaityana Bharathi(PO),Kokapeta(village), Gandipet, Hyderabad -500075, Telangana, India</small></h5-->
+			  			<img class='img-fluid' src='../images/header.jpg'>
+			  			</center>
+			  		</div>
+			  		<div class='col-sm-2'>
+			  		</div>
+			  	</div>
+			</div>
+			<br>
 			<div class='container pt-3'>
 				<div class='row'>
 				  	<div class='col-sm-12'>
-				  		
+				  		<ul class='nav nav-tabs nav-justified'>
+						    <li class='nav-item'>
+						      <a class='nav-link' href='Student.php'>Profile</a>
+						    </li>
+						    <li class='nav-item'>
+						      <a class='nav-link active' href='Attendance.php'>Attendance</a>
+						    </li>
+						    <li class='nav-item'>
+						      <a class='nav-link' href='student_marks.php'>Marks Details</a>
+						    </li>
+						    <li class='nav-item'>
+						      <a class='nav-link' href='student_admission.php'>Admission Details</a>
+						    </li>
+						    <li class='nav-item'>
+						      <a class='nav-link' href='student_placement.php'>Placement Details</a>
+						    </li>
+					  	</ul>
 					  	<div class='tab-content'>
 					  		<div class='container tab-pane active'><br>
 					  			<div class='table-responsive'>
