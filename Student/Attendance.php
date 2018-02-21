@@ -18,16 +18,16 @@
 				<strong>Not connected to database." . mysqli_error();"</strong>
 			</div>";
 	}
-	$sql = "select * from student where RollNumber='$uname'";
-	$retval = mysqli_query($conn, $sql);
-	while($row = mysqli_fetch_array($retval))
-	{
-		$photo = $row['Photo'];
-		$name = $row['FirstName']." ".$row['LastName'];
-		$rno = $uname;
-		$phno = $row['PhoneNumber'];
-		$email = $row['Email'];
-	}        			
+	// $sql = "select * from student where RollNumber='$uname'";
+	// $retval = mysqli_query($conn, $sql);
+	// while($row = mysqli_fetch_array($retval))
+	// {
+	// 	$photo = $row['Photo'];
+	// 	$name = $row['FirstName']." ".$row['LastName'];
+	// 	$rno = $uname;
+	// 	$phno = $row['PhoneNumber'];
+	// 	$email = $row['Email'];
+	// }        			
 ?>
 <!DOCTYPE html>
 <html lang='en'>
@@ -36,180 +36,102 @@
 		<meta charset='utf-8'>
 		<meta name='viewport' content='width=device-width, initial-scale=1'>
 		<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css'>
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0-beta.3/lux/bootstrap.min.css">
 		<link rel='stylesheet' href='../style.css'>
     </head>
 	<body>
-		<div id="mySidenav" class="sidenav">
-			<div class="row">
-				<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-			</div>
-			<div class='row'>
-				<div class="col">
-					<h3>Student Profile</h3>
-				</div>
-				<div class="col-sm-5">
-					<center>
-						<a href='../student_login.php' class="btn btn-outline-dark pl-3 pr-3 pt-2 pb-2">Logout</a>
-					</center>
-				</div>
-			</div>
-        	<hr>
-        	<center>
-        		<?php
-        			echo "
-        				<img src='data:image/jpeg;base64,".base64_encode( $photo )."' width='150px' height='150px' class='rounded-circle' alt='photo' /> 
-        			";
-        		?>
-        	</center>
-        	<br>
-            <table class='table'>
-		  		<tbody>
-					<tr>
-				    	<td><h5>Name</h5></td>
-				        <td><h6><?php echo "$name" ?></h6></td>
-				    </tr>
-				    <tr>
-				    	<td><h5>RollNumber</h5></td>
-				        <td><h6><?php echo "$rno" ?></h6></td>
-				    </tr>
-				    <tr>
-				        <td><h5>Phone No</h5></td>
-				        <td><h6><?php echo "$phno" ?></h6></td>
-				    </tr>
-				    <tr>
-				        <td><h5>Email ID</h5></td>
-				        <td><h6><?php echo "$email" ?></h6></td>
-				    </tr>
-				    <tr>
-				        <td><h5>Attendance</h5></td>
-				        <td><h6>75%</h6></td>
-				    </tr>
-				    <tr>
-				        <td><h5>CGPA</h5></td>
-				        <td><h6>7.66</h6></td>
-				    </tr>
-				    <tr>
-				    </tr>
-				</tbody>
-			</table>
-          	<!--a href="#">About</a>
-		  	<a href="#">Services</a>
-		  	<a href="#">Clients</a>
-		  	<a href="#">Contact</a-->
-		</div>
+		<header id="home">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				<a class="navbar-brand" href="#"><img class='img-fluid' src='../images/header.jpg'></a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+				</button>
 
-		<div id="main">
-			<div class='container pt-2' >
-			  	<div class='row'>
-			  		<div class='col-sm-2'>
-						<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
-			  		</div>
-			  		<div class='col-sm-8'>
-			  			<center>
-			  			<!--h5 class='text-primary'> Chaitanya Bharathi Institute of Technology(Autonomous)<br>
-			  			<small class='text-info'>Accredited by NBA & NAAC, Approved by A.I.C.T.E., New Delhi, Affliated to Osmania University<br> Chaityana Bharathi(PO),Kokapeta(village), Gandipet, Hyderabad -500075, Telangana, India</small></h5-->
-			  			<img class='img-fluid' src='../images/header.jpg'>
-			  			</center>
-			  		</div>
-			  		<div class='col-sm-2'>
-			  		</div>
-			  	</div>
-			</div>
-			<br>
-			<div class='container pt-3'>
-				<div class='row'>
-				  	<div class='col-sm-12'>
-				  		<ul class='nav nav-tabs nav-justified'>
-						    <li class='nav-item'>
-						      <a class='nav-link' href='Student.php'>Profile</a>
-						    </li>
-						    <li class='nav-item'>
-						      <a class='nav-link active' href='Attendance.php'>Attendance</a>
-						    </li>
-						    <li class='nav-item'>
-						      <a class='nav-link' href='student_marks.php'>Marks Details</a>
-						    </li>
-						    <li class='nav-item'>
-						      <a class='nav-link' href='student_admission.php'>Admission Details</a>
-						    </li>
-						    <li class='nav-item'>
-						      <a class='nav-link' href='student_placement.php'>Placement Details</a>
-						    </li>
-					  	</ul>
-					  	<div class='tab-content'>
-					  		<div class='container tab-pane active'><br>
-					  			<div class='table-responsive'>
-						  			<table class='table table-bordered table-hover'>
-						  				<thead>
-									      <tr>
-									        <th class='text-success'>Date</th>
-									        <th class='text-success'>1<br>(09:40-10:30)</th>
-									        <th class='text-success'>2<br>(10:30-11:20)</th>
-									        <th class='text-success'>3<br>(11:20-12:10)</th>
-									        <th class='text-success'>4<br>(12:10-01:00)</th>
-									        <th class='text-success'>5<br>(01:35-02:25)</th>
-									        <th class='text-success'>6<br>(02:25-03:15)</th>
-									        <th class='text-success'>7<br>(03:15-04:05)</th>
-									      </tr>
-									    </thead>
-									    <tbody>
-									      
-									      <tr>
-									        <td>18-01-2018</td>
-									        <td>Present</td>
-									        <td>Present</td>
-									        <td>-</td>
-									        <td>-</td>
-									        <td>Absent</td>
-									        <td>Absent</td>
-									        <td>-</td>
-									      </tr>
-									      <tr>
-									        <td>18-01-2018</td>
-									        <td>Present</td>
-									        <td>-</td>
-									        <td>Present</td>
-									        <td>-</td>
-									        <td>Absent</td>
-									        <td>-</td>
-									        <td>Absent</td>
-									      </tr>
-									      <tr>
-									        <td>18-01-2018</td>
-									        <td>Present</td>
-									        <td>-</td>
-									        <td>Present</td>
-									        <td>-</td>
-									        <td>Absent</td>
-									        <td>Absent</td>
-									        <td>-</td>
-									      </tr>
-									      <tr>
-									        <td>18-01-2018</td>
-									        <td>-</td>
-									        <td>Absent</td>
-									        <td>Absent</td>
-									        <td>Present</td>
-									        <td>Present</td>
-									        <td>-</td>
-									        <td>-</td>
-									      </tr>
-									      <tr>
-									        <td>18-01-2018</td>
-									        <td>-</td>
-									        <td>Present</td>
-									        <td>Present</td>
-									        <td>-</td>
-									        <td>Absent</td>
-									        <td>Absent</td>
-									        <td>-</td>
-									      </tr>
-									    </tbody>
-									</table>
-								</div>
-							</div>
+				<div class="collapse navbar-collapse" id="navbarColor03">
+					<ul class="navbar-nav mr-auto ">
+				    	<li class="nav-item">
+				        	<a class="nav-link" href="Student.php">Home</a>
+				      	<li>
+				      	<li class="nav-item active">
+				        	<a class="nav-link" href="Attendance.php">Attendance</a>
+				      	</li>
+				      	<li class="nav-item">
+				        	<a class="nav-link" href="student_marks.php">Marks Details</a>
+				      	</li>
+				      	<li class="nav-item">
+				        	<a class="nav-link" href="student_admission.php">Admission Details</a>
+				      	</li>
+				      	<li class="nav-item">
+				        	<a class="nav-link" href="student_placement.php">Placement Details</a>
+				      	</li>
+				      	<li class="nav-item">
+				      		<a class="nav-link btn btn-outline-success" href='../student_login.php'>Logout</a>
+				      	</li>
+				    </ul>
+				</div>
+			</nav>
+		</header>
+		
+		<div class='container pt-3'>
+			<div class='row'>
+				<div class='col-sm-12'>
+					<div class='tab-content'>
+						<div class='container tab-pane active text-primary'><br>
+					  		<table class='table table-bordered table-hover table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl'>
+						  		<thead>
+									<tr>
+										<th class='text-danger'>Date</th>
+									    <th class='text-danger'>09:40-10:30</th>
+									    <th class='text-danger'>10:30-11:20</th>
+									    <th class='text-danger'>11:20-12:10</th>
+									    <th class='text-danger'>12:10-01:00</th>
+									    <th class='text-danger'>01:35-02:25</th>
+									    <th class='text-danger'>02:25-03:15</th>
+									    <th class='text-danger'>03:15-04:05</th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php
+										$sql = "SELECT dailyattendance.RollNumber,dailyattendance.Date, dailyattendance.Timeslot, dailyattendance.Attendance 
+											from dailyattendance 
+											where RollNumber='$uname' and dailyattendance.Timeperiod=(SELECT max(timeperiod.ID) from  timeperiod)
+											ORDER BY dailyattendance.Date,dailyattendance.Timeslot";
+										$retval = mysqli_query($conn, $sql);
+											
+										$data = array();
+										$timeslot = array('09:40:00','10:30:00','11:20:00','12:10:00','01:35:00','02:25:00','03:15:00');
+										while($row = mysqli_fetch_array($retval))
+										{
+											for ($i=0; $i<7 ; $i++)
+											{ 
+												$data[$row['Date']][$timeslot[$i]] = '-';
+											}
+										}
+										//var_dump($data);
+										$retval = mysqli_query($conn, $sql);
+										while($row = mysqli_fetch_array($retval))
+										{
+											$data[$row['Date']][$row['Timeslot']] = $row['Attendance'];
+										}
+										foreach ($data as $date => $value)
+										{
+											echo "
+												<tr>
+													<td>$date</div>
+											";
+											foreach ($value as $time => $attendance)
+											{
+												echo "
+													<td>$attendance</td>
+												";	
+											}
+											echo "</tr>";
+										}
+									?>
+								</tbody>
+							<table>
 						</div>
-				  	</div>
+					</div>
 				</div>
 			</div>
 		</div>

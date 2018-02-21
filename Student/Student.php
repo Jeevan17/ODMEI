@@ -50,7 +50,7 @@
 				<div class="collapse navbar-collapse" id="navbarColor03">
 					<ul class="navbar-nav mr-auto ">
 				    	<li class="nav-item active">
-				        	<a class="nav-link" href="Student.php">Home <span class="sr-only">(current)</span></a>
+				        	<a class="nav-link" href="Student.php">Home</a>
 				      	<li>
 				      	<li class="nav-item">
 				        	<a class="nav-link" href="Attendance.php">Attendance</a>
@@ -64,127 +64,57 @@
 				      	<li class="nav-item">
 				        	<a class="nav-link" href="student_placement.php">Placement Details</a>
 				      	</li>
+				      	<li class="nav-item">
+				      		<a class="nav-link btn btn-outline-success" href='../student_login.php'>Logout</a>
+				      	</li>
 				    </ul>
 				</div>
 			</nav>
 		</header>
 		
-		<table class="table table-hover">
-			<thead>
-		    	<tr>
-			      <th scope="col">Type</th>
-			      <th scope="col">Column heading</th>
-			      <th scope="col">Column heading</th>
-			      <th scope="col">Column heading</th>
-			    </tr>
-		  	</thead>
-		  	<tbody>
-			    <tr>
-			      <th scope="row">Active</th>
-			      <td>Column content</td>
-			      <td>Column content</td>
-			      <td>Column content</td>
-			    </tr>
-		  	</tbody>
-		</table> 
-			<div class='container pt-3'>
-				<div class='row'>
-				  	<div class='col-sm-12'>
-				  		
-					  	<div class='tab-content'>
-					  		<div class='container tab-pane active'><br>
-					  			<div class='table-responsive'>
-						  			<table class='table table-bordered table-hover'>
-						  				<thead>
-									      <tr>
-									        <th class='text-success'>Date</th>
-									        <th class='text-success'>1<br>(09:40-10:30)</th>
-									        <th class='text-success'>2<br>(10:30-11:20)</th>
-									        <th class='text-success'>3<br>(11:20-12:10)</th>
-									        <th class='text-success'>4<br>(12:10-01:00)</th>
-									        <th class='text-success'>5<br>(01:35-02:25)</th>
-									        <th class='text-success'>6<br>(02:25-03:15)</th>
-									        <th class='text-success'>7<br>(03:15-04:05)</th>
-									      </tr>
-									    </thead>
-									    <tbody>
-									      
-									      <tr>
-									        <td>18-01-2018</td>
-									        <td>Present</td>
-									        <td>Present</td>
-									        <td>-</td>
-									        <td>-</td>
-									        <td>Absent</td>
-									        <td>Absent</td>
-									        <td>-</td>
-									      </tr>
-									      <tr>
-									        <td>18-01-2018</td>
-									        <td>Present</td>
-									        <td>-</td>
-									        <td>Present</td>
-									        <td>-</td>
-									        <td>Absent</td>
-									        <td>-</td>
-									        <td>Absent</td>
-									      </tr>
-									      <tr>
-									        <td>18-01-2018</td>
-									        <td>Present</td>
-									        <td>-</td>
-									        <td>Present</td>
-									        <td>-</td>
-									        <td>Absent</td>
-									        <td>Absent</td>
-									        <td>-</td>
-									      </tr>
-									      <tr>
-									        <td>18-01-2018</td>
-									        <td>-</td>
-									        <td>Absent</td>
-									        <td>Absent</td>
-									        <td>Present</td>
-									        <td>Present</td>
-									        <td>-</td>
-									        <td>-</td>
-									      </tr>
-									      <tr>
-									        <td>18-01-2018</td>
-									        <td>-</td>
-									        <td>Present</td>
-									        <td>Present</td>
-									        <td>-</td>
-									        <td>Absent</td>
-									        <td>Absent</td>
-									        <td>-</td>
-									      </tr>
-									    </tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-				  	</div>
-				</div>
+		<div class='tab-content'>
+			<div class='container tab-pane active text-primary'><br>
+				<br>
+				<center>
+					<?php 
+						echo "
+        				<img src='data:image/jpeg;base64,".base64_encode( $photo )."' width='150px' height='150px' class='img-thumbnail' alt='photo' /> 
+        			";
+        			?>
+				</center>
+				<table class="table table-bordered table-hover table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl">
+					<tbody>
+						<tr >
+					      <th scope="row"><h3>Name</h3></th>
+					      <td><h4><?php echo "$name" ?></h4></td>
+					    </tr>
+						<tr >
+					      <th scope="row"><h3><h3>Roll Number</h3></h3></th>
+					      <td><h4><?php echo "$rno" ?></h4></td>
+					    </tr>
+						<tr >
+					      <th scope="row"><h3>Phone No</h3></th>
+					      <td><h4><?php echo "$phno" ?></h4></td>
+					    </tr>
+						<tr >
+					      <th scope="row"><h3>EMAIL ID</h3></th>
+					      <td><h4><?php echo "$email" ?></h4></td>
+					    </tr>
+						<tr >
+					      <th scope="row"><h3>ATTENDANCE</h3></th>
+					      <td><h4><?php echo "$name" ?></h4></td>
+					    </tr>
+						<tr >
+					      <th scope="row"><h3>CGPA</h3></th>
+					      <td><h4><?php echo "$name" ?></h4></td>
+					    </tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 		
 		<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 		<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js'></script>
 		<script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js'></script>
-
-		<script>
-			function openNav() {
-			    document.getElementById("mySidenav").style.width = "400px";
-			    document.getElementById("main").style.marginLeft = "400px";
-			    document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-			}
-
-			function closeNav() {
-			    document.getElementById("mySidenav").style.width = "0";
-			    document.getElementById("main").style.marginLeft= "0";
-			    document.body.style.backgroundColor = "white";
-			}
-		</script>
 	</body>
 </html>
