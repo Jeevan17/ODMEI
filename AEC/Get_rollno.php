@@ -5,7 +5,7 @@
 	
 	$conn = mysqli_connect($dbhost, $dbuser, $dbpass,'cbitdb');
 	session_start();
-	if(!isset($_SESSION['principal'])){
+	if(!isset($_SESSION['AEC'])){
 		echo "<script language='javascript'>window.location='../index.php';</script>";
 	}
    
@@ -58,7 +58,7 @@
 				</div>
 				<div class='row'>
 					<div class='col'>
-						<button type='button' class='btn btn-info' onclick='loadPresent()'>Update Attendance</button> 
+						<button type='button' class='btn btn-info' onclick='loadAdd()'>Update Attendance</button> 
 					</div>
 				</div>
 			</div>

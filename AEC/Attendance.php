@@ -5,7 +5,7 @@
 	
 	$conn = mysqli_connect($dbhost, $dbuser, $dbpass,'cbitdb');
 	session_start();
-	if(!isset($_SESSION['principal'])){
+	if(!isset($_SESSION['AEC'])){
 		echo "<script language='javascript'>window.location='../index.php';</script>";
 	}
    

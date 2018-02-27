@@ -17,17 +17,7 @@
 			<div class='alert alert-danger'>
 				<strong>Not connected to database." . mysqli_error();"</strong>
 			</div>";
-	}
-	// $sql = "select * from student where RollNumber='$uname'";
-	// $retval = mysqli_query($conn, $sql);
-	// while($row = mysqli_fetch_array($retval))
-	// {
-	// 	$photo = $row['Photo'];
-	// 	$name = $row['FirstName']." ".$row['LastName'];
-	// 	$rno = $uname;
-	// 	$phno = $row['PhoneNumber'];
-	// 	$email = $row['Email'];
-	// }        			
+	}			
 ?>
 <!DOCTYPE html>
 <html lang='en'>
@@ -95,7 +85,7 @@
 										$sql = "SELECT dailyattendance.RollNumber,dailyattendance.Date, dailyattendance.Timeslot, dailyattendance.Attendance 
 											from dailyattendance 
 											where RollNumber='$uname' and dailyattendance.Timeperiod=(SELECT max(timeperiod.ID) from  timeperiod)
-											ORDER BY dailyattendance.Date,dailyattendance.Timeslot";
+											ORDER BY dailyattendance.Date desc,dailyattendance.Timeslot";
 										$retval = mysqli_query($conn, $sql);
 											
 										$data = array();
@@ -117,7 +107,7 @@
 										{
 											echo "
 												<tr>
-													<td>$date</div>
+													<td class='text-info'>".date("d-m-Y", strtotime($date))."</div>
 											";
 											foreach ($value as $time => $attendance)
 											{
