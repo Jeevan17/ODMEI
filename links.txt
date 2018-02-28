@@ -17,3 +17,10 @@ Bootstrap 4
 Progressive Web Apps
   https://codelabs.developers.google.com/codelabs/your-first-pwapp/#0
   https://github.com/pwarocks/pwa.rocks
+  
+Laravel
+  https://laravel.com/
+  https://laracasts.com/series/laravel-from-scratch-2017
+  
+--------------------------------------------------------------
+  https://medium.com/@IO_/https-medium-com-io-building-progressive-web-apps-with-laravel-57f6bfa3ddb1
