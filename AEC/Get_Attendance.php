@@ -76,10 +76,16 @@
 							<td><input type='checkbox' name='$rollnum' checked></td>
 						";
 					} 
+					elseif ($attendance == 'Absent') {
+						echo "
+							<td><input type='checkbox' name='$rollnum' ></td>
+						";
+					
+					}
 					else
 					{
 						echo "
-							<td><input type='checkbox' name='$rollnum' ></td>
+							<td><input type='checkbox' name='$rollnum' disabled></td>
 						";
 					}
 				}
