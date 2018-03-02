@@ -41,233 +41,253 @@
 		{
 			$CourseID = $row['CourseID'];
 		}
-		
-		$sql = "SELECT id from timeperiod WHERE id=(SELECT max(id) from timeperiod)";
+		global $flag;
+		$sql = "SELECT date FROM dailyattendance WHERE Date='$date' and CourseID='$CourseID'";
 		$retval = mysqli_query($conn, $sql);
-		while ($row = mysqli_fetch_array($retval))
+		while($row = mysqli_fetch_array($retval))
 		{
-			$Timeperiod = $row['id'];
+			$flag = $row['date'];
 		}
-		//echo "$Timeperiod";				
-		foreach ($absent as $rno)
+		if(!is_null($flag))
 		{
-			if (!is_null($rno))
+			echo "
+			<div class='alert alert-danger'>
+				<strong>Cannot Add Attendance(Date Already used)</strong>
+			</div>";
+		}
+		else
+		{
+			$sql = "SELECT id from timeperiod WHERE id=(SELECT max(id) from timeperiod)";
+			$retval = mysqli_query($conn, $sql);
+			while ($row = mysqli_fetch_array($retval))
 			{
-				for ($i=0; $i <7 ; $i++)
+				$Timeperiod = $row['id'];
+			}
+			//echo "$Timeperiod";				
+			foreach ($absent as $rno)
+			{
+				if (!is_null($rno))
 				{
-					switch ($i)
+					for ($i=0; $i <7 ; $i++)
 					{
-					 	case 0:
-					 		if ($timeslot[$i] == 1)
-					 		{
-					 			$sql = "INSERT INTO dailyattendance (RollNumber,CourseID,Timeperiod,Date,Timeslot,Attendance) VALUES ('$rno','$CourseID','$Timeperiod','$date','09:40:00','Absent')";
-					 			if (mysqli_query($conn, $sql))
-					 			{
-								    //echo "New record created successfully";
-								}
-								else
-								{
-								    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-								}
-					 		}
-					 	break;
-					 	case 1:
-					 		if ($timeslot[$i] == 1)
-					 		{
-					 			$sql = "INSERT INTO dailyattendance (RollNumber,CourseID,Timeperiod,Date,Timeslot,Attendance) VALUES ('$rno','$CourseID','$Timeperiod','$date','10:30:00','Absent')";
-					 			if (mysqli_query($conn, $sql))
-					 			{
-								    //echo "New record created successfully";
-								}
-								else
-								{
-								    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-								}
-					 		}
-					 	break;
-					 	case 2:
-					 		if ($timeslot[$i] == 1)
-					 		{
-					 			$sql = "INSERT INTO dailyattendance (RollNumber,CourseID,Timeperiod,Date,Timeslot,Attendance) VALUES ('$rno','$CourseID','$Timeperiod','$date','11:20:00','Absent')";
-					 			if (mysqli_query($conn, $sql))
-					 			{
-								    //echo "New record created successfully";
-								}
-								else
-								{
-								    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-								}
-					 		}
-					 	break;
-					 	case 3:
-					 		if ($timeslot[$i] == 1)
-					 		{
-					 			$sql = "INSERT INTO dailyattendance (RollNumber,CourseID,Timeperiod,Date,Timeslot,Attendance) VALUES ('$rno','$CourseID','$Timeperiod','$date','12:10:00','Absent')";
-					 			if (mysqli_query($conn, $sql))
-					 			{
-								    //echo "New record created successfully";
-								}
-								else
-								{
-								    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-								}
-					 		}
-					 	break;
-					 	case 4:
-					 		if ($timeslot[$i] == 1)
-					 		{
-					 			$sql = "INSERT INTO dailyattendance (RollNumber,CourseID,Timeperiod,Date,Timeslot,Attendance) VALUES ('$rno','$CourseID','$Timeperiod','$date','01:35:00','Absent')";
-					 			if (mysqli_query($conn, $sql))
-					 			{
-								    //echo "New record created successfully";
-								}
-								else
-								{
-								    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-								}
-					 		}
-					 	break;
-					 	case 5:
-					 		if ($timeslot[$i] == 1)
-					 		{
-					 			$sql = "INSERT INTO dailyattendance (RollNumber,CourseID,Timeperiod,Date,Timeslot,Attendance) VALUES ('$rno','$CourseID','$Timeperiod','$date','02:25:00','Absent')";
-					 			if (mysqli_query($conn, $sql))
-					 			{
-								    //echo "New record created successfully";
-								}
-								else
-								{
-								    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-								}
-					 		}
-					 	break;
-					 	case 6:
-					 		if ($timeslot[$i] == 1)
-					 		{
-					 			$sql = "INSERT INTO dailyattendance (RollNumber,CourseID,Timeperiod,Date,Timeslot,Attendance) VALUES ('$rno','$CourseID','$Timeperiod','$date','03:15:00','Absent')";
-					 			if (mysqli_query($conn, $sql))
-					 			{
-								    //echo "New record created successfully";
-								}
-								else
-								{
-								    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-								}
-					 		}
-					 	break;
-					} 
+						switch ($i)
+						{
+						 	case 0:
+						 		if ($timeslot[$i] == 1)
+						 		{
+						 			$sql = "INSERT INTO dailyattendance (RollNumber,CourseID,Timeperiod,Date,Timeslot,Attendance) VALUES ('$rno','$CourseID','$Timeperiod','$date','09:40:00','Absent')";
+						 			if (mysqli_query($conn, $sql))
+						 			{
+									    //echo "New record created successfully";
+									}
+									else
+									{
+									    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+									}
+						 		}
+						 	break;
+						 	case 1:
+						 		if ($timeslot[$i] == 1)
+						 		{
+						 			$sql = "INSERT INTO dailyattendance (RollNumber,CourseID,Timeperiod,Date,Timeslot,Attendance) VALUES ('$rno','$CourseID','$Timeperiod','$date','10:30:00','Absent')";
+						 			if (mysqli_query($conn, $sql))
+						 			{
+									    //echo "New record created successfully";
+									}
+									else
+									{
+									    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+									}
+						 		}
+						 	break;
+						 	case 2:
+						 		if ($timeslot[$i] == 1)
+						 		{
+						 			$sql = "INSERT INTO dailyattendance (RollNumber,CourseID,Timeperiod,Date,Timeslot,Attendance) VALUES ('$rno','$CourseID','$Timeperiod','$date','11:20:00','Absent')";
+						 			if (mysqli_query($conn, $sql))
+						 			{
+									    //echo "New record created successfully";
+									}
+									else
+									{
+									    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+									}
+						 		}
+						 	break;
+						 	case 3:
+						 		if ($timeslot[$i] == 1)
+						 		{
+						 			$sql = "INSERT INTO dailyattendance (RollNumber,CourseID,Timeperiod,Date,Timeslot,Attendance) VALUES ('$rno','$CourseID','$Timeperiod','$date','12:10:00','Absent')";
+						 			if (mysqli_query($conn, $sql))
+						 			{
+									    //echo "New record created successfully";
+									}
+									else
+									{
+									    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+									}
+						 		}
+						 	break;
+						 	case 4:
+						 		if ($timeslot[$i] == 1)
+						 		{
+						 			$sql = "INSERT INTO dailyattendance (RollNumber,CourseID,Timeperiod,Date,Timeslot,Attendance) VALUES ('$rno','$CourseID','$Timeperiod','$date','01:35:00','Absent')";
+						 			if (mysqli_query($conn, $sql))
+						 			{
+									    //echo "New record created successfully";
+									}
+									else
+									{
+									    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+									}
+						 		}
+						 	break;
+						 	case 5:
+						 		if ($timeslot[$i] == 1)
+						 		{
+						 			$sql = "INSERT INTO dailyattendance (RollNumber,CourseID,Timeperiod,Date,Timeslot,Attendance) VALUES ('$rno','$CourseID','$Timeperiod','$date','02:25:00','Absent')";
+						 			if (mysqli_query($conn, $sql))
+						 			{
+									    //echo "New record created successfully";
+									}
+									else
+									{
+									    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+									}
+						 		}
+						 	break;
+						 	case 6:
+						 		if ($timeslot[$i] == 1)
+						 		{
+						 			$sql = "INSERT INTO dailyattendance (RollNumber,CourseID,Timeperiod,Date,Timeslot,Attendance) VALUES ('$rno','$CourseID','$Timeperiod','$date','03:15:00','Absent')";
+						 			if (mysqli_query($conn, $sql))
+						 			{
+									    //echo "New record created successfully";
+									}
+									else
+									{
+									    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+									}
+						 		}
+						 	break;
+						} 
+					}
 				}
 			}
-		}
-		foreach ($present as $rno)
-		{
-			if (!is_null($rno))
+			foreach ($present as $rno)
 			{
-				for ($i=0; $i <7 ; $i++)
+				if (!is_null($rno))
 				{
-					switch ($i)
+					for ($i=0; $i <7 ; $i++)
 					{
-					 	case 0:
-					 		if ($timeslot[$i] == 1)
-					 		{
-					 			$sql = "INSERT INTO dailyattendance (RollNumber,CourseID,Timeperiod,Date,Timeslot,Attendance) VALUES ('$rno','$CourseID','$Timeperiod','$date','09:40:00','Present')";
-					 			if (mysqli_query($conn, $sql))
-					 			{
-								    //echo "New record created successfully";
-								}
-								else
-								{
-								    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-								}
-					 		}
-					 	break;
-					 	case 1:
-					 		if ($timeslot[$i] == 1)
-					 		{
-					 			$sql = "INSERT INTO dailyattendance (RollNumber,CourseID,Timeperiod,Date,Timeslot,Attendance) VALUES ('$rno','$CourseID','$Timeperiod','$date','10:30:00','Present')";
-					 			if (mysqli_query($conn, $sql))
-					 			{
-								    //echo "New record created successfully";
-								}
-								else
-								{
-								    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-								}
-					 		}
-					 	break;
-					 	case 2:
-					 		if ($timeslot[$i] == 1)
-					 		{
-					 			$sql = "INSERT INTO dailyattendance (RollNumber,CourseID,Timeperiod,Date,Timeslot,Attendance) VALUES ('$rno','$CourseID','$Timeperiod','$date','11:20:00','Present')";
-					 			if (mysqli_query($conn, $sql))
-					 			{
-								    //echo "New record created successfully";
-								}
-								else
-								{
-								    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-								}
-					 		}
-					 	break;
-					 	case 3:
-					 		if ($timeslot[$i] == 1)
-					 		{
-					 			$sql = "INSERT INTO dailyattendance (RollNumber,CourseID,Timeperiod,Date,Timeslot,Attendance) VALUES ('$rno','$CourseID','$Timeperiod','$date','12:10:00','Present')";
-					 			if (mysqli_query($conn, $sql))
-					 			{
-								    //echo "New record created successfully";
-								}
-								else
-								{
-								    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-								}
-					 		}
-					 	break;
-					 	case 4:
-					 		if ($timeslot[$i] == 1)
-					 		{
-					 			$sql = "INSERT INTO dailyattendance (RollNumber,CourseID,Timeperiod,Date,Timeslot,Attendance) VALUES ('$rno','$CourseID','$Timeperiod','$date','01:35:00','Present')";
-					 			if (mysqli_query($conn, $sql))
-					 			{
-								    //echo "New record created successfully";
-								}
-								else
-								{
-								    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-								}
-					 		}
-					 	break;
-					 	case 5:
-					 		if ($timeslot[$i] == 1)
-					 		{
-					 			$sql = "INSERT INTO dailyattendance (RollNumber,CourseID,Timeperiod,Date,Timeslot,Attendance) VALUES ('$rno','$CourseID','$Timeperiod','$date','02:25:00','Present')";
-					 			if (mysqli_query($conn, $sql))
-					 			{
-								    //echo "New record created successfully";
-								}
-								else
-								{
-								    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-								}
-					 		}
-					 	break;
-					 	case 6:
-					 		if ($timeslot[$i] == 1)
-					 		{
-					 			$sql = "INSERT INTO dailyattendance (RollNumber,CourseID,Timeperiod,Date,Timeslot,Attendance) VALUES ('$rno','$CourseID','$Timeperiod','$date','03:15:00','Present')";
-					 			if (mysqli_query($conn, $sql))
-					 			{
-								    //echo "New record created successfully";
-								}
-								else
-								{
-								    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-								}
-					 		}
-					 	break;
-					} 
+						switch ($i)
+						{
+						 	case 0:
+						 		if ($timeslot[$i] == 1)
+						 		{
+						 			$sql = "INSERT INTO dailyattendance (RollNumber,CourseID,Timeperiod,Date,Timeslot,Attendance) VALUES ('$rno','$CourseID','$Timeperiod','$date','09:40:00','Present')";
+						 			if (mysqli_query($conn, $sql))
+						 			{
+									    //echo "New record created successfully";
+									}
+									else
+									{
+									    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+									}
+						 		}
+						 	break;
+						 	case 1:
+						 		if ($timeslot[$i] == 1)
+						 		{
+						 			$sql = "INSERT INTO dailyattendance (RollNumber,CourseID,Timeperiod,Date,Timeslot,Attendance) VALUES ('$rno','$CourseID','$Timeperiod','$date','10:30:00','Present')";
+						 			if (mysqli_query($conn, $sql))
+						 			{
+									    //echo "New record created successfully";
+									}
+									else
+									{
+									    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+									}
+						 		}
+						 	break;
+						 	case 2:
+						 		if ($timeslot[$i] == 1)
+						 		{
+						 			$sql = "INSERT INTO dailyattendance (RollNumber,CourseID,Timeperiod,Date,Timeslot,Attendance) VALUES ('$rno','$CourseID','$Timeperiod','$date','11:20:00','Present')";
+						 			if (mysqli_query($conn, $sql))
+						 			{
+									    //echo "New record created successfully";
+									}
+									else
+									{
+									    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+									}
+						 		}
+						 	break;
+						 	case 3:
+						 		if ($timeslot[$i] == 1)
+						 		{
+						 			$sql = "INSERT INTO dailyattendance (RollNumber,CourseID,Timeperiod,Date,Timeslot,Attendance) VALUES ('$rno','$CourseID','$Timeperiod','$date','12:10:00','Present')";
+						 			if (mysqli_query($conn, $sql))
+						 			{
+									    //echo "New record created successfully";
+									}
+									else
+									{
+									    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+									}
+						 		}
+						 	break;
+						 	case 4:
+						 		if ($timeslot[$i] == 1)
+						 		{
+						 			$sql = "INSERT INTO dailyattendance (RollNumber,CourseID,Timeperiod,Date,Timeslot,Attendance) VALUES ('$rno','$CourseID','$Timeperiod','$date','01:35:00','Present')";
+						 			if (mysqli_query($conn, $sql))
+						 			{
+									    //echo "New record created successfully";
+									}
+									else
+									{
+									    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+									}
+						 		}
+						 	break;
+						 	case 5:
+						 		if ($timeslot[$i] == 1)
+						 		{
+						 			$sql = "INSERT INTO dailyattendance (RollNumber,CourseID,Timeperiod,Date,Timeslot,Attendance) VALUES ('$rno','$CourseID','$Timeperiod','$date','02:25:00','Present')";
+						 			if (mysqli_query($conn, $sql))
+						 			{
+									    //echo "New record created successfully";
+									}
+									else
+									{
+									    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+									}
+						 		}
+						 	break;
+						 	case 6:
+						 		if ($timeslot[$i] == 1)
+						 		{
+						 			$sql = "INSERT INTO dailyattendance (RollNumber,CourseID,Timeperiod,Date,Timeslot,Attendance) VALUES ('$rno','$CourseID','$Timeperiod','$date','03:15:00','Present')";
+						 			if (mysqli_query($conn, $sql))
+						 			{
+									    //echo "New record created successfully";
+									}
+									else
+									{
+									    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+									}
+						 		}
+						 	break;
+						} 
+					}
 				}
 			}
+			echo "
+			<div class='alert alert-danger'>
+				<strong>Attendance added Successfully</strong>
+			</div>";
 		}        
 	}
 ?>

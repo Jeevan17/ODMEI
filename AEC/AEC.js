@@ -127,8 +127,7 @@ function loadAdd()
 	xhttp.open("POST", "Attendance.php", true);
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send("date="+date+"&present="+JSON.stringify(present)+"&absent="+JSON.stringify(absent)+"&timeslot="+JSON.stringify(timeslot)+"&course="+course+"&year="+year+"&program="+program+"&branch="+branch+"&section="+section+"&semester="+semester);
-	alert("Record Inserted");
-
+	
 	len=time.length;
  	for (var i=0; i<len; i++)
  	{

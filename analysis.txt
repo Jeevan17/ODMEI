@@ -1,7 +1,7 @@
 Completed:
 
 student_info(attendance,admission)
-aec(add attendance*,update attendance*)
+aec(add attendance,update attendance)*
 principal(student, placements)
 placements
 
