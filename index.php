@@ -27,18 +27,22 @@
 			</div>
 			<br>
 			<div class='row'>
-				<div class='col-sm-4'>
+				<div class="col-sm-2">
 				</div>
-				<div class='col-sm-2'>
+				<div class='col'>
 					<a href='student_login.php' class="btn btn-outline-primary btn-lg pt-4 pb-4 pl-4 pr-4">Student Login</a>
 				</div>
-				<div class='col-sm-2'>
+				<div class="col-sm-1">
+				</div>
+				<div class='col'>
+					<a href='staff_login.php' class="btn btn-outline-dark btn-lg pt-4 pb-4 pl-4 pr-4">Staff Login</a>
+				</div>
+				<div class="col-sm-1">
+				</div>
+				<div class='col'>
 					<a href='Department_login.php' class="btn btn-outline-secondary btn-lg pt-4 pb-4 ">Department Login</a>
 				</div>
-				<!-- <div class='col-sm-2'>
-					<a href='student_login.php' class="btn btn-outline-primary btn-lg pt-4 pb-4 pl-4 pr-4">Staff Login</a>
-				</div> -->
-				<div class='col-sm-4'>
+				<div class="col-sm-2">
 				</div>
 			</div>
 		</div>

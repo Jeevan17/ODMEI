@@ -28,19 +28,6 @@
 		$phno = $row['PhoneNumber'];
 		$email = $row['Email'];
 	}
-	$sql = "SELECT dailyattendance.RollNumber, courses.CourseName, dailyattendance.Timeperiod,dailyattendance.Attendance, COUNT(dailyattendance.Attendance) AS AttendanceCount
-		from dailyattendance
-		INNER JOIN courses
-		ON courses.CourseID=dailyattendance.CourseID
-		WHERE dailyattendance.RollNumber='$uname' AND dailyattendance.Timeperiod=(SELECT max(id) from timeperiod)
-		GROUP by courses.CourseName, dailyattendance.Attendance";
-	$retval = mysqli_query($conn, $sql);
-	$data = array();
-	while ($row = mysqli_fetch_array($retval))
-	{
-		$data[$row['CourseName']][$row['Attendance']] = $row['AttendanceCount'];
-	}
-	var_dump($data);
 ?>
 <!DOCTYPE html>
 <html lang='en'>
@@ -78,7 +65,7 @@
 				        	<a class="nav-link" href="student_placement.php">Placement Details</a>
 				      	</li>
 				      	<li class="nav-item">
-				      		<a class="nav-link btn btn-outline-success" href='../student_login.php'>Logout</a>
+				      		<a class="nav-link btn btn-outline-success" href='../index.php'>Logout</a>
 				      	</li>
 				    </ul>
 				</div>

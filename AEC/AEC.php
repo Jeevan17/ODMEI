@@ -186,12 +186,12 @@
 															</tbody>
 														</table>
 													</div>
-													<button type="button" class="btn btn-outline-success" onclick="loadRnum()">Get Rollnumbers</button>
+													<button type="button" class="btn btn-outline-success" onclick="loadSubjects()">Get Rollnumbers</button>
 												</form>
 												<br>
-												<div id='rollnumber'>
+												<div id='subjects'>
 												</div>
-												<div id='test'>
+												<div id='rollnumber'>
 												</div>
 											</div>
 											<div id='Update_Attendance' class='container tab-pane fade'>

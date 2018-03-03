@@ -10,8 +10,8 @@ Yet to do:
 staff(add attendance, receive feedback)
 student_info(achievements, marks, placements,send feedback)
 principal(staff)
-coe(add external marks)
-aec(add internal marks)
+coe(add external marks, add courses)
+aec(add internal marks, change timeperiod|students current year and sem, student enroll courses, staff teaches course, timetable)
 
 
 ---------------------------------

@@ -25,6 +25,8 @@
 		$timeslot=json_decode($_POST['timeslot']);
 		$date=$_POST['date'];
 		$course = $_POST['course'];
+		$year = $_POST['year'];
+		$semester = $_POST['semester'];
 		// echo "<br>$date<br>";
 		
 		// var_dump($present);
@@ -63,11 +65,21 @@
 			{
 				$Timeperiod = $row['id'];
 			}
-			//echo "$Timeperiod";				
+			//echo "$Timeperiod";
 			foreach ($absent as $rno)
-			{
+			{	
 				if (!is_null($rno))
 				{
+					$sql = "SELECT attendance.TotalAttended, attendance.TotalClassesHeld 
+							FROM attendance 
+							WHERE attendance.RollNumber = '$rno' and attendance.YearandSem='$year/4 Sem-$semester' AND attendance.Timeperiod=(SELECT max(timeperiod.ID) from timeperiod)";
+					global $TCH,$TCA;
+					$retval = mysqli_query($conn, $sql);
+					while ($row = mysqli_fetch_array($retval))
+					{
+						$TCH = $row['TotalClassesHeld'];
+						$TCA = $row['TotalAttended'];
+					}
 					for ($i=0; $i <7 ; $i++)
 					{
 						switch ($i)
@@ -79,6 +91,33 @@
 						 			if (mysqli_query($conn, $sql))
 						 			{
 									    //echo "New record created successfully";
+									    if (is_null($TCH) and is_null($TCA))
+									    {
+									    	$sql = "INSERT INTO attendance(RollNumber, Timeperiod, YearandSem, TotalAttended, TotalClassesHeld) VALUES ('$rno', '$Timeperiod', '$year/4 Sem-$semester', 0, 1)";
+									    	if (mysqli_query($conn, $sql))
+						 					{
+									    		//echo "New record created successfully";
+									    		$TCH = null;
+									    		$TCA = null;
+						 					}
+						 					else
+						 					{
+						 						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+						 					}
+									    }
+									    elseif (!is_null($TCH) and !is_null($TCA))
+									    {
+									    	$TCH = $TCH +1;
+									    	$sql = "UPDATE attendance SET TotalClassesHeld=$TCH WHERE RollNumber='$rno' AND timeperiod='$Timeperiod' AND YearandSem='$year/4 Sem-$semester'";
+									    	if (mysqli_query($conn, $sql))
+						 					{
+									    		//echo "New record created successfully";
+						 					}
+						 					else
+						 					{
+						 						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+						 					}
+									    } 
 									}
 									else
 									{
@@ -93,6 +132,33 @@
 						 			if (mysqli_query($conn, $sql))
 						 			{
 									    //echo "New record created successfully";
+									    if (is_null($TCH) and is_null($TCA))
+									    {
+									    	$sql = "INSERT INTO attendance(RollNumber, Timeperiod, YearandSem, TotalAttended, TotalClassesHeld) VALUES ('$rno', '$Timeperiod', '$year/4 Sem-$semester', 0, 1)";
+									    	if (mysqli_query($conn, $sql))
+						 					{
+									    		//echo "New record created successfully";
+									    		$TCH = 1;
+									    		$TCA = 0;
+						 					}
+						 					else
+						 					{
+						 						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+						 					}
+									    }
+									    elseif (!is_null($TCH) and !is_null($TCA))
+									    {
+									    	$TCH = $TCH +1;
+									    	$sql = "UPDATE attendance SET TotalClassesHeld=$TCH WHERE RollNumber='$rno' AND timeperiod='$Timeperiod' AND YearandSem='$year/4 Sem-$semester'";
+									    	if (mysqli_query($conn, $sql))
+						 					{
+									    		//echo "New record created successfully";
+						 					}
+						 					else
+						 					{
+						 						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+						 					}
+									    }
 									}
 									else
 									{
@@ -107,6 +173,33 @@
 						 			if (mysqli_query($conn, $sql))
 						 			{
 									    //echo "New record created successfully";
+									    if (is_null($TCH) and is_null($TCA))
+									    {
+									    	$sql = "INSERT INTO attendance(RollNumber, Timeperiod, YearandSem, TotalAttended, TotalClassesHeld) VALUES ('$rno', '$Timeperiod', '$year/4 Sem-$semester', 0, 1)";
+									    	if (mysqli_query($conn, $sql))
+						 					{
+									    		//echo "New record created successfully";
+									    		$TCH = 1;
+									    		$TCA = 0;
+						 					}
+						 					else
+						 					{
+						 						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+						 					}
+									    }
+									    elseif (!is_null($TCH) and !is_null($TCA))
+									    {
+									    	$TCH = $TCH +1;
+									    	$sql = "UPDATE attendance SET TotalClassesHeld=$TCH WHERE RollNumber='$rno' AND timeperiod='$Timeperiod' AND YearandSem='$year/4 Sem-$semester'";
+									    	if (mysqli_query($conn, $sql))
+						 					{
+									    		//echo "New record created successfully";
+						 					}
+						 					else
+						 					{
+						 						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+						 					}
+									    }
 									}
 									else
 									{
@@ -121,6 +214,33 @@
 						 			if (mysqli_query($conn, $sql))
 						 			{
 									    //echo "New record created successfully";
+									    if (is_null($TCH) and is_null($TCA))
+									    {
+									    	$sql = "INSERT INTO attendance(RollNumber, Timeperiod, YearandSem, TotalAttended, TotalClassesHeld) VALUES ('$rno', '$Timeperiod', '$year/4 Sem-$semester', 0, 1)";
+									    	if (mysqli_query($conn, $sql))
+						 					{
+									    		//echo "New record created successfully";
+									    		$TCH = 1;
+									    		$TCA = 0;
+						 					}
+						 					else
+						 					{
+						 						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+						 					}
+									    }
+									    elseif (!is_null($TCH) and !is_null($TCA))
+									    {
+									    	$TCH = $TCH +1;
+									    	$sql = "UPDATE attendance SET TotalClassesHeld=$TCH WHERE RollNumber='$rno' AND timeperiod='$Timeperiod' AND YearandSem='$year/4 Sem-$semester'";
+									    	if (mysqli_query($conn, $sql))
+						 					{
+									    		//echo "New record created successfully";
+						 					}
+						 					else
+						 					{
+						 						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+						 					}
+									    }
 									}
 									else
 									{
@@ -135,6 +255,33 @@
 						 			if (mysqli_query($conn, $sql))
 						 			{
 									    //echo "New record created successfully";
+									    if (is_null($TCH) and is_null($TCA))
+									    {
+									    	$sql = "INSERT INTO attendance(RollNumber, Timeperiod, YearandSem, TotalAttended, TotalClassesHeld) VALUES ('$rno', '$Timeperiod', '$year/4 Sem-$semester', 0, 1)";
+									    	if (mysqli_query($conn, $sql))
+						 					{
+									    		//echo "New record created successfully";
+									    		$TCH = 1;
+									    		$TCA = 0;
+						 					}
+						 					else
+						 					{
+						 						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+						 					}
+									    }
+									    elseif (!is_null($TCH) and !is_null($TCA))
+									    {
+									    	$TCH = $TCH +1;
+									    	$sql = "UPDATE attendance SET TotalClassesHeld=$TCH WHERE RollNumber='$rno' AND timeperiod='$Timeperiod' AND YearandSem='$year/4 Sem-$semester'";
+									    	if (mysqli_query($conn, $sql))
+						 					{
+									    		//echo "New record created successfully";
+						 					}
+						 					else
+						 					{
+						 						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+						 					}
+									    }
 									}
 									else
 									{
@@ -149,6 +296,33 @@
 						 			if (mysqli_query($conn, $sql))
 						 			{
 									    //echo "New record created successfully";
+									    if (is_null($TCH) and is_null($TCA))
+									    {
+									    	$sql = "INSERT INTO attendance(RollNumber, Timeperiod, YearandSem, TotalAttended, TotalClassesHeld) VALUES ('$rno', '$Timeperiod', '$year/4 Sem-$semester', 0, 1)";
+									    	if (mysqli_query($conn, $sql))
+						 					{
+									    		//echo "New record created successfully";
+									    		$TCH = 1;
+									    		$TCA = 0;
+						 					}
+						 					else
+						 					{
+						 						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+						 					}
+									    }
+									    elseif (!is_null($TCH) and !is_null($TCA))
+									    {
+									    	$TCH = $TCH +1;
+									    	$sql = "UPDATE attendance SET TotalClassesHeld=$TCH WHERE RollNumber='$rno' AND timeperiod='$Timeperiod' AND YearandSem='$year/4 Sem-$semester'";
+									    	if (mysqli_query($conn, $sql))
+						 					{
+									    		//echo "New record created successfully";
+						 					}
+						 					else
+						 					{
+						 						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+						 					}
+									    }
 									}
 									else
 									{
@@ -163,6 +337,33 @@
 						 			if (mysqli_query($conn, $sql))
 						 			{
 									    //echo "New record created successfully";
+									    if (is_null($TCH) and is_null($TCA))
+									    {
+									    	$sql = "INSERT INTO attendance(RollNumber, Timeperiod, YearandSem, TotalAttended, TotalClassesHeld) VALUES ('$rno', '$Timeperiod', '$year/4 Sem-$semester', 0, 1)";
+									    	if (mysqli_query($conn, $sql))
+						 					{
+									    		//echo "New record created successfully";
+									    		$TCH = 1;
+									    		$TCA = 0;
+						 					}
+						 					else
+						 					{
+						 						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+						 					}
+									    }
+									    elseif (!is_null($TCH) and !is_null($TCA))
+									    {
+									    	$TCH = $TCH +1;
+									    	$sql = "UPDATE attendance SET TotalClassesHeld=$TCH WHERE RollNumber='$rno' AND timeperiod='$Timeperiod' AND YearandSem='$year/4 Sem-$semester'";
+									    	if (mysqli_query($conn, $sql))
+						 					{
+									    		//echo "New record created successfully";
+						 					}
+						 					else
+						 					{
+						 						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+						 					}
+									    }
 									}
 									else
 									{
@@ -178,6 +379,16 @@
 			{
 				if (!is_null($rno))
 				{
+					$sql = "SELECT attendance.TotalAttended, attendance.TotalClassesHeld 
+					FROM attendance 
+					WHERE attendance.RollNumber = '$rno' and attendance.YearandSem='$year/4 Sem-$semester' AND attendance.Timeperiod=(SELECT max(timeperiod.ID) from timeperiod)";
+					global $TCH,$TCA;
+					$retval = mysqli_query($conn, $sql);
+					while ($row = mysqli_fetch_array($retval))
+					{
+						$TCH = $row['TotalClassesHeld'];
+						$TCA = $row['TotalAttended'];
+					}
 					for ($i=0; $i <7 ; $i++)
 					{
 						switch ($i)
@@ -189,6 +400,34 @@
 						 			if (mysqli_query($conn, $sql))
 						 			{
 									    //echo "New record created successfully";
+									    if (is_null($TCH) and is_null($TCA))
+									    {
+									    	$sql = "INSERT INTO attendance(RollNumber, Timeperiod, YearandSem, TotalAttended, TotalClassesHeld) VALUES ('$rno', '$Timeperiod', '$year/4 Sem-$semester', 1, 1)";
+									    	if (mysqli_query($conn, $sql))
+						 					{
+									    		//echo "New record created successfully";
+									    		$TCH = null;
+									    		$TCA = null;
+						 					}
+						 					else
+						 					{
+						 						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+						 					}
+									    }
+									    elseif (!is_null($TCH) and !is_null($TCA))
+									    {
+									    	$TCH = $TCH +1;
+									    	$TCA = $TCA +1;
+									    	$sql = "UPDATE attendance SET TotalAttended=$TCA,TotalClassesHeld=$TCH WHERE RollNumber='$rno' AND timeperiod='$Timeperiod' AND YearandSem='$year/4 Sem-$semester'";
+									    	if (mysqli_query($conn, $sql))
+						 					{
+									    		//echo "New record created successfully";
+						 					}
+						 					else
+						 					{
+						 						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+						 					}
+									    }
 									}
 									else
 									{
@@ -203,6 +442,34 @@
 						 			if (mysqli_query($conn, $sql))
 						 			{
 									    //echo "New record created successfully";
+									    if (is_null($TCH) and is_null($TCA))
+									    {
+									    	$sql = "INSERT INTO attendance(RollNumber, Timeperiod, YearandSem, TotalAttended, TotalClassesHeld) VALUES ('$rno', '$Timeperiod', '$year/4 Sem-$semester', 1, 1)";
+									    	if (mysqli_query($conn, $sql))
+						 					{
+									    		//echo "New record created successfully";
+									    		$TCH = 1;
+									    		$TCA = 1;
+						 					}
+						 					else
+						 					{
+						 						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+						 					}
+									    }
+									    elseif (!is_null($TCH) and !is_null($TCA))
+									    {
+									    	$TCH = $TCH +1;
+									    	$TCA = $TCA +1;
+									    	$sql = "UPDATE attendance SET TotalAttended=$TCA,TotalClassesHeld=$TCH WHERE RollNumber='$rno' AND timeperiod='$Timeperiod' AND YearandSem='$year/4 Sem-$semester'";
+									    	if (mysqli_query($conn, $sql))
+						 					{
+									    		//echo "New record created successfully";
+						 					}
+						 					else
+						 					{
+						 						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+						 					}
+									    }
 									}
 									else
 									{
@@ -217,6 +484,34 @@
 						 			if (mysqli_query($conn, $sql))
 						 			{
 									    //echo "New record created successfully";
+									    if (is_null($TCH) and is_null($TCA))
+									    {
+									    	$sql = "INSERT INTO attendance(RollNumber, Timeperiod, YearandSem, TotalAttended, TotalClassesHeld) VALUES ('$rno', '$Timeperiod', '$year/4 Sem-$semester', 1, 1)";
+									    	if (mysqli_query($conn, $sql))
+						 					{
+									    		//echo "New record created successfully";
+									    		$TCH = 1;
+									    		$TCA = 1;
+						 					}
+						 					else
+						 					{
+						 						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+						 					}
+									    }
+									    elseif (!is_null($TCH) and !is_null($TCA))
+									    {
+									    	$TCH = $TCH +1;
+									    	$TCA = $TCA +1;
+									    	$sql = "UPDATE attendance SET TotalAttended=$TCA,TotalClassesHeld=$TCH WHERE RollNumber='$rno' AND timeperiod='$Timeperiod' AND YearandSem='$year/4 Sem-$semester'";
+									    	if (mysqli_query($conn, $sql))
+						 					{
+									    		//echo "New record created successfully";
+						 					}
+						 					else
+						 					{
+						 						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+						 					}
+									    }
 									}
 									else
 									{
@@ -231,6 +526,34 @@
 						 			if (mysqli_query($conn, $sql))
 						 			{
 									    //echo "New record created successfully";
+									    if (is_null($TCH) and is_null($TCA))
+									    {
+									    	$sql = "INSERT INTO attendance(RollNumber, Timeperiod, YearandSem, TotalAttended, TotalClassesHeld) VALUES ('$rno', '$Timeperiod', '$year/4 Sem-$semester', 1, 1)";
+									    	if (mysqli_query($conn, $sql))
+						 					{
+									    		//echo "New record created successfully";
+									    		$TCH = 1;
+									    		$TCA = 1;
+						 					}
+						 					else
+						 					{
+						 						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+						 					}
+									    }
+									    elseif (!is_null($TCH) and !is_null($TCA))
+									    {
+									    	$TCH = $TCH +1;
+									    	$TCA = $TCA +1;
+									    	$sql = "UPDATE attendance SET TotalAttended=$TCA,TotalClassesHeld=$TCH WHERE RollNumber='$rno' AND timeperiod='$Timeperiod' AND YearandSem='$year/4 Sem-$semester'";
+									    	if (mysqli_query($conn, $sql))
+						 					{
+									    		//echo "New record created successfully";
+						 					}
+						 					else
+						 					{
+						 						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+						 					}
+									    }
 									}
 									else
 									{
@@ -245,6 +568,34 @@
 						 			if (mysqli_query($conn, $sql))
 						 			{
 									    //echo "New record created successfully";
+									    if (is_null($TCH) and is_null($TCA))
+									    {
+									    	$sql = "INSERT INTO attendance(RollNumber, Timeperiod, YearandSem, TotalAttended, TotalClassesHeld) VALUES ('$rno', '$Timeperiod', '$year/4 Sem-$semester', 1, 1)";
+									    	if (mysqli_query($conn, $sql))
+						 					{
+									    		//echo "New record created successfully";
+									    		$TCH = 1;
+									    		$TCA = 1;
+						 					}
+						 					else
+						 					{
+						 						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+						 					}
+									    }
+									    elseif (!is_null($TCH) and !is_null($TCA))
+									    {
+									    	$TCH = $TCH +1;
+									    	$TCA = $TCA +1;
+									    	$sql = "UPDATE attendance SET TotalAttended=$TCA,TotalClassesHeld=$TCH WHERE RollNumber='$rno' AND timeperiod='$Timeperiod' AND YearandSem='$year/4 Sem-$semester'";
+									    	if (mysqli_query($conn, $sql))
+						 					{
+									    		//echo "New record created successfully";
+						 					}
+						 					else
+						 					{
+						 						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+						 					}
+									    }
 									}
 									else
 									{
@@ -259,6 +610,34 @@
 						 			if (mysqli_query($conn, $sql))
 						 			{
 									    //echo "New record created successfully";
+									    if (is_null($TCH) and is_null($TCA))
+									    {
+									    	$sql = "INSERT INTO attendance(RollNumber, Timeperiod, YearandSem, TotalAttended, TotalClassesHeld) VALUES ('$rno', '$Timeperiod', '$year/4 Sem-$semester', 1, 1)";
+									    	if (mysqli_query($conn, $sql))
+						 					{
+									    		//echo "New record created successfully";
+									    		$TCH = 1;
+									    		$TCA = 1;
+						 					}
+						 					else
+						 					{
+						 						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+						 					}
+									    }
+									    elseif (!is_null($TCH) and !is_null($TCA))
+									    {
+									    	$TCH = $TCH +1;
+									    	$TCA = $TCA +1;
+									    	$sql = "UPDATE attendance SET TotalAttended=$TCA,TotalClassesHeld=$TCH WHERE RollNumber='$rno' AND timeperiod='$Timeperiod' AND YearandSem='$year/4 Sem-$semester'";
+									    	if (mysqli_query($conn, $sql))
+						 					{
+									    		//echo "New record created successfully";
+						 					}
+						 					else
+						 					{
+						 						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+						 					}
+									    }
 									}
 									else
 									{
@@ -273,6 +652,34 @@
 						 			if (mysqli_query($conn, $sql))
 						 			{
 									    //echo "New record created successfully";
+									    if (is_null($TCH) and is_null($TCA))
+									    {
+									    	$sql = "INSERT INTO attendance(RollNumber, Timeperiod, YearandSem, TotalAttended, TotalClassesHeld) VALUES ('$rno', '$Timeperiod', '$year/4 Sem-$semester', 1, 1)";
+									    	if (mysqli_query($conn, $sql))
+						 					{
+									    		//echo "New record created successfully";
+									    		$TCH = 1;
+									    		$TCA = 1;
+						 					}
+						 					else
+						 					{
+						 						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+						 					}
+									    }
+									    elseif (!is_null($TCH) and !is_null($TCA))
+									    {
+									    	$TCH = $TCH +1;
+									    	$TCA = $TCA +1;
+									    	$sql = "UPDATE attendance SET TotalAttended=$TCA,TotalClassesHeld=$TCH WHERE RollNumber='$rno' AND timeperiod='$Timeperiod' AND YearandSem='$year/4 Sem-$semester'";
+									    	if (mysqli_query($conn, $sql))
+						 					{
+									    		//echo "New record created successfully";
+						 					}
+						 					else
+						 					{
+						 						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+						 					}
+									    }
 									}
 									else
 									{

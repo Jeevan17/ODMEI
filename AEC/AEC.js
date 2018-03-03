@@ -138,7 +138,26 @@ function loadAdd()
  	}
 	
 }
-
+function loadSubjects()
+{
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function()
+	{
+    	if (this.readyState == 4 && this.status == 200)
+    	{
+    	  document.getElementById("subjects").innerHTML = xhttp.responseText;
+  		}
+	};
+	var program = document.getElementById("Program").value;
+	var year = document.getElementById("Year").value;
+	var semester = document.getElementById("Semester").value;
+	var branch = document.getElementById("Branch").value;
+	var section = document.getElementById("Section").value;
+	var date = document.getElementById("date").value;
+	xhttp.open("POST", "Get_subjects.php", true);
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send("year="+year+"&program="+program+"&branch="+branch+"&section="+section+"&semester="+semester);
+}
 function loadRnum()
 {
 	var xhttp = new XMLHttpRequest();
@@ -155,9 +174,10 @@ function loadRnum()
 	var branch = document.getElementById("Branch").value;
 	var section = document.getElementById("Section").value;
 	var date = document.getElementById("date").value;
+	var course = document.getElementById('courses').value; 
 	xhttp.open("POST", "Get_rollno.php", true);
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhttp.send("year="+year+"&program="+program+"&branch="+branch+"&section="+section+"&semester="+semester);
+	xhttp.send("course="+course+"&year="+year+"&program="+program+"&branch="+branch+"&section="+section+"&semester="+semester);
 }
 
 
