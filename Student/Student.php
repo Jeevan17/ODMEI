@@ -1,44 +1,43 @@
-<?php
-
-	$dbhost = 'localhost';
-	$dbuser = 'admin';
-	$dbpass = 'cbit';
-	
-	$conn = mysqli_connect($dbhost, $dbuser, $dbpass,'cbitdb');
+<?php include '../dataConnections.php'; 
 
 	session_start();
 	if(!isset($_SESSION['student'])){
 		echo "<script language='javascript'>window.location='../student_login.php';</script>";
 	}
 	$uname=$_SESSION['student'];
-	if(! $conn )
-	{
-		echo "
-			<div class='alert alert-danger'>
-				<strong>Not connected to database." . mysqli_error();"</strong>
-			</div>";
-	}
-	$sql = "select * from student where RollNumber='$uname'";
+
+	$sql = "SELECT * FROM student INNER JOIN bsp_code ON student.BSP = bsp_code.BSP WHERE student.RollNumber=$uname";
 	$retval = mysqli_query($conn, $sql);
 	while($row = mysqli_fetch_array($retval))
 	{
 		$photo = $row['Photo'];
 		$name = $row['FirstName']." ".$row['LastName'];
 		$rno = $uname;
-		$phno = $row['PhoneNumber'];
+		$phno = $row['phoneNumber'];
 		$email = $row['Email'];
+		$batch = $row['CBatch'];
+		$program = $row['Program'];
+		$branch = $row['Branch'];
+		$section = $row['Section'];
+		$yands = $row['CurrentYandS'];
+	}
+	$sql = "SELECT TotalAttended,TotalClassesHeld FROM attendance WHERE RollNumber='$rno' AND 	Timeperiod=(SELECT max(id) FROM timeperiod)";
+	$retval = mysqli_query($conn, $sql);
+	$attendance = 0;
+	while($row = mysqli_fetch_array($retval))
+	{
+		$attendance = $row['TotalAttended']/$row['TotalClassesHeld'] * 100;
 	}
 ?>
 <!DOCTYPE html>
 <html lang='en'>
 	<head>
-		<title><?php $uname?></title>
+		<title><?php echo "$uname";?></title>
 		<meta charset='utf-8'>
 		<meta name='viewport' content='width=device-width, initial-scale=1'>
 		<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css'>
 		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0-beta.3/lux/bootstrap.min.css">
-		<link rel='stylesheet' href='../style.css'>
-    </head>
+	</head>
 	<body>
 		<header id="home">
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -51,7 +50,7 @@
 					<ul class="navbar-nav mr-auto ">
 				    	<li class="nav-item active">
 				        	<a class="nav-link" href="Student.php">Home</a>
-				      	<li>
+				      	</li>
 				      	<li class="nav-item">
 				        	<a class="nav-link" href="Attendance.php">Attendance</a>
 				      	</li>
@@ -74,45 +73,52 @@
 		
 		<div class='tab-content'>
 			<div class='container tab-pane active text-primary'><br>
-				<br>
-				<center>
-					<?php 
-						echo "
-        				<img src='data:image/jpeg;base64,".base64_encode( $photo )."' width='150px' height='150px' class='img-thumbnail' alt='photo' /> 
-        			";
-        			?>
-				</center>
-				<table class="table table-bordered table-hover table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl">
-					<tbody>
-						<tr >
-					      <th scope="row"><h3>Name</h3></th>
-					      <td><h4><?php echo "$name" ?></h4></td>
-					    </tr>
-						<tr >
-					      <th scope="row"><h3><h3>Roll Number</h3></h3></th>
-					      <td><h4><?php echo "$rno" ?></h4></td>
-					    </tr>
-						<tr >
-					      <th scope="row"><h3>Phone No</h3></th>
-					      <td><h4><?php echo "$phno" ?></h4></td>
-					    </tr>
-						<tr >
-					      <th scope="row"><h3>EMAIL ID</h3></th>
-					      <td><h4><?php echo "$email" ?></h4></td>
-					    </tr>
-						<tr >
-					      <th scope="row"><h3>ATTENDANCE</h3></th>
-					      <td><h4><?php echo "$name" ?></h4></td>
-					    </tr>
-						<tr >
-					      <th scope="row"><h3>CGPA</h3></th>
-					      <td><h4><?php echo "$name" ?></h4></td>
-					    </tr>
-					</tbody>
-				</table>
+				<div class="row">
+					<div class="col-sm-6">
+						<table class="table table-bordered table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl">
+							<tbody>
+								<tr>
+									<th rowspan='7'>
+										<?php 
+											echo "
+						        			<img src='data:image/jpeg;base64,".base64_encode( $photo )."' alt='photo' height='150' width='120'/> 
+						        			";
+						        		?>
+					        		</th>
+								    <th scope="row">Name</th>
+								    <td><?php echo "$name" ?></td>
+									<tr>
+								      <th scope="row">Roll Number</th>
+								      <td><?php echo "$rno" ?></td>
+								    </tr>
+									<tr>
+								      <th scope="row">Division</th>
+								      <td><?php echo "$program $yands $branch-$section($batch)" ?></td>
+								    </tr>
+									<tr>
+								      <th scope="row">Phone No</th>
+								      <td><?php echo "$phno" ?></td>
+								    </tr>
+									<tr>
+									  <th scope="row">EMAIL ID</th>
+								      <td><?php echo "$email" ?></td>
+								    </tr>
+									<tr>
+								      <th scope="row">ATTENDANCE</th>
+								      <td><?php echo "$attendance" ?></td>
+								    </tr>
+								    <tr>
+								      <th scope="row">CGPA</th>
+								      <td><?php echo "$name" ?></td>
+								    </tr>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
 			</div>
 		</div>
-		
+
 		<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 		<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js'></script>
 		<script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js'></script>

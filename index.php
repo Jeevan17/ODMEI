@@ -6,12 +6,13 @@
 		<!--BootStrap-->
 			<meta charset='utf-8'>
 			<meta name='viewport' content='width=device-width, initial-scale=1'>
-  			<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css'>
+			<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css'>
+			<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0-beta.3/lux/bootstrap.min.css">
   		<!--BootStrap End-->
 	</head>
 	<body>
 		<div class='container-fluid'>
-			<br><br><br><br><br><br>
+			<br><br><br>
 			<div class='row'>
 				<div class='col-sm-2'>
 				</div>
@@ -27,22 +28,22 @@
 			</div>
 			<br>
 			<div class='row'>
-				<div class="col-sm-2">
+				<div class="col-sm-1">
 				</div>
 				<div class='col'>
-					<a href='student_login.php' class="btn btn-outline-primary btn-lg pt-4 pb-4 pl-4 pr-4">Student Login</a>
+					<a href='student_login.php' class="btn btn-outline-primary btn-lg">Student Login</a>
 				</div>
 				<div class="col-sm-1">
 				</div>
 				<div class='col'>
-					<a href='staff_login.php' class="btn btn-outline-dark btn-lg pt-4 pb-4 pl-4 pr-4">Staff Login</a>
+					<a href='staff_login.php' class="btn btn-outline-info btn-lg">Staff Login</a>
 				</div>
 				<div class="col-sm-1">
 				</div>
 				<div class='col'>
-					<a href='Department_login.php' class="btn btn-outline-secondary btn-lg pt-4 pb-4 ">Department Login</a>
+					<a href='department_login.php' class="btn btn-outline-warning btn-lg">Department Login</a>
 				</div>
-				<div class="col-sm-2">
+				<div class="col-sm-1">
 				</div>
 			</div>
 		</div>

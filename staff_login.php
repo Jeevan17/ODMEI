@@ -1,11 +1,5 @@
-<?php
+<?php include 'dataConnections.php';
 
-	$dbhost = 'localhost';
-	$dbuser = 'admin';
-	$dbpass = 'cbit';
-	
-	$conn = mysqli_connect($dbhost, $dbuser, $dbpass,'cbitdb');
-   
 	session_start();
 	if(isset($_SESSION['staff'])) {
 		unset($_SESSION['staff']);
@@ -13,14 +7,8 @@
 		echo "<script language='javascript'>window.location='index.php';</script>";
 	}
 	
-	if(! $conn )
-	{
-		echo "
-			<div class='alert alert-danger'>
-				<strong>Not connected to database." . mysqli_error();"</strong>
-			</div>";
-	}
 ?>
+
 <!--***********************************************-->
 <!--HTML Code-->
 <!DOCTYPE html>
@@ -31,7 +19,8 @@
 		<!--BootStrap-->
 			<meta charset='utf-8'>
 			<meta name='viewport' content='width=device-width, initial-scale=1'>
-  			<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css'>
+			<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css'>
+			<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0-beta.3/lux/bootstrap.min.css">
   		<!--BootStrap End-->
 	</head>
 	<body>

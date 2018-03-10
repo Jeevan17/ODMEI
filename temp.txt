@@ -21,3 +21,11 @@ INNER JOIN courses
 ON courses.CourseID=dailyattendance.CourseID
 WHERE dailyattendance.RollNumber='160114733313' AND dailyattendance.Timeperiod=(SELECT max(id) from timeperiod)
 GROUP by courses.CourseName, dailyattendance.Attendance
+
+
+php artisan make:migration create_student_details_table --create=student_details
+
+ToDO
+------
+timetable
+staff_courses
