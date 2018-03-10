@@ -95,7 +95,7 @@
 
 						while($row = mysqli_fetch_array($retval))
 						{
-							echo "<option>".$row['CourseID']."---".$row['CourseName']."</option>";;
+							echo "<option>".$row['CourseID']."-".$row['CourseName']."</option>";;
 						}
 					echo "
 					</select>

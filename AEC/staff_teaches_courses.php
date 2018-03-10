@@ -22,7 +22,7 @@
 				<?php
 					while($row = mysqli_fetch_array($retval))
 					{
-						echo "<option>".$row['StaffID']."---".$row['FullName']."</option>";
+						echo "<option>".$row['StaffID']."-".$row['FullName']."</option>";
 					}
 				?>
 			</select>
@@ -31,6 +31,8 @@
 </form>
 <br>
 <div id="courses"></div>
+</div>
+<div id="courses2"></div>
 </div>
 </div>
 	<script src="Staff_Courses/staffCourses.js"></script>

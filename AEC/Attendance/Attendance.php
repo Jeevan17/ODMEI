@@ -59,7 +59,7 @@
 		}
 		else
 		{
-			$sql = "SELECT id from timeperiod WHERE id=(SELECT max(id) from timeperiod)";
+			$sql = "SELECT max(id) AS id FROM timeperiod";
 			$retval = mysqli_query($conn, $sql);
 			while ($row = mysqli_fetch_array($retval))
 			{
