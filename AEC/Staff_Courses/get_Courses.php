@@ -8,7 +8,7 @@
 	{
 		$staff=$_POST["staff"];
 		echo "
-			<p> Select Below Fields and press Insert/Update Record</p>
+			<p> Select Below Fields and press Insert Data</p>
 			<div class='row'>
 				<div class='col-sm-1 pt-2'>
 					Year: 
@@ -87,22 +87,21 @@
 						Select Course:
 				</div>
 				<div class='col-sm-4'>
-					<select class='form-control' id='course'>
-					    <option selected='selected'></option>
+					<select class='form-control' id='course' required>
 					    ";
 					    $sql = "SELECT CourseID,CourseName FROM courses";
 						$retval = mysqli_query($conn, $sql);
 
 						while($row = mysqli_fetch_array($retval))
 						{
-							echo "<option>".$row['CourseID']."-".$row['CourseName']."</option>";;
+							echo "<option>".$row['CourseID']."--".$row['CourseName']."</option>";;
 						}
 					echo "
 					</select>
 			 	</div>
 			</div>
 			<br>
-			<button type='button' class='btn btn-outline-dark' onclick='loadInsert()'>Insert Data</button>
+			<button type='submit' class='btn btn-outline-dark' onclick='loadInsert()'>Insert Data</button>
 			";
 	}
 ?>

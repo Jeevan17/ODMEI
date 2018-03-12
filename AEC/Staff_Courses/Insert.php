@@ -4,7 +4,7 @@
 		echo "<script language='javascript'>window.location='../index.php';</script>";
 	}
 	
-	if (array_key_exists('year', $_POST) and array_key_exists('semester', $_POST) and array_key_exists('program', $_POST)  and array_key_exists('branch', $_POST) and array_key_exists('section', $_POST) and array_key_exists('batch', $_POST) and array_key_exists('staff', $_POST) and array_key_exists('course', $_POST))
+	if (array_key_exists('year', $_POST) and array_key_exists('semester', $_POST) and array_key_exists('program', $_POST) and array_key_exists('branch', $_POST) and array_key_exists('section', $_POST) and array_key_exists('batch', $_POST) and array_key_exists('staff', $_POST) and array_key_exists('course', $_POST))
 	{
 		$year=$_POST["year"];
 		$branch=$_POST["branch"];
@@ -31,13 +31,32 @@
 			$timeperiod = $row['id'];
 		}
 
-		list($sid,$sname) = split('[-]', $staff_a);
-		var_dump($sid);
-		var_dump($sname);
-		echo "$sid";
-		echo "$sname";
-	}
-	else {
-		echo "<h1>jeevan</h1>";
+		$staff = explode("--",$staff_a);
+		$course = explode("--",$course_a);
+		if ($batch = "All (1, 2 and 3)")
+		{
+			for ($i=1; $i <=3 ; $i++)
+			{ 
+				$sql = "INSERT INTO staff_teaches_courses(StaffID, CourseID, Timeperiod, YearandSem, BSP, Batch) VALUES ('$staff[0]','$course[0]','$timeperiod','$year/4 Sem-$semester','$BSP','$i')";
+		    	if (mysqli_query($conn, $sql))
+				{
+					//echo "New record created successfully";
+				}
+				else
+				{
+					echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+				}
+			}
+		} else {
+			$sql = "INSERT INTO staff_teaches_courses(StaffID, CourseID, Timeperiod, YearandSem, BSP, Batch) VALUES ('$staff[0]','$course[0]','$timeperiod','$year/4 Sem-$semester','$BSP','$batch')";
+		    	if (mysqli_query($conn, $sql))
+				{
+					//echo "New record created successfully";
+				}
+				else
+				{
+					echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+				}
+		}
 	}
 ?>

@@ -33,5 +33,6 @@ function loadInsert()
 	var course = document.getElementById('course').value;
 	xhttp.open("POST", "Staff_Courses/Insert.php", true);
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhttp.send("staff="+staff+"&batch="+batch+"&year="+year+"&program="+program+"&branch="+branch+"&section="+section+"&semester="+semester+"&course"+course);
+	xhttp.send("course="+course+"&staff="+staff+"&batch="+batch+"&year="+year+"&program="+program+"&branch="+branch+"&section="+section+"&semester="+semester);
+	alert('Record Inserted Successfully');
 }
