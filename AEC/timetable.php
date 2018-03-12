@@ -69,7 +69,7 @@
 			</select>
 		</div>
 		<div class="col-sm-1"></div>
-		<div class="col-sm-1 pt-2">
+		<!-- <div class="col-sm-1 pt-2">
 			Batch: 
 		</div>
 		<div class="col-sm-4">
@@ -79,7 +79,7 @@
 			    <option>2</option>
 			    <option>3</option>
 			</select>
-		</div>
+		</div> -->
 	</div>
 	<br>
 	<button type="button" class="btn btn-outline-success" onclick="loadTable()">Generate Table</button>

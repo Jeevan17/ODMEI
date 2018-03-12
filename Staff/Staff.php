@@ -1,23 +1,12 @@
-<?php
-
-	$dbhost = 'localhost';
-	$dbuser = 'admin';
-	$dbpass = 'cbit';
-	
-	$conn = mysqli_connect($dbhost, $dbuser, $dbpass,'cbitdb');
-
+<?php include '../dataConnections.php';
 	session_start();
 	if(!isset($_SESSION['staff'])){
 		echo "<script language='javascript'>window.location='../index.php';</script>";
 	}
+	$currentPage = 'Staff';
 	$uname=$_SESSION['staff'];
-	if(! $conn )
-	{
-		echo "
-			<div class='alert alert-danger'>
-				<strong>Not connected to database." . mysqli_error();"</strong>
-			</div>";
-	}
+	
+	include 'header.php';										
 	$sql = "select * from staff where StaffID='$uname'";
 	$retval = mysqli_query($conn, $sql);
 	while($row = mysqli_fetch_array($retval))
@@ -30,85 +19,46 @@
 		$Specialization = $row['Specialization'];
 	}
 ?>
-<!DOCTYPE html>
-<html lang='en'>
-	<head>
-		<title><?php $uname?></title>
-		<meta charset='utf-8'>
-		<meta name='viewport' content='width=device-width, initial-scale=1'>
-		<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css'>
-		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0-beta.3/lux/bootstrap.min.css">
-	</head>
-	<body>
-		<header id="home">
-			<nav class="navbar navbar-expand-lg navbar-light bg-light">
-				<a class="navbar-brand" href="#"><img class='img-fluid' src='../images/header.jpg'></a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-				</button>
-
-				<div class="collapse navbar-collapse" id="navbarColor03">
-					<ul class="navbar-nav mr-auto ">
-				    	<li class="nav-item active">
-				        	<a class="nav-link" href="Student.php">Home</a>
-				      	</li>
-				      	<li class="nav-item">
-				        	<a class="nav-link" href="Attendance.php">Add Attendance</a>
-				      	</li>
-				      	<li class="nav-item">
-				        	<a class="nav-link" href="student_marks.php">Send Meterial</a>
-				      	</li>
-				      	<li class="nav-item">
-				        	<a class="nav-link" href="student_admission.php">Check Feedback</a>
-				      	</li>
-				      	<li class="nav-item">
-				      		<a class="nav-link btn btn-outline-success" href='../index.php'>Logout</a>
-				      	</li>
-				    </ul>
-				</div>
-			</nav>
-		</header>
-		<div class='tab-content'>
-			<div class='container tab-pane active text-primary'><br>
-				<div class="row">
-					<div class="col-sm-6">
-						<table class="table table-bordered table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl">
-							<tbody>
-								<tr>
-									<th rowspan='5'>
-										<?php 
-											echo "
-						        			<img src='data:image/jpeg;base64,".base64_encode( $photo )."'  alt='photo' height='150' width='120'/> 
-						        			";
-						        		?>
-					        		</th>
-								    <th scope="row">Name</th>
-								    <td><?php echo "$name" ?></td>
-									<tr >
-								      <th scope="row">Staff ID</th>
-								      <td><?php echo "$sid" ?></td>
-								    </tr>
-									<tr >
-								      <th scope="row">Phone No</th>
-								      <td><?php echo "$phno" ?></td>
-								    </tr>
-									<tr >
-								      <th scope="row">EMAIL ID</th>
-								      <td><?php echo "$email" ?></td>
-								    </tr>
-									<tr >
-								      <th scope="row">Specialization</th>
-								      <td><?php echo "$Specialization" ?></td>
-								    </tr>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
+<br>
+	<div class="row">
+		<div class="col-sm-6">
+			<table class="table table-bordered table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl">
+				<tbody>
+					<tr>
+						<th rowspan='5'>
+							<?php 
+								echo "
+			        			<img src='data:image/jpeg;base64,".base64_encode( $photo )."'  alt='photo' height='150' width='120'/> 
+			        			";
+			        		?>
+		        		</th>
+					    <th scope="row">Name</th>
+					    <td><?php echo "$name" ?></td>
+						<tr >
+					      <th scope="row">Staff ID</th>
+					      <td><?php echo "$sid" ?></td>
+					    </tr>
+						<tr >
+					      <th scope="row">Phone No</th>
+					      <td><?php echo "$phno" ?></td>
+					    </tr>
+						<tr >
+					      <th scope="row">EMAIL ID</th>
+					      <td><?php echo "$email" ?></td>
+					    </tr>
+						<tr >
+					      <th scope="row">Specialization</th>
+					      <td><?php echo "$Specialization" ?></td>
+					    </tr>
+					</tr>
+				</tbody>
+			</table>
 		</div>
-		<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-		<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js'></script>
-		<script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js'></script>
+	</div>
+<div>
+</div>
+	<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js'></script>
+	<script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js'></script>
 	</body>
 </html>

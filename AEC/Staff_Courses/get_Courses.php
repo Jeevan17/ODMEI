@@ -6,7 +6,8 @@
 	
 	if (array_key_exists('staff', $_POST))
 	{
-		$staff=$_POST["staff"];
+		$staff = $_POST["staff"];
+		$sid = explode("--",$staff);
 		echo "
 			<p> Select Below Fields and press Insert Data</p>
 			<div class='row'>
@@ -89,7 +90,7 @@
 				<div class='col-sm-4'>
 					<select class='form-control' id='course' required>
 					    ";
-					    $sql = "SELECT CourseID,CourseName FROM courses";
+					    $sql = "SELECT courses.CourseID,courses.CourseName FROM courses where courses.Department=(SELECT staff.Department FROM staff where staff.StaffID = '$sid[0]')";
 						$retval = mysqli_query($conn, $sql);
 
 						while($row = mysqli_fetch_array($retval))

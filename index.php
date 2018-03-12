@@ -41,7 +41,7 @@
 				<div class="col-sm-1">
 				</div>
 				<div class='col'>
-					<a href='department_login.php' class="btn btn-outline-warning btn-lg">Department Login</a>
+					<a href='Department_login.php' class="btn btn-outline-warning btn-lg">Department Login</a>
 				</div>
 				<div class="col-sm-1">
 				</div>

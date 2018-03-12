@@ -13,8 +13,8 @@ function loadTable()
 	var semester = document.getElementById("Semester").value;
 	var branch = document.getElementById("Branch").value;
 	var section = document.getElementById("Section").value;
-	var batch = document.getElementById('Batch').value; 
+	//var batch = document.getElementById('Batch').value; 
 	xhttp.open("POST", "TimeTable/get_timeTable.php", true);
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhttp.send("batch="+batch+"&year="+year+"&program="+program+"&branch="+branch+"&section="+section+"&semester="+semester);
+	xhttp.send("year="+year+"&program="+program+"&branch="+branch+"&section="+section+"&semester="+semester);
 }

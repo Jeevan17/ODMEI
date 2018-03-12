@@ -4,14 +4,14 @@
 		echo "<script language='javascript'>window.location='../index.php';</script>";
 	}
 	
-	if (array_key_exists('year', $_POST) and array_key_exists('semester', $_POST) and array_key_exists('program', $_POST)  and array_key_exists('branch', $_POST) and array_key_exists('section', $_POST) and array_key_exists('batch', $_POST))
+	if (array_key_exists('year', $_POST) and array_key_exists('semester', $_POST) and array_key_exists('program', $_POST)  and array_key_exists('branch', $_POST) and array_key_exists('section', $_POST))
 	{
 		$year=$_POST["year"];
 		$branch=$_POST["branch"];
 		$section=$_POST["section"];
 		$semester=$_POST["semester"];
 		$program = $_POST['program'];
-		$batch = $_POST['batch'];
+		//$batch = $_POST['batch'];
 		echo "<h3>Time Table for<mark>$program $year/4 Sem-$semester $branch-$section</mark></h3>
 			<hr>
 			<table class='table table-bordered table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl'>
@@ -29,21 +29,39 @@
 				</thead>
 				<tbody>
 				";
-				$days = array('Monday','Tuesday','Wednesday','Thrusday','Friday','Saturday');
+				$days = array('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
+				$i = 0;
 				foreach ($days as $day)
 				{
-					echo "
-						<tr>
-							<th>$day</th>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-					";
+					$i++;
+				?>
+					<tr>
+						<th><?php 
+							echo "$day";
+							 ?></th>
+						<td>
+							<form>
+								<select class="form-control" id="staff<?php $i ?>">
+									<?php
+									 	$sql = "SELECT staff.StaffID,staff.FullName FROM staff where staff.Department = '$branch'";
+										$retval = mysqli_query($conn, $sql);
+
+										while($row = mysqli_fetch_array($retval))
+										{
+											echo "<option>".$row['StaffID']."--".$row['FullName']."</option>";
+										}
+									?>
+								</select>
+							</form>
+						</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				<?php	
 				}
 				echo "
 				</tbody>
