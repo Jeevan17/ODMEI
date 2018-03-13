@@ -29,39 +29,34 @@
 				</thead>
 				<tbody>
 				";
-				$days = array('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
-				foreach ($days as $day)
-				{
+				$days = array('1.Monday','2.Tuesday','3.Wednesday','4.Thursday','5.Friday','6.Saturday');
 				?>
 					<tr>
-						<th><?php 
-							echo "$day";
-							 ?></th>
+						<th>
+							Day:<select class="form-control" id="day">
+									<option selected="selected"></option>
+									<?php
+										foreach ($days as $day)
+										{
+											echo "<option>$day</option>";
+										}
+									?>
+								</select>
+						</th>
 						<?php 
-							$i=0;
+							$i = 0;
 							while ($i < 7)
 							{
 							?>
 							<td>
 							<form>
-								<select class="form-control" id="staff<?php echo "$day";?>">
-									<?php
-									 	$sql = "SELECT staff.StaffID,staff.FullName FROM staff where staff.Department = '$branch'";
-										$retval = mysqli_query($conn, $sql);
-
-										while($row = mysqli_fetch_array($retval))
-										{
-											echo "<option>".$row['StaffID']."--".$row['FullName']."</option>";
-										}
-									?>
-								</select>
-								<select class="form-control" id="course<?php echo "$day";?>">
+								Courses:<select class="form-control" id="course<?php echo "$i";?>" onchange="loadStaff(this.value,<?php echo "'$i'"; ?>)">
+									<option selected="selected">-</option>
 									<?php
 										$sql = "SELECT courses.CourseID,courses.CourseName FROM courses
-												INNER JOIN staff_teaches_courses
-												ON courses.CourseID=staff_teaches_courses.CourseID
-												WHERE staff_teaches_courses.YearandSem='$year/4 Sem-$semester'AND staff_teaches_courses.BSP=(SELECT bsp_code.BSP FROM bsp_code WHERE bsp_code.Branch='$branch' AND bsp_code.Section='$section' AND bsp_code.Program='$program') AND staff_teaches_courses.Timeperiod=(SELECT max(timeperiod.id) FROM timeperiod)
-												GROUP BY courses.CourseName";
+												INNER JOIN student_enroll_courses
+												WHERE student_enroll_courses.YearandSem='$year/4 Sem-$semester' AND student_enroll_courses.Timeperiod = (SELECT max(timeperiod.id) FROM timeperiod) AND student_enroll_courses.RollNumber IN (SELECT student.RollNumber FROM student WHERE student.BSP = (SELECT bsp_code.BSP FROM bsp_code WHERE bsp_code.Branch='$branch' AND bsp_code.Section = '$section' AND bsp_code.Program = '$program'))
+												GROUP BY courses.CourseID";
 										$retval = mysqli_query($conn, $sql);
 
 										while($row = mysqli_fetch_array($retval))
@@ -71,12 +66,19 @@
 
 									?>
 								</select>
-								<select class="form-control" id="timeslot<?php echo "$day";?>">
+								<div id="staff<?php echo "$i$i";?>">
+									Staff:<select class="form-control" id="staff<?php echo"$i";?>">
+										<option>-</option>
+									</select>
+								</div>
+								
+								Batch:<select class="form-control" id="batch<?php echo "$i";?>">
+									<option selected="selected">-</option>
 									<?php
-										$timeslot = array('09:40:00', '10:30:00', '11:20:00', '12:10:00', '01:35:00', '02:25:00', '03:15:00' );
-										foreach ($timeslot as $time)
+										$batches = array('All (1, 2 and 3)', '1', '2', '3');
+										foreach ($batches as $batch)
 										{
-											echo "<option>$time</option>";
+											echo "<option>$batch</option>";
 										}
 									?>
 								</select>
@@ -88,11 +90,10 @@
 						?>
 					</tr>
 				<?php	
-				}
 				echo "
 				</tbody>
 			</table>
-			<center><button type='button' class='btn btn-outline-dark'>Create TimeTable</button></center>
+			<center><button type='button' class='btn btn-outline-dark' onclick='loadInsert()'>Create TimeTable</button></center>
 			<br>
 			<hr>";
 	}		
