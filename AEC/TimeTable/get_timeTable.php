@@ -18,30 +18,33 @@
 				<thead>
 					<tr>
 						<th></th>
-						<th>09:40-10:30</th>
-						<th>10:30-11:20</th>
-						<th>11:20-12:10</th>
-						<th>12:10-01:00</th>
-						<th>01:35-02:25</th>
-						<th>02:25-03:15</th>
-						<th>03:15-04:05</th>
+						<th>09:40:00-10:30:00</th>
+						<th>10:30:00-11:20:00</th>
+						<th>11:20:00-12:10:00</th>
+						<th>12:10:00-01:00:00</th>
+						<th>01:35:00-02:25:00</th>
+						<th>02:25:00-03:15:00</th>
+						<th>03:15:00-04:05:00</th>
 					</tr>
 				</thead>
 				<tbody>
 				";
 				$days = array('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
-				$i = 0;
 				foreach ($days as $day)
 				{
-					$i++;
 				?>
 					<tr>
 						<th><?php 
 							echo "$day";
 							 ?></th>
-						<td>
+						<?php 
+							$i=0;
+							while ($i < 7)
+							{
+							?>
+							<td>
 							<form>
-								<select class="form-control" id="staff<?php $i ?>">
+								<select class="form-control" id="staff<?php echo "$day";?>">
 									<?php
 									 	$sql = "SELECT staff.StaffID,staff.FullName FROM staff where staff.Department = '$branch'";
 										$retval = mysqli_query($conn, $sql);
@@ -52,20 +55,45 @@
 										}
 									?>
 								</select>
+								<select class="form-control" id="course<?php echo "$day";?>">
+									<?php
+										$sql = "SELECT courses.CourseID,courses.CourseName FROM courses
+												INNER JOIN staff_teaches_courses
+												ON courses.CourseID=staff_teaches_courses.CourseID
+												WHERE staff_teaches_courses.YearandSem='$year/4 Sem-$semester'AND staff_teaches_courses.BSP=(SELECT bsp_code.BSP FROM bsp_code WHERE bsp_code.Branch='$branch' AND bsp_code.Section='$section' AND bsp_code.Program='$program') AND staff_teaches_courses.Timeperiod=(SELECT max(timeperiod.id) FROM timeperiod)
+												GROUP BY courses.CourseName";
+										$retval = mysqli_query($conn, $sql);
+
+										while($row = mysqli_fetch_array($retval))
+										{
+											echo "<option>".$row['CourseID']."--".$row['CourseName']."</option>";
+										}
+
+									?>
+								</select>
+								<select class="form-control" id="timeslot<?php echo "$day";?>">
+									<?php
+										$timeslot = array('09:40:00', '10:30:00', '11:20:00', '12:10:00', '01:35:00', '02:25:00', '03:15:00' );
+										foreach ($timeslot as $time)
+										{
+											echo "<option>$time</option>";
+										}
+									?>
+								</select>
 							</form>
-						</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+							</td>
+						<?php 
+							$i++;
+							} 
+						?>
 					</tr>
 				<?php	
 				}
 				echo "
 				</tbody>
 			</table>
-				";
+			<center><button type='button' class='btn btn-outline-dark'>Create TimeTable</button></center>
+			<br>
+			<hr>";
 	}		
 ?>

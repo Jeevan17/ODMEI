@@ -79,5 +79,5 @@
 			</nav>
 		</header>
 		<div class='tab-content'>
-			<div class='container tab-pane active text-primary'><br>
+			<div class='container-fluid tab-pane active text-primary'><br>
 		
