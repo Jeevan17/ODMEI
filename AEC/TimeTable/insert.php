@@ -29,22 +29,16 @@
 		{
 			$course = explode("--",$subjects[$i]);
 			$sid = explode("--", $staff[$i]);
-			if ($batch[$i] == "All (1, 2 and 3)")
+
+			if ($course[0] == '-' || $sid[0] == '-' || $batch[$i] == '-')
 			{
-				$sql = "INSERT INTO timetable(StaffID, CourseID, YearandSem, BSP, Batch, Day, Timeslot) VALUES ('$sid[0]','$course[0]','$year/4 Sem-$semester','$BSP','0','$day[1]','$timeslot[$i]')";
-			    if (mysqli_query($conn, $sql))
-				{
-					//echo "New record created successfully";
-				}
-				else
-				{
-					echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-				}
 			}
 			else
 			{
-				$sql = "INSERT INTO timetable(StaffID, CourseID, YearandSem, BSP, Batch, Day, Timeslot) VALUES ('$sid[0]','$course[0]','$year/4 Sem-$semester','$BSP','$batch[$i]','$day[1]','$timeslot[$i]')";
-			    	if (mysqli_query($conn, $sql))
+				if ($batch[$i] == "All (1, 2 and 3)")
+				{
+					$sql = "INSERT INTO timetable(StaffID, CourseID, YearandSem, BSP, Batch, Day, Timeslot) VALUES ('$sid[0]','$course[0]','$year/4 Sem-$semester','$BSP','0','$day[1]','$timeslot[$i]')";
+				    if (mysqli_query($conn, $sql))
 					{
 						//echo "New record created successfully";
 					}
@@ -52,6 +46,19 @@
 					{
 						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 					}
+				}
+				else
+				{
+					$sql = "INSERT INTO timetable(StaffID, CourseID, YearandSem, BSP, Batch, Day, Timeslot) VALUES ('$sid[0]','$course[0]','$year/4 Sem-$semester','$BSP','$batch[$i]','$day[1]','$timeslot[$i]')";
+				    	if (mysqli_query($conn, $sql))
+						{
+							//echo "New record created successfully";
+						}
+						else
+						{
+							echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+						}
+				}
 			}
 		}	
 	}

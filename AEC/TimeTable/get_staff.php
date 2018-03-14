@@ -20,7 +20,7 @@
 			<select class='form-control' id='staff$i'>
 				<option selected='selected'>-</option>
 		";
-			$sql = "SELECT staff.StaffID,staff.FullName FROM staff WHERE staff.StaffID IN (SELECT staff_teaches_courses.StaffID FROM staff_teaches_courses WHERE staff_teaches_courses.CourseID='$subject[0]')";
+			$sql = "SELECT staff.StaffID,staff.FullName FROM staff WHERE staff.StaffID IN (SELECT staff_teaches_courses.StaffID FROM staff_teaches_courses WHERE staff_teaches_courses.CourseID='$subject[0]' AND staff_teaches_courses.BSP = (SELECT bsp_code.BSP FROM bsp_code WHERE bsp_code.Branch='$branch' AND bsp_code.Section='$section' AND bsp_code.Program='$program'))";
 			$retval = mysqli_query($conn, $sql);
 
 			while($row = mysqli_fetch_array($retval))
