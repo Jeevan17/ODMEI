@@ -16,57 +16,70 @@
 			
 			$sql = "SELECT bsp_code.Branch, bsp_code.Section, bsp_code.Program FROM bsp_code WHERE bsp_code.BSP IN (SELECT timetable.BSP FROM timetable WHERE timetable.Day='$day' AND timetable.StaffID='$uname' AND timetable.CourseID='$course[0]')";
 			$retval = mysqli_query($conn, $sql);
-			while($row = mysqli_fetch_array($retval))
+			if (mysqli_num_rows($retval) > 0)
 			{
-			?>	<div class='row'>
-					<div class="col-sm-1 pt-2">
-						Branch: 
-					</div>
-					<div class="col-sm-4">
-						<select class="form-control" id="Branch">
-							<option><?php echo "{$row['Branch']}"; ?></option>
-						</select>
-					</div>
-					<div class="col-sm-1"></div>
-					<div class="col-sm-1 pt-2">
-						Section: 
-					</div>
-					<div class="col-sm-4">
-						<select class="form-control" id="Section">
-						    <option><?php echo "{$row['Section']}"; ?></option>
-						</select>
-					</div>
-				</div>
-				<br>
-				<div class='row'>
-					<div class="col-sm-1 pt-2">
-						Program: 
-					</div>
-					<div class="col-sm-4">
-						<select class="form-control" id="Program">
-						    <option><?php echo "{$row['Program']}"; ?></option>
-						</select>
-					</div>
-			<?php }
-				$sql = "SELECT YearandSem FROM timetable WHERE StaffID='$uname' AND CourseID='$course[0]' AND Day ='$day' GROUP BY YearandSem";
-				$retval = mysqli_query($conn, $sql);
 				while($row = mysqli_fetch_array($retval))
 				{
-			?>
+				?>	<div class='row'>
+						<div class="col-sm-1 pt-2">
+							Branch: 
+						</div>
+						<div class="col-sm-4">
+							<select class="form-control" id="Branch">
+								<option><?php echo "{$row['Branch']}"; ?></option>
+							</select>
+						</div>
+						<div class="col-sm-1"></div>
+						<div class="col-sm-1 pt-2">
+							Section: 
+						</div>
+						<div class="col-sm-4">
+							<select class="form-control" id="Section">
+							    <option><?php echo "{$row['Section']}"; ?></option>
+							</select>
+						</div>
+					</div>
+					<br>
+					<div class='row'>
+						<div class="col-sm-1 pt-2">
+							Program: 
+						</div>
+						<div class="col-sm-4">
+							<select class="form-control" id="Program">
+							    <option><?php echo "{$row['Program']}"; ?></option>
+							</select>
+						</div>
+				<?php }
+					$sql = "SELECT YearandSem FROM timetable WHERE StaffID='$uname' AND CourseID='$course[0]' AND Day ='$day' GROUP BY YearandSem";
+					$retval = mysqli_query($conn, $sql);
+					while($row = mysqli_fetch_array($retval))
+					{
+				?>
 
-					<div class="col-sm-1"></div>
-					<div class="col-sm-1 pt-2">
-						YandS: 
+						<div class="col-sm-1"></div>
+						<div class="col-sm-1 pt-2">
+							YandS: 
+						</div>
+						<div class="col-sm-4">
+							<select class="form-control" id="yands">
+							    <option><?php echo "{$row['YearandSem']}"; ?></option>
+							</select>
+						</div>
 					</div>
-					<div class="col-sm-4">
-						<select class="form-control" id="Semester">
-						    <option><?php echo "{$row['YearandSem']}"; ?></option>
-						</select>
-					</div>
-				</div>
-			<?php
+				<?php
+				}
+				echo "
+					<div id='rollnumber'>
+						<br><hr><center><button type='button' class='btn btn-outline-success' onclick='loadRnum()'>Get Rollnumbers</button></center>
+					</div>";
 			}
-			echo "<br><hr><center><button type='button' class='btn btn-outline-success' onclick='loadSubjects()'>Get Rollnumbers</button></center>";
+			else
+			{
+				echo "
+					<div class='alert alert-danger'>
+						<strong>Recheck the Date and Subject Selected</strong>
+					</div>";
+			}
 		}
 	}
 ?>
