@@ -1,28 +1,16 @@
-<?php
-
-	$dbhost = 'localhost';
-	$dbuser = 'admin';
-	$dbpass = 'cbit';
-	
-	$conn = mysqli_connect($dbhost, $dbuser, $dbpass,'cbitdb');
+<?php include '../dataConnections.php'; 
 
 	session_start();
 	if(!isset($_SESSION['student'])){
 		echo "<script language='javascript'>window.location='../student_login.php';</script>";
 	}
 	$uname=$_SESSION['student'];
-	if(! $conn )
-	{
-		echo "
-			<div class='alert alert-danger'>
-				<strong>Not connected to database." . mysqli_error();"</strong>
-			</div>";
-	}			
-?>
+	?>
+
 <!DOCTYPE html>
 <html lang='en'>
 	<head>
-		<title><?php $uname?></title>
+		<title><?php echo "$uname";?></title>
 		<meta charset='utf-8'>
 		<meta name='viewport' content='width=device-width, initial-scale=1'>
 		<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css'>

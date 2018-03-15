@@ -45,30 +45,25 @@
 					<tbody>
 						<tr>
 					";
-						$r=0;
 						for ($q=0; $q < 7; $q++)
 						{
-							for(; $r<sizeof($data);$r++)
+							if (in_array($time_slot[$q], $data))
 							{
-								if ($data[$r] == $time_slot[$q])
-								{
-									echo "
-										<th>  
-											<input type='checkbox' name='Attendance' value='$time_slot[$q]'>
-										</th>
+								echo "
+									<th>  
+										<input type='checkbox' name='Attendance' value='$time_slot[$q]' checked>
+									</th>
 
-									";
-									break;
-								}
-								else
-								{
-									echo "
-										<th>  
-											<input type='checkbox' name='Attendance' value='$time_slot[$q]' disabled>
-										</th>
+								";
+							}
+							else
+							{
+								echo "
+									<th>  
+										<input type='checkbox' name='Attendance' value='$time_slot[$q]' disabled>
+									</th>
 
-									";
-								}
+								";
 							}
 						}
 			echo "
@@ -76,7 +71,7 @@
 					</tbody>
 				</table>
 			";
-			$sql="SELECT RollNumber FROM student_enroll_courses where student_enroll_courses.YearandSem='$yands' AND student_enroll_courses.CourseID='$cid[0]' AND student_enroll_courses.Timeperiod=(SELECT max(timeperiod.id) FROM timeperiod)";
+			$sql="SELECT RollNumber FROM student_enroll_courses where student_enroll_courses.YearandSem='$yands' AND student_enroll_courses.CourseID='$cid[0]' AND student_enroll_courses.Timeperiod=(SELECT max(timeperiod.id) FROM timeperiod) ORDER BY RollNumber";
 			$retval = mysqli_query($conn, $sql);
 			echo "
 				<hr>
@@ -86,7 +81,7 @@
 						while($row = mysqli_fetch_array($retval))
 						{
 							echo "
-								<br><input type='checkbox' name='rollnumber' id='{$row['RollNumber']}' value='{$row['RollNumber']}'/>{$row['RollNumber']}
+								<br><input type='checkbox' name='rollnumber' id='{$row['RollNumber']}' checked value='{$row['RollNumber']}'/>{$row['RollNumber']}
 							";
 						}
 			echo "

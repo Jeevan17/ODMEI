@@ -19,7 +19,7 @@
 
 		$sql = "SELECT date FROM dailyattendance WHERE Date='$date' and CourseID='$cid[0]'";
 		$retval = mysqli_query($conn, $sql);
-		if (mysqli_num_rows($retval) > 0)
+		if (!(mysqli_num_rows($retval) > 0))
 		{
 			$sql = "SELECT max(id) AS id FROM timeperiod";
 			$retval = mysqli_query($conn, $sql);
@@ -95,6 +95,7 @@
 						$TCH = $row['TotalClassesHeld'];
 						$TCA = $row['TotalAttended'];
 					}
+				 			
 					for ($i=0; $i <7 ; $i++)
 					{
 						if ($timeslot[$i] == 1)
@@ -109,8 +110,8 @@
 							    	if (mysqli_query($conn, $sql))
 				 					{
 							    		//echo "New record created successfully";
-							    		$TCH = null;
-							    		$TCA = null;
+							    		$TCH = 1;
+							    		$TCA = 1;
 				 					}
 				 					else
 				 					{
@@ -119,7 +120,7 @@
 							    }
 							    elseif (!is_null($TCH) and !is_null($TCA))
 							    {
-							    	$TCH = $TCH +1;
+									$TCH = $TCH +1;
 							    	$TCA = $TCA +1;
 							    	$sql = "UPDATE attendance SET TotalAttended=$TCA,TotalClassesHeld=$TCH WHERE RollNumber='$rno' AND timeperiod='$Timeperiod' AND YearandSem='$yands'";
 							    	if (mysqli_query($conn, $sql))
