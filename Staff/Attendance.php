@@ -3,7 +3,7 @@
 	if(!isset($_SESSION['staff'])){
 		echo "<script language='javascript'>window.location='../index.php';</script>";
 	}
-	$currentPage = 'Staff';
+	$currentPage = 'Add Attendance';
 	$uname=$_SESSION['staff'];
 	
 	include 'header.php';										

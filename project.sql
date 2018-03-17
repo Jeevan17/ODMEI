@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 17, 2018 at 10:19 AM
+-- Generation Time: Mar 17, 2018 at 12:30 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.8
 
@@ -295,6 +295,24 @@ INSERT INTO `placement` (`CompanyName`, `Description`, `Logo`, `CutOff`, `Type`)
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `placement_batch`
+--
+
+CREATE TABLE `placement_batch` (
+  `ID` int(10) UNSIGNED NOT NULL,
+  `Batch_name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `placement_batch`
+--
+
+INSERT INTO `placement_batch` (`ID`, `Batch_name`) VALUES
+(1, '2017-2018');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `sem_marks`
 --
 
@@ -450,7 +468,7 @@ CREATE TABLE `student_attend_placements` (
   `RollNumber` bigint(20) NOT NULL,
   `CompanyName` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `StartDate` date NOT NULL,
-  `PBatch` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `PBatch` int(10) UNSIGNED NOT NULL,
   `EndDate` date NOT NULL,
   `Result` enum('Placed','NotPlaced','NotAttempted','NotEligible') COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -460,15 +478,15 @@ CREATE TABLE `student_attend_placements` (
 --
 
 INSERT INTO `student_attend_placements` (`RollNumber`, `CompanyName`, `StartDate`, `PBatch`, `EndDate`, `Result`) VALUES
-(1, 'Google', '2018-02-01', '2017-2018', '2018-02-02', 'Placed'),
-(1, 'qwe', '2018-02-01', '2017-2018', '2018-02-04', 'NotPlaced'),
-(2, 'Apple', '2018-02-01', '2017-2018', '2018-02-02', 'Placed'),
-(2, 'xyz', '2018-02-01', '2017-2018', '2018-02-04', 'NotAttempted'),
-(160114733094, 'Apple', '2018-01-02', '2017-2018', '2018-01-03', 'NotPlaced'),
-(160114733094, 'xyz', '2018-02-01', '2017-2018', '2018-02-02', 'Placed'),
-(160114733313, 'Apple', '2018-01-02', '2017-2018', '2018-01-03', 'Placed'),
-(160114733313, 'Google', '2018-01-04', '2017-2018', '2018-01-05', 'NotEligible'),
-(160114733313, 'xyz', '2018-02-01', '2017-2018', '2018-02-02', 'Placed');
+(1, 'Google', '2018-02-01', 1, '2018-02-02', 'Placed'),
+(1, 'qwe', '2018-02-01', 1, '2018-02-04', 'NotPlaced'),
+(2, 'Apple', '2018-02-01', 1, '2018-02-02', 'Placed'),
+(2, 'xyz', '2018-02-01', 1, '2018-02-04', 'NotAttempted'),
+(160114733094, 'Apple', '2018-01-02', 1, '2018-01-03', 'NotPlaced'),
+(160114733094, 'xyz', '2018-02-01', 1, '2018-02-02', 'Placed'),
+(160114733313, 'Apple', '2018-01-02', 1, '2018-01-03', 'Placed'),
+(160114733313, 'Google', '2018-01-04', 1, '2018-01-05', 'NotEligible'),
+(160114733313, 'xyz', '2018-02-01', 1, '2018-02-02', 'Placed');
 
 -- --------------------------------------------------------
 
@@ -736,6 +754,12 @@ ALTER TABLE `placement`
   ADD PRIMARY KEY (`CompanyName`);
 
 --
+-- Indexes for table `placement_batch`
+--
+ALTER TABLE `placement_batch`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Indexes for table `sem_marks`
 --
 ALTER TABLE `sem_marks`
@@ -774,7 +798,8 @@ ALTER TABLE `student`
 --
 ALTER TABLE `student_attend_placements`
   ADD PRIMARY KEY (`RollNumber`,`CompanyName`),
-  ADD KEY `student_attend_placements_companyname_foreign` (`CompanyName`);
+  ADD KEY `student_attend_placements_companyname_foreign` (`CompanyName`),
+  ADD KEY `PBatch` (`PBatch`);
 
 --
 -- Indexes for table `student_details`
@@ -832,6 +857,11 @@ ALTER TABLE `timetable`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+--
+-- AUTO_INCREMENT for table `placement_batch`
+--
+ALTER TABLE `placement_batch`
+  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `timeperiod`
 --
@@ -893,6 +923,7 @@ ALTER TABLE `staff_teaches_courses`
 --
 ALTER TABLE `student_attend_placements`
   ADD CONSTRAINT `student_attend_placements_companyname_foreign` FOREIGN KEY (`CompanyName`) REFERENCES `placement` (`CompanyName`),
+  ADD CONSTRAINT `student_attend_placements_ibfk_1` FOREIGN KEY (`PBatch`) REFERENCES `placement_batch` (`ID`),
   ADD CONSTRAINT `student_attend_placements_rollnumber_foreign` FOREIGN KEY (`RollNumber`) REFERENCES `student` (`RollNumber`);
 
 --
