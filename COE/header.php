@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang='en'>
 	<head>
-		<title>AEC</title>
+		<title>COE</title>
 		<meta charset='utf-8'>
 		<meta name='viewport' content='width=device-width, initial-scale=1'>
 		<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css'>
@@ -38,16 +38,10 @@
 					<ul class="navbar-nav mr-auto ">
 						<?php
 							$urls = array(
-							'Attendance' => 'AEC.php',
-							'Admission Details' => 'Admission_details.php',
-							'Mid Marks' => 'Mid_marks.php'
+							'External Marks' => 'COE.php'
 							);
-							//Other
+
 							$dropdownurls = array(
-								'Prepare Time Table' => 'timetable.php',
-								'Add Time Period' => 'timePeriod.php',
-								'Staff Registry' => 'staff_teaches_courses.php',
-								'Course Details' => 'course_details.php'
 							);
 							foreach ($urls as $name => $url) {
 								echo "<li ".(($currentPage === $name) ?"class='nav-item active' ":"class='nav-item'")."><a class='nav-link' href='$url'>$name</a></li>";
@@ -62,18 +56,18 @@
 							}
 							echo "<li $a>";
 							?>
-							<a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="width: 76px;">Other</a>
+							<!-- <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="width: 76px;">Other</a>
 						    <div class="dropdown-menu">
 						    
 						 <?php
-							foreach ($dropdownurls as $name => $url) {
-								echo "
-									<div class='dropdown-divider'></div>
-									<a class ='dropdown-item' href='$url'>$name</a>
-									";
-							}
+							// foreach ($dropdownurls as $name => $url) {
+							// 	echo "
+							// 		<div class='dropdown-divider'></div>
+							// 		<a class ='dropdown-item' href='$url'>$name</a>
+							// 		";
+							// }
 						?>
-							</div>
+							</div> -->
 						</li>
 						
 						<li class="nav-item">

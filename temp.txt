@@ -29,3 +29,10 @@ ToDO
 ------
 timetable
 staff_courses
+
+
+SELECT timetable.Day,timetable.Timeslot,timetable.StaffID,staff.FullName,courses.CourseName, timetable.CourseID, timetable.Batch
+FROM timetable 
+INNER JOIN staff
+ON timetable.StaffID = staff.StaffID 
+WHERE  timetable.YearandSem = '4/4 Sem-2' AND timetable.BSP = (SELECT bsp_code.BSP FROM bsp_code WHERE bsp_code.Branch='CSE' AND bsp_code.Section='2' AND bsp_code.Program='BE') AND timetable.CourseID IN (SELECT student_enroll_courses.CourseID FROM student_enroll_courses WHERE student_enroll_courses.RollNumber='160114733313') AND timetable.Batch = 0 OR 2

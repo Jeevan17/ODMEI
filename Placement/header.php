@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang='en'>
 	<head>
-		<title>AEC</title>
+		<title>Placement</title>
 		<meta charset='utf-8'>
 		<meta name='viewport' content='width=device-width, initial-scale=1'>
 		<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css'>
 		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0-beta.3/lux/bootstrap.min.css">
 		<style type="text/css">
 			table.table-bordered{
-			    border:1px solid rgba(0, 0, 0, .2);//#ff0040;
+			    border:1px solid rgba(0, 0, 0, .1);//#ff0040;
 			    margin-top:20px;
 			}
 			table.table-bordered > thead > tr > th{
-			    border:1px solid rgba(0, 0, 0, .2);
+			    border:1px solid rgba(0, 0, 0, .1);
 			}
 			table.table-bordered > tbody > tr > td{
-			    border:1px solid rgba(0, 0, 0, .2);
+			    border:1px solid rgba(0, 0, 0, .1);
 			}
 			table.table-bordered > tbody > tr > th{
-			    border:1px solid rgba(0, 0, 0, .2);
+			    border:1px solid rgba(0, 0, 0, .1);
 			}
 			select.form-control{
 				padding-left: 0px;
@@ -38,16 +38,14 @@
 					<ul class="navbar-nav mr-auto ">
 						<?php
 							$urls = array(
-							'Attendance' => 'AEC.php',
-							'Admission Details' => 'Admission_details.php',
-							'Mid Marks' => 'Mid_marks.php'
+							'Home' => 'Placement.php',
+							'Company Details' => 'Company_details.php',
+							'Branch wise Details' => 'Branch_details.php'
 							);
-							//Other
+
 							$dropdownurls = array(
-								'Prepare Time Table' => 'timetable.php',
-								'Add Time Period' => 'timePeriod.php',
-								'Staff Registry' => 'staff_teaches_courses.php',
-								'Course Details' => 'course_details.php'
+								'Placement Batch' => 'placement_batch.php',
+								'Add Company Profile' => 'comapny_profile.php'
 							);
 							foreach ($urls as $name => $url) {
 								echo "<li ".(($currentPage === $name) ?"class='nav-item active' ":"class='nav-item'")."><a class='nav-link' href='$url'>$name</a></li>";
@@ -84,5 +82,5 @@
 			</nav>
 		</header>
 		<div class='tab-content'>
-			<div class='container-fluid tab-pane active text-primary'><br>
+			<div class='container tab-pane active text-primary'><br>
 		
