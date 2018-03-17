@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 16, 2018 at 08:16 AM
+-- Generation Time: Mar 17, 2018 at 10:19 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.8
 
@@ -99,6 +99,18 @@ INSERT INTO `courses` (`CourseID`, `CourseName`, `Department`, `sessional`, `SEE
 ('CS472', 'Cloud Computing', 'CSE', 25, 75, 3),
 ('CS474', 'Cyber Forensics', 'CSE', 25, 75, 3),
 ('CS483', 'Machine Learning', 'CSE', 25, 75, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `course_yands`
+--
+
+CREATE TABLE `course_yands` (
+  `CourseID` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `YearandSem` enum('1/4 Sem-1','1/4 Sem-2','2/4 Sem-1','2/4 Sem-2','3/4 Sem-1','3/4 Sem-2','4/4 Sem-1','4/4 Sem-2') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `SyllabusType` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'R13'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -203,6 +215,20 @@ INSERT INTO `login` (`Username`, `Password`, `Role`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `mid_marks`
+--
+
+CREATE TABLE `mid_marks` (
+  `RollNumber` bigint(20) NOT NULL,
+  `CourseID` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Timeperiod` int(11) NOT NULL,
+  `Mid1` decimal(4,2) NOT NULL,
+  `Mid2` decimal(4,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -235,7 +261,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (49, '2018_03_07_111219_create_student_attend_placements_table', 7),
 (50, '2018_03_07_112642_create_student_marks_table', 8),
 (51, '2018_03_07_135328_create_student_takes_books_table', 9),
-(52, '2018_03_07_135819_create_timetable_table', 10);
+(52, '2018_03_07_135819_create_timetable_table', 10),
+(53, '2018_03_17_053417_create_course_yands_table', 11),
+(54, '2018_03_17_053909_create_mid_marks_table', 11),
+(55, '2018_03_17_054711_create_sem_marks_table', 11);
 
 -- --------------------------------------------------------
 
@@ -262,6 +291,19 @@ INSERT INTO `placement` (`CompanyName`, `Description`, `Logo`, `CutOff`, `Type`)
 INSERT INTO `placement` (`CompanyName`, `Description`, `Logo`, `CutOff`, `Type`) VALUES
 ('qwe', 'asdfasdf', 0x89504e470d0a1a0a0000000d494844520000010f000000ba08030000008781387e0000003f504c5445cbcbcbc9c9c9b0b0b0b1b1b1b4b4b4cfcfcfacacaccdcdcdb6b6b6c5c7c8d2d2d2a4a4a4bababaa8a8a8c2c2c2c6c6c69b9b9b9696969f9f9f929292d8d8d894c09304000005a349444154789ceddc0b739b38188561a10b2202844df2ff7f6b25f08583b1e304a91dd4f3ceee4c37a91df3ec0708dbb1f860cb441513ec1a3d307a60f4c0e881d103a307460f8c1e183d307a60f4c0e881d103a307460f8c1e183d307a60f4c0e881d103a307460f8c1e183d307a60f4c0e881d103a307460f8c1e183d307a60f4c0e881d103a307460f8c1e183d307a60f4c0e881d103a307460f8c1e584e0f6bd2676da6077b299f47d0187cf2069157249747d0f0721cdbc4f5bdf2554e906c1eae3b8db56a52a795ec4446904c1ed6a9cfbaf35d861adda57fbcb73279381f38bae4d371c9e71b903c1ed6b46df81f99894367dc63f278187f0a183aeced4a877fd335116b35643bc964f1b0468d7167d1daa73de50efe322026f543be96c943f693c7f0e58c7109337a3a651dd34337d6a5bd6f6b7a39cd873bd8fe72f11026f17ddbb63eb487832fdbbd87416b0f3e1f0b8fdb15d99e3b2ec6235cdc7552cac6577b408af130be3f8de16aacefeb3d8ba9523c4c773ed5f37255c9e6f717a88578b8e6b3bf5fcde8eed720657898e1dcdf35c23ffeb7e799223cac6dc7d5a5eef03f7b848b3b851efab717ec257884ff6857e311bef16a7becd35372f038e6fa54f5f1ea76f6107ddfe955c38b0b3253c967df9e3cc2cdbb5dabba57659b8ff8b0270f33b4f5da43f9e71eae3a8dcfd628c7f650ba9a3de40f3c8c184f6183c31968e3611dd6434df33179d8aade988f67070023cea72edc767b8d528487556b0fa506b77d4b578da766bae9e62e538287b0ddb40db71a2d1bb7fdc48811a70bc73648191e55b8ae450fff65b77ea8b94dc704f278295c8487b05eae7617b7f93ce2723ab627a40c0f21baf8bac3653ac215aef8daba9513a751c39ef570502dc543f8e6062275b5b9b7ccd3011e0f1372588fc5fa63fe4a15444252aace7d6d6d4c5c86ad341e27c49a837a5ce6e3fe7ca1b5c3105fde1e8cdb5c7ac49de591633d21c7f658ccc7f4c5f995a92767163c94de8fbd3021c7f56875dc39aad5b2ebd9f34091e3d90bbdcb09091e7dbce3e6681e72f250e2c93274d52b0e251713128fa7e57b9821703c7d495f2ede1054a6c76a5bcc701e9b17ef8a0820d7e7174bf430c2c30370435886bd7cd3c77d420af408c78a71f1ec87fd6e3aaec790f96f17e761ecf829f5edf9f52a727cff0e227939a816e76186f11cae6fd5f50952377c8ecdb71cea7a9629cd234cc75987ed8f1312b7683a76bcf5063329e34e56964738569cce4d336d9d8a2fc118ffe674c45b0cae348f78ecb84e439c10e74fef7294e81136ff7ce198be59bd3f1d87f7506ddc04b87e0927da78289d9abea9c7b02a954abed9e461da7ebae9013daedb70c9f87005bbd878a5ea5abd8d519c4738939c356efe8f34caf2a8e274e89f6d7fc91e61157a3b76d04324988e923cc274ece728c7c30e09a6a31c0f2bdaf599e5bff630d558ef3c94fe458f8fbfe0d1d263e931b47d320f5bc0fe32ccdb90c423cc47f8637d4c8f3aa1475d2f3dd4f13c64460f498fbfe591ed78baf018fbb039bb2b693e1278f4a5cc8710f177c476279c29633ee2efce25f95564518ac7fc43f636df71111ee93aaa871c278fca89fd478e45c61d743d367bd4dea5fd7429e7cfc7f468da6915a5eac49fa7749eeeb73ed8eb51c2fabe9e97957ddae67bedbbd4c7a55b993cacee772fd19fafdd7b77300f61075967f3e8bbcd773827299347d863545c6567d0a80347b68f87c9f8797d55b7ffa26533ff95f85367e05167f308fb4cb7f50eec9d7526e374e4f5b87fbea54bb60e715935327ffea9bdbe5fdda6fabcb0dc1ff799f9f360733ffaf4e5f5385ef4c0e881d103a307460f8c1e183d307a60f4c0e881d103a307460f8c1e183d307a60f4c0e881d103a307460f8c1e183d307a60f4c0e881d103a307460f8c1e183d307a60f4c0e881d103a307460f8c1e183d307a60f4c0e881d103a307460f8c1e183d307a60f4c0e881d103ab080255ffb47fbdf58f7db0657f00b6849f095a9ad13c0000000049454e44ae426082, '7.00', 'FullTime'),
 ('xyz', 'asdfasdf', 0x89504e470d0a1a0a0000000d494844520000010f000000ba08030000008781387e0000003f504c5445cbcbcbc9c9c9b0b0b0b1b1b1b4b4b4cfcfcfacacaccdcdcdb6b6b6c5c7c8d2d2d2a4a4a4bababaa8a8a8c2c2c2c6c6c69b9b9b9696969f9f9f929292d8d8d894c09304000005a349444154789ceddc0b739b38188561a10b2202844df2ff7f6b25f08583b1e304a91dd4f3ceee4c37a91df3ec0708dbb1f860cb441513ec1a3d307a60f4c0e881d103a307460f8c1e183d307a60f4c0e881d103a307460f8c1e183d307a60f4c0e881d103a307460f8c1e183d307a60f4c0e881d103a307460f8c1e183d307a60f4c0e881d103a307460f8c1e183d307a60f4c0e881d103a307460f8c1e584e0f6bd2676da6077b299f47d0187cf2069157249747d0f0721cdbc4f5bdf2554e906c1eae3b8db56a52a795ec4446904c1ed6a9cfbaf35d861adda57fbcb73279381f38bae4d371c9e71b903c1ed6b46df81f99894367dc63f278187f0a183aeced4a877fd335116b35643bc964f1b0468d7167d1daa73de50efe322026f543be96c943f693c7f0e58c7109337a3a651dd34337d6a5bd6f6b7a39cd873bd8fe72f11026f17ddbb63eb487832fdbbd87416b0f3e1f0b8fdb15d99e3b2ec6235cdc7552cac6577b408af130be3f8de16aacefeb3d8ba9523c4c773ed5f37255c9e6f717a88578b8e6b3bf5fcde8eed720657898e1dcdf35c23ffeb7e799223cac6dc7d5a5eef03f7b848b3b851efab717ec257884ff6857e311bef16a7becd35372f038e6fa54f5f1ea76f6107ddfe955c38b0b3253c967df9e3cc2cdbb5dabba57659b8ff8b0270f33b4f5da43f9e71eae3a8dcfd628c7f650ba9a3de40f3c8c184f6183c31968e3611dd6434df33179d8aade988f67070023cea72edc767b8d528487556b0fa506b77d4b578da766bae9e62e538287b0ddb40db71a2d1bb7fdc48811a70bc73648191e55b8ae450fff65b77ea8b94dc704f278295c8487b05eae7617b7f93ce2723ab627a40c0f21baf8bac3653ac215aef8daba9513a751c39ef570502dc543f8e6062275b5b9b7ccd3011e0f1372588fc5fa63fe4a15444252aace7d6d6d4c5c86ad341e27c49a837a5ce6e3fe7ca1b5c3105fde1e8cdb5c7ac49de591633d21c7f658ccc7f4c5f995a92767163c94de8fbd3021c7f56875dc39aad5b2ebd9f34091e3d90bbdcb09091e7dbce3e6681e72f250e2c93274d52b0e251713128fa7e57b9821703c7d495f2ede1054a6c76a5bcc701e9b17ef8a0820d7e7174bf430c2c30370435886bd7cd3c77d420af408c78a71f1ec87fd6e3aaec790f96f17e761ecf829f5edf9f52a727cff0e227939a816e76186f11cae6fd5f50952377c8ecdb71cea7a9629cd234cc75987ed8f1312b7683a76bcf5063329e34e56964738569cce4d336d9d8a2fc118ffe674c45b0cae348f78ecb84e439c10e74fef7294e81136ff7ce198be59bd3f1d87f7506ddc04b87e0927da78289d9abea9c7b02a954abed9e461da7ebae9013daedb70c9f87005bbd878a5ea5abd8d519c4738939c356efe8f34caf2a8e274e89f6d7fc91e61157a3b76d04324988e923cc274ece728c7c30e09a6a31c0f2bdaf599e5bff630d558ef3c94fe458f8fbfe0d1d263e931b47d320f5bc0fe32ccdb90c423cc47f8637d4c8f3aa1475d2f3dd4f13c64460f498fbfe591ed78baf018fbb039bb2b693e1278f4a5cc8710f177c476279c29633ee2efce25f95564518ac7fc43f636df71111ee93aaa871c278fca89fd478e45c61d743d367bd4dea5fd7429e7cfc7f468da6915a5eac49fa7749eeeb73ed8eb51c2fabe9e97957ddae67bedbbd4c7a55b993cacee772fd19fafdd7b77300f61075967f3e8bbcd773827299347d863545c6567d0a80347b68f87c9f8797d55b7ffa26533ff95f85367e05167f308fb4cb7f50eec9d7526e374e4f5b87fbea54bb60e715935327ffea9bdbe5fdda6fabcb0dc1ff799f9f360733ffaf4e5f5385ef4c0e881d103a307460f8c1e183d307a60f4c0e881d103a307460f8c1e183d307a60f4c0e881d103a307460f8c1e183d307a60f4c0e881d103a307460f8c1e183d307a60f4c0e881d103a307460f8c1e183d307a60f4c0e881d103a307460f8c1e183d307a60f4c0e881d103ab080255ffb47fbdf58f7db0657f00b6849f095a9ad13c0000000049454e44ae426082, '7.00', 'FullTime');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sem_marks`
+--
+
+CREATE TABLE `sem_marks` (
+  `RollNumber` bigint(20) NOT NULL,
+  `CourseID` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Timeperiod` int(11) NOT NULL,
+  `external` decimal(4,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -595,43 +637,43 @@ CREATE TABLE `timetable` (
 --
 
 INSERT INTO `timetable` (`StaffID`, `CourseID`, `YearandSem`, `BSP`, `Batch`, `Day`, `Timeslot`) VALUES
-(7, 'CS483', '4/4 Sem-2', 2, '0', 'Monday', '09:40:00'),
-(7, 'CS483', '4/4 Sem-2', 2, '0', 'Monday', '10:30:00'),
-(5, 'CS421', '4/4 Sem-2', 2, '0', 'Monday', '11:20:00'),
-(9, 'CS424', '4/4 Sem-2', 2, '2', 'Monday', '01:35:00'),
-(9, 'CS424', '4/4 Sem-2', 2, '2', 'Monday', '02:25:00'),
-(9, 'CS424', '4/4 Sem-2', 2, '2', 'Monday', '03:15:00'),
-(5, 'CS422', '4/4 Sem-2', 2, '3', 'Monday', '01:35:00'),
-(5, 'CS422', '4/4 Sem-2', 2, '3', 'Monday', '02:25:00'),
-(5, 'CS422', '4/4 Sem-2', 2, '3', 'Monday', '03:15:00'),
-(11, 'CS424', '4/4 Sem-2', 2, '1', 'Monday', '01:35:00'),
-(11, 'CS424', '4/4 Sem-2', 2, '1', 'Monday', '02:25:00'),
-(11, 'CS424', '4/4 Sem-2', 2, '1', 'Monday', '03:15:00'),
+(3, 'CS471', '4/4 Sem-2', 2, '0', 'Wednesday', '11:20:00'),
+(3, 'CS471', '4/4 Sem-2', 2, '0', 'Wednesday', '12:10:00'),
+(3, 'CS471', '4/4 Sem-2', 2, '0', 'Thursday', '09:40:00'),
+(3, 'CS471', '4/4 Sem-2', 2, '0', 'Thursday', '10:30:00'),
 (4, 'CS423', '4/4 Sem-2', 2, '0', 'Tuesday', '09:40:00'),
 (4, 'CS423', '4/4 Sem-2', 2, '0', 'Tuesday', '10:30:00'),
 (4, 'CS423', '4/4 Sem-2', 2, '0', 'Tuesday', '11:20:00'),
-(8, 'CS424', '4/4 Sem-2', 2, '2', 'Tuesday', '01:35:00'),
-(8, 'CS424', '4/4 Sem-2', 2, '2', 'Tuesday', '02:25:00'),
-(8, 'CS424', '4/4 Sem-2', 2, '2', 'Tuesday', '03:15:00'),
+(5, 'CS421', '4/4 Sem-2', 2, '0', 'Monday', '11:20:00'),
+(5, 'CS421', '4/4 Sem-2', 2, '0', 'Wednesday', '09:40:00'),
+(5, 'CS421', '4/4 Sem-2', 2, '0', 'Wednesday', '10:30:00'),
+(5, 'CS421', '4/4 Sem-2', 2, '0', 'Thursday', '11:20:00'),
 (5, 'CS422', '4/4 Sem-2', 2, '1', 'Tuesday', '01:35:00'),
 (5, 'CS422', '4/4 Sem-2', 2, '1', 'Tuesday', '02:25:00'),
 (5, 'CS422', '4/4 Sem-2', 2, '1', 'Tuesday', '03:15:00'),
-(5, 'CS421', '4/4 Sem-2', 2, '0', 'Wednesday', '09:40:00'),
-(5, 'CS421', '4/4 Sem-2', 2, '0', 'Wednesday', '10:30:00'),
-(3, 'CS471', '4/4 Sem-2', 2, '0', 'Wednesday', '11:20:00'),
-(3, 'CS471', '4/4 Sem-2', 2, '0', 'Wednesday', '12:10:00'),
-(5, 'CS422', '4/4 Sem-2', 2, '3', 'Wednesday', '01:35:00'),
-(5, 'CS422', '4/4 Sem-2', 2, '3', 'Wednesday', '02:25:00'),
-(5, 'CS422', '4/4 Sem-2', 2, '3', 'Wednesday', '03:15:00'),
-(3, 'CS471', '4/4 Sem-2', 2, '0', 'Thursday', '09:40:00'),
-(3, 'CS471', '4/4 Sem-2', 2, '0', 'Thursday', '10:30:00'),
-(5, 'CS421', '4/4 Sem-2', 2, '0', 'Thursday', '11:20:00'),
-(7, 'CS483', '4/4 Sem-2', 2, '0', 'Thursday', '01:35:00'),
-(7, 'CS483', '4/4 Sem-2', 2, '0', 'Thursday', '02:25:00'),
+(5, 'CS422', '4/4 Sem-2', 2, '2', 'Wednesday', '01:35:00'),
+(5, 'CS422', '4/4 Sem-2', 2, '2', 'Wednesday', '02:25:00'),
+(5, 'CS422', '4/4 Sem-2', 2, '2', 'Wednesday', '03:15:00'),
+(5, 'CS422', '4/4 Sem-2', 2, '3', 'Monday', '01:35:00'),
+(5, 'CS422', '4/4 Sem-2', 2, '3', 'Monday', '02:25:00'),
+(5, 'CS422', '4/4 Sem-2', 2, '3', 'Monday', '03:15:00'),
 (6, 'CS474', '4/4 Sem-2', 2, '0', 'Wednesday', '11:20:00'),
 (6, 'CS474', '4/4 Sem-2', 2, '0', 'Wednesday', '12:10:00'),
 (6, 'CS474', '4/4 Sem-2', 2, '0', 'Thursday', '09:40:00'),
-(6, 'CS474', '4/4 Sem-2', 2, '0', 'Thursday', '10:30:00');
+(6, 'CS474', '4/4 Sem-2', 2, '0', 'Thursday', '10:30:00'),
+(7, 'CS483', '4/4 Sem-2', 2, '0', 'Monday', '09:40:00'),
+(7, 'CS483', '4/4 Sem-2', 2, '0', 'Monday', '10:30:00'),
+(7, 'CS483', '4/4 Sem-2', 2, '0', 'Thursday', '01:35:00'),
+(7, 'CS483', '4/4 Sem-2', 2, '0', 'Thursday', '02:25:00'),
+(8, 'CS424', '4/4 Sem-2', 2, '2', 'Tuesday', '01:35:00'),
+(8, 'CS424', '4/4 Sem-2', 2, '2', 'Tuesday', '02:25:00'),
+(8, 'CS424', '4/4 Sem-2', 2, '2', 'Tuesday', '03:15:00'),
+(9, 'CS424', '4/4 Sem-2', 2, '2', 'Monday', '01:35:00'),
+(9, 'CS424', '4/4 Sem-2', 2, '2', 'Monday', '02:25:00'),
+(9, 'CS424', '4/4 Sem-2', 2, '2', 'Monday', '03:15:00'),
+(11, 'CS424', '4/4 Sem-2', 2, '1', 'Monday', '01:35:00'),
+(11, 'CS424', '4/4 Sem-2', 2, '1', 'Monday', '02:25:00'),
+(11, 'CS424', '4/4 Sem-2', 2, '1', 'Monday', '03:15:00');
 
 --
 -- Indexes for dumped tables
@@ -656,6 +698,12 @@ ALTER TABLE `courses`
   ADD PRIMARY KEY (`CourseID`);
 
 --
+-- Indexes for table `course_yands`
+--
+ALTER TABLE `course_yands`
+  ADD KEY `course_yands_courseid_foreign` (`CourseID`);
+
+--
 -- Indexes for table `dailyattendance`
 --
 ALTER TABLE `dailyattendance`
@@ -669,6 +717,13 @@ ALTER TABLE `library`
   ADD PRIMARY KEY (`BookID`);
 
 --
+-- Indexes for table `mid_marks`
+--
+ALTER TABLE `mid_marks`
+  ADD KEY `mid_marks_rollnumber_foreign` (`RollNumber`),
+  ADD KEY `mid_marks_courseid_foreign` (`CourseID`);
+
+--
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
@@ -679,6 +734,13 @@ ALTER TABLE `migrations`
 --
 ALTER TABLE `placement`
   ADD PRIMARY KEY (`CompanyName`);
+
+--
+-- Indexes for table `sem_marks`
+--
+ALTER TABLE `sem_marks`
+  ADD KEY `sem_marks_rollnumber_foreign` (`RollNumber`),
+  ADD KEY `sem_marks_courseid_foreign` (`CourseID`);
 
 --
 -- Indexes for table `staff`
@@ -724,7 +786,8 @@ ALTER TABLE `student_details`
 -- Indexes for table `student_enroll_courses`
 --
 ALTER TABLE `student_enroll_courses`
-  ADD KEY `student_enroll_courses_rollnumber_foreign` (`RollNumber`);
+  ADD KEY `student_enroll_courses_rollnumber_foreign` (`RollNumber`),
+  ADD KEY `CourseID` (`CourseID`);
 
 --
 -- Indexes for table `student_login`
@@ -756,7 +819,7 @@ ALTER TABLE `timeperiod`
 -- Indexes for table `timetable`
 --
 ALTER TABLE `timetable`
-  ADD KEY `timetable_staffid_foreign` (`StaffID`),
+  ADD PRIMARY KEY (`StaffID`,`CourseID`,`YearandSem`,`BSP`,`Batch`,`Day`,`Timeslot`),
   ADD KEY `timetable_courseid_foreign` (`CourseID`),
   ADD KEY `timetable_bsp_foreign` (`BSP`);
 
@@ -768,7 +831,7 @@ ALTER TABLE `timetable`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 --
 -- AUTO_INCREMENT for table `timeperiod`
 --
@@ -785,11 +848,31 @@ ALTER TABLE `attendance`
   ADD CONSTRAINT `attendance_rollnumber_foreign` FOREIGN KEY (`RollNumber`) REFERENCES `student` (`RollNumber`);
 
 --
+-- Constraints for table `course_yands`
+--
+ALTER TABLE `course_yands`
+  ADD CONSTRAINT `course_yands_courseid_foreign` FOREIGN KEY (`CourseID`) REFERENCES `courses` (`CourseID`);
+
+--
 -- Constraints for table `dailyattendance`
 --
 ALTER TABLE `dailyattendance`
   ADD CONSTRAINT `dailyattendance_courseid_foreign` FOREIGN KEY (`CourseID`) REFERENCES `courses` (`CourseID`),
   ADD CONSTRAINT `dailyattendance_rollnumber_foreign` FOREIGN KEY (`RollNumber`) REFERENCES `student` (`RollNumber`);
+
+--
+-- Constraints for table `mid_marks`
+--
+ALTER TABLE `mid_marks`
+  ADD CONSTRAINT `mid_marks_courseid_foreign` FOREIGN KEY (`CourseID`) REFERENCES `courses` (`CourseID`),
+  ADD CONSTRAINT `mid_marks_rollnumber_foreign` FOREIGN KEY (`RollNumber`) REFERENCES `student` (`RollNumber`);
+
+--
+-- Constraints for table `sem_marks`
+--
+ALTER TABLE `sem_marks`
+  ADD CONSTRAINT `sem_marks_courseid_foreign` FOREIGN KEY (`CourseID`) REFERENCES `courses` (`CourseID`),
+  ADD CONSTRAINT `sem_marks_rollnumber_foreign` FOREIGN KEY (`RollNumber`) REFERENCES `student` (`RollNumber`);
 
 --
 -- Constraints for table `staff_login`
@@ -822,6 +905,7 @@ ALTER TABLE `student_details`
 -- Constraints for table `student_enroll_courses`
 --
 ALTER TABLE `student_enroll_courses`
+  ADD CONSTRAINT `student_enroll_courses_ibfk_1` FOREIGN KEY (`CourseID`) REFERENCES `courses` (`CourseID`),
   ADD CONSTRAINT `student_enroll_courses_rollnumber_foreign` FOREIGN KEY (`RollNumber`) REFERENCES `student` (`RollNumber`);
 
 --
