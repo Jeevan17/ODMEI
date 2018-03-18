@@ -1,3 +1,13 @@
+<?php 
+	$sql = "SELECT * FROM notification WHERE Rollnumber = '$uname' AND Type='Material'";
+	$retval = mysqli_query($conn, $sql);
+	$material_count = null;
+	while($row = mysqli_fetch_array($retval))
+	{
+		$material_count = mysqli_num_rows($retval);
+	}
+?>
+
 <!DOCTYPE html>
 <html lang='en'>
 	<head>
@@ -42,10 +52,11 @@
 							'Attendance' => 'Attendance.php',
 							'Marks Details' => 'student_marks.php'
 							);
-
+							//Other
 							$dropdownurls = array(
 								'Admission Details' => 'student_admission.php',
-								'Placement Details' => 'placement.php'
+								'Placement Details' => 'placement.php',
+								'Material' => 'material.php'
 							);
 							foreach ($urls as $name => $url) {
 								echo "<li ".(($currentPage === $name) ?"class='nav-item active' ":"class='nav-item'")."><a class='nav-link' href='$url'>$name</a></li>";
@@ -64,11 +75,22 @@
 						    <div class="dropdown-menu">
 						    
 						 <?php
-							foreach ($dropdownurls as $name => $url) {
-								echo "
-									<div class='dropdown-divider'></div>
-									<a class ='dropdown-item' href='$url'>$name</a>
+							foreach ($dropdownurls as $name => $url)
+							{
+								if($name == 'Material' && $material_count > 0)
+								{
+									echo "
+										<div class='dropdown-divider'></div>
+										<a class ='dropdown-item' href='$url'>$name <span class='badge badge-pill badge-danger'>$material_count</span></a>
 									";
+								}
+								else
+								{
+									echo "
+										<div class='dropdown-divider'></div>
+										<a class ='dropdown-item' href='$url'>$name</a>
+									";
+								}
 							}
 						?>
 							</div>
