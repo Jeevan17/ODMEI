@@ -41,48 +41,6 @@
 		<br>
 		<div id='getBSP'>
 		</div>
-		<br>
-		<!-- <div class='row'>
-			<table class='table table-bordered table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl'>
-				<thead>
-					<tr>
-						<th>09:40-10:30</th>
-						<th>10:30-11:20</th>
-						<th>11:20-12:10</th>
-						<th>12:10-01:00</th>
-						<th>01:35-02:25</th>
-						<th>02:25-03:15</th>
-						<th>03:15-04:05</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<th>  
-							<input type="checkbox" name="Attendance" value="09:40-10:30">
-						</th>
-						<th>
-							<input type="checkbox" name="Attendance" value="10:30-11:20">
-						</th>
-						<th>
-							<input type="checkbox" name="Attendance" value="11:20-12:10">
-						</th>
-						<th>
-							<input type="checkbox" name="Attendance" value="12:10-01:00">
-						</th>
-						<th>
-							<input type="checkbox" name="Attendance" value="01:35-02:25">
-						</th>
-						<th>
-							<input type="checkbox" name="Attendance" value="02:25-03:15">
-						</th>
-						<th>
-							<input type="checkbox" name="Attendance" value="03:15-04:05">
-						</th>
-					</tr>
-				</tbody>
-			</table>
-		</div> 
-		-->
 	</form>
 	<br>
 </div>

@@ -81,7 +81,7 @@
 					    </tr>
 					    <tr>
 					      <th scope="row">CGPA</th>
-					      <td><?php echo "$name" ?></td>
+					      <td><?php echo "--" ?></td>
 					    </tr>
 					</tr>
 				</tbody>
@@ -183,8 +183,8 @@
 							echo "<td>";
 							if ($value != '-')
 							{
-								echo "<center>$value[1]<br>--------<br>";
-								echo "$value[3]</center>";
+								echo "<center>$value[3]<br>--------<br>";
+								echo "$value[1]</center>";
 							}
 							else
 							{

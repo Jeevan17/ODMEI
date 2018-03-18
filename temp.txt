@@ -36,3 +36,7 @@ FROM timetable
 INNER JOIN staff
 ON timetable.StaffID = staff.StaffID 
 WHERE  timetable.YearandSem = '4/4 Sem-2' AND timetable.BSP = (SELECT bsp_code.BSP FROM bsp_code WHERE bsp_code.Branch='CSE' AND bsp_code.Section='2' AND bsp_code.Program='BE') AND timetable.CourseID IN (SELECT student_enroll_courses.CourseID FROM student_enroll_courses WHERE student_enroll_courses.RollNumber='160114733313') AND timetable.Batch = 0 OR 2
+
+
+
+SELECT DISTINCT staff_teaches_courses.YearandSem, bsp_code.Branch, bsp_code.Program, staff_teaches_courses.Batch FROM staff_teaches_courses INNER JOIN bsp_code ON bsp_code.BSP = staff_teaches_courses.BSP WHERE StaffID='3' AND CourseID='CS471' AND Timeperiod=(SELECT max(id) FROM timeperiod)
