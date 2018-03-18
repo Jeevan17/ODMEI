@@ -1,17 +1,18 @@
 Completed:
 
 student_info(attendance,admission)
-aec(add attendance,update attendance)*
+aec(add attendance,update attendance, staff teaches courses, timetable)*
 principal(student, placements)
+staff(add attendance)
 placements
 
 Yet to do:
 
-staff(add attendance, receive feedback)
+staff(receive feedback)
 student_info(achievements, marks, placements,send feedback)
 principal(staff)
 coe(add external marks, add courses)
-aec(add internal marks, change timeperiod|students current year and sem, student enroll courses, staff teaches course, timetable)
+aec(add internal marks, change timeperiod|students current year and sem, student enroll courses)
 
 
 ---------------------------------

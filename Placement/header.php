@@ -44,8 +44,8 @@
 							);
 
 							$dropdownurls = array(
-								'Placement Batch' => 'placement_batch.php',
-								'Add Company Profile' => 'comapny_profile.php'
+								'Add New Placement Batch' => 'placement_batch.php',
+								'Add Company Profile' => 'company_profile.php'
 							);
 							foreach ($urls as $name => $url) {
 								echo "<li ".(($currentPage === $name) ?"class='nav-item active' ":"class='nav-item'")."><a class='nav-link' href='$url'>$name</a></li>";
