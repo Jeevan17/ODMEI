@@ -63,7 +63,7 @@
 							}
 							if ($currentPage == 'other')
 							{
-								$a = "class='nav-item dropdown active'";
+								$a = "class='nav-item dropdown active '";
 							}
 							else
 							{

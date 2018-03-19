@@ -1,24 +1,23 @@
 Completed:
 
-student_info(attendance,admission)
-aec(add attendance,update attendance, staff teaches courses, timetable)*
-principal(student, placements)
-staff(add attendance)
-placements
+student(Home, attendance, material)
+staff(home, add attendance, send material)
+aec(add attendance,update attendance, prepare timetable, staff registry)
+principal(student, placements)---------UI
+placements(home, company details, branch wise details------UI, add new placement batch, add company details)
+
 
 Yet to do:
 
-staff(receive feedback)
-student_info(achievements, marks, placements,send feedback)
+student(marks details**, Admission Details, Placement details)
+aec(admission details, faculty details, mid marks**, add timeperiod)
 principal(staff)
-coe(add external marks, add courses)
-aec(add internal marks, change timeperiod|students current year and sem, student enroll courses)
+hod
+placement(add results**)
+coe(add external marks**, add courses)
 
-
----------------------------------
-Push Notifications
-UI(Ajax)
-*********************************
-//Laravel
-PWA
-
+-----------------------------------------------------------
+student(achievements, send feedback)
+staff(achievements, receive feedback)
+library
+bus

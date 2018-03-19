@@ -24,8 +24,7 @@
 			<div class="col-sm-4">
 				<?php
 					$sql = "SELECT courses.CourseName,courses.CourseID
-							FROM courses
-							WHERE courses.CourseID IN (SELECT staff_teaches_courses.CourseID FROM staff_teaches_courses WHERE staff_teaches_courses.StaffID='$uname')";
+							FROM courses WHERE courses.CourseID IN (SELECT staff_teaches_courses.CourseID FROM staff_teaches_courses WHERE staff_teaches_courses.StaffID='$uname')";
 					$retval = mysqli_query($conn, $sql);
 					echo "<select class='form-control' id='courses' onchange='loadBSP()'>
 							<option selected='selected'>-</option>
