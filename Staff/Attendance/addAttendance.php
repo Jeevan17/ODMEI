@@ -53,8 +53,8 @@
 							    	if (mysqli_query($conn, $sql))
 				 					{
 							    		//echo "New record created successfully";
-							    		$TCH = null;
-							    		$TCA = null;
+							    		$TCH = 1;
+							    		$TCA = 0;
 				 					}
 				 					else
 				 					{

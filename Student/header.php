@@ -1,7 +1,7 @@
 <?php 
+	$material_count = null;
 	$sql = "SELECT * FROM notification WHERE Rollnumber = '$uname' AND Type='Material'";
 	$retval = mysqli_query($conn, $sql);
-	$material_count = null;
 	while($row = mysqli_fetch_array($retval))
 	{
 		$material_count = mysqli_num_rows($retval);
@@ -63,7 +63,7 @@
 							}
 							if ($currentPage == 'other')
 							{
-								$a = "class='nav-item dropdown active'";
+								$a = "class='nav-item dropdown active '";
 							}
 							else
 							{
