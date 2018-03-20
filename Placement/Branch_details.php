@@ -5,9 +5,9 @@
     echo "<script language='javascript'>window.location='../index.php';</script>";
   }
   $currentPage = 'Branch wise Details';
-
   include 'header.php';
-?>                  
+?>
+                  
 <center>
   <label for='bname'>Enter Branch Name</label>
     <input type='text' class='form-control' id='bname' placeholder='eg:- CSE' name='branch_name' required style=' width: 200px;     display: initial;'>

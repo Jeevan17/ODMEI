@@ -1,21 +1,10 @@
-<?php
-	$dbhost = 'localhost';
-	$dbuser = 'admin';
-	$dbpass = 'cbit';
-	
-	$conn = mysqli_connect($dbhost, $dbuser, $dbpass,'cbitdb');
-	session_start();
-	if(!isset($_SESSION['principal'])){
-		echo "<script language='javascript'>window.location='../index.php';</script>";
-	}
-   
-	if(! $conn )
-	{
-		echo "
-			<div class='alert alert-danger'>
-				<strong>Not connected to database." . mysqli_error();"</strong>
-			</div>";
-	}
+<?php include '../dataConnections.php'; 
+
+  session_start();
+  if(!isset($_SESSION['Placement'])){
+    echo "<script language='javascript'>window.location='../index.php';</script>";
+  }
+  
 	if (array_key_exists('bname', $_POST))
 	{
 		$bname=$_POST["bname"];
