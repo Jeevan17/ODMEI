@@ -43,7 +43,7 @@
 	</thead>
 	<tbody>
 		<?php
-			$sql = "SELECT courses.CourseName,material.DocumentName,material.File FROM material INNER JOIN courses ON courses.CourseID=material.CourseID WHERE material.BSP='$bsp' AND material.YearandSem='$yands' AND (material.Batch='$batch' OR material.Batch='0')";
+			$sql = "SELECT courses.CourseName,material.ID,material.DocumentName,material.File FROM material INNER JOIN courses ON courses.CourseID=material.CourseID WHERE material.BSP='$bsp' AND material.YearandSem='$yands' AND (material.Batch='$batch' OR material.Batch='0')";
 			$retval = mysqli_query($conn, $sql);
 			while($row = mysqli_fetch_array($retval))
 			{
@@ -51,7 +51,7 @@
 					<tr>
 						<td>{$row['CourseName']}</td>
 						<td>{$row['DocumentName']}</td>
-						<td><a href='data:image/jpeg;base64,".base64_encode( $row['File'] )."'/>Download</a></td>
+						<td><a href='material/download.php?id={$row['ID']}' class='btn btn-success'/>Download</a></td>
 					</tr>
 				";
 			}

@@ -9,10 +9,11 @@
 	{
 		$cname=$_POST["cname"];
 		echo "<hr><h3><mark>$cname</mark></h3><br>";
-		$sql="SELECT student_attend_placements.PBatch, bsp_code.Branch ,count(bsp_code.Branch) as Count
+		$sql="SELECT placement_batch.Batch_name, bsp_code.Branch ,count(bsp_code.Branch) as Count
 			FROM student 
 			INNER JOIN student_attend_placements ON student.RollNumber=student_attend_placements.RollNumber 
 			INNER JOIN bsp_code ON student.BSP=bsp_code.BSP 
+			INNER JOIN placement_batch ON placement_batch.ID = student_attend_placements.PBatch
 			where student_attend_placements.Result='Placed' and student_attend_placements.CompanyName='$cname'
 			GROUP BY student_attend_placements.CompanyName, bsp_code.Branch
 			ORDER BY student_attend_placements.CompanyName";
@@ -24,13 +25,13 @@
 		{
 			for ($i=0; $i<3 ; $i++)
 			{ 
-				$data[$row['PBatch']][$brch[$i]] = '-';
+				$data[$row['Batch_name']][$brch[$i]] = '-';
 			}
 		}
 		$retval = mysqli_query($conn, $sql);
 		while($row = mysqli_fetch_array($retval))
 		{
-			$data[$row['PBatch']][$row['Branch']] = (int)$row['Count'];
+			$data[$row['Batch_name']][$row['Branch']] = (int)$row['Count'];
 		}
 		echo "
 			<table class='table table-bordered table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl'>

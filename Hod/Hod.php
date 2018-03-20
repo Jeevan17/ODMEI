@@ -1,16 +1,18 @@
 <?php include '../dataConnections.php'; 
 
 	session_start();
-	if(!isset($_SESSION['principal'])){
+	if(!isset($_SESSION['Hod'])){
 		echo "<script language='javascript'>window.location='../index.php';</script>";
 	}
 	$currentPage = 'Home';
-	
-	include 'header.php';							
+	$uname=$_SESSION['Hod'];
+
+	include 'header.php';
+	$hod_name = explode('_', $uname);
 ?>
 <div>
 	<center>
-		<form action='principal.php' method='POST'>
+		<form action='Hod.php' method='POST'>
 			<label for='rno'>Enter Roll Number</label>
 			<input type='text' class='form-control' id='rno' placeholder='eg:- 160114733313' name='rollno' required style=' width: 200px;     display: initial;'>
 			<input type='submit' value='Search' name='submit' class='btn ml-3 btn-outline-primary btn-sm' style='display: initial;'>
@@ -28,17 +30,19 @@
 		if($_POST['rollno']!=null)
 		{
 			//session_start();
-			if(!isset($_SESSION['principal'])){
+			if(!isset($_SESSION['Hod'])){
 				echo "<script language='javascript'>window.location='index.php';</script>";
 			}
 			$rno = $_POST['rollno'];
-			$sql = "select * from student where RollNumber='$rno'";
+			$sql = "SELECT * from student where RollNumber='$rno' AND BSP IN(SELECT bsp_code.BSP from bsp_code WHERE bsp_code.Branch = '$hod_name[1]')";
 			$retval = mysqli_query($conn, $sql);
 			if(! $retval )
 			{
 				echo "<script>alert('Entered RollNo does not exist!')</script>";
 				die('Could not get data: ' . mysqli_error());
 			}							
+			if(mysqli_num_rows($retval) > 0)
+			{
 ?>			
 	<hr>
 	<div class='container'>
@@ -116,7 +120,7 @@
 					<div id='Attendance' class='container tab-pane fade'>
 					    <h1><mark>Attendance Details</mark></h1><br>
 						<?php 
-							$sql="SELECT * from attendance where RollNumber='$rno'";
+							$sql="SELECT * from attendance where RollNumber='$rno' AND RollNumber IN(SELECT RollNumber from student where student.BSP IN(SELECT bsp_code.BSP from bsp_code WHERE bsp_code.Branch = '$hod_name[1]'))";
 							$retval = mysqli_query($conn, $sql);
 							echo "
 								<table class='table table-bordered table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl'>
@@ -218,7 +222,7 @@
 					<div id='placement' class='container tab-pane fade'>
 						<h1><mark>Placement Details</mark></h1><br>
 						<?php
-							$sql="SELECT * FROM `student_attend_placements` where RollNumber='$rno'";
+							$sql="SELECT * FROM `student_attend_placements` where RollNumber='$rno' AND RollNumber IN(SELECT RollNumber from student where student.BSP IN(SELECT bsp_code.BSP from bsp_code WHERE bsp_code.Branch = '$hod_name[1]'))";
 							$retval = mysqli_query($conn, $sql);
 							echo "
 								<table class='table table-bordered table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl'>
@@ -248,6 +252,15 @@
 	</div>
 
 	<?php
+			}
+			else
+			{
+				echo "
+					<div class='alert alert-danger'>
+						<strong>No Data Found</strong>
+					</div>
+				";
+			}
 		}
 	}
 	?>

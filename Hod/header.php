@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang='en'>
 	<head>
-		<title>Placement</title>
+		<title>Principal</title>
 		<meta charset='utf-8'>
 		<meta name='viewport' content='width=device-width, initial-scale=1'>
 		<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css'>
-		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0-beta.3/lux/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/lux/bootstrap.min.css">
 		<style type="text/css">
 			table.table-bordered{
 			    border:1px solid rgba(0, 0, 0, .1);//#ff0040;
@@ -38,22 +38,20 @@
 					<ul class="navbar-nav mr-auto ">
 						<?php
 							$urls = array(
-							'Home' => 'Placement.php',
-							'Company Details' => 'Company_details.php',
-							'Branch wise Details' => 'Branch_details.php'
+							'Home' => 'Hod.php',
+							'Placement' => 'placement_details.php',
+							'Staff Details' => 'staff_details.php'
 							);
-
+							//Other
 							$dropdownurls = array(
-								'Year wise Details' => 'Year_details.php',
-								'Add New Placement Batch' => 'placement_batch.php',
-								'Add Company Profile' => 'company_profile.php'
+								'' => ''
 							);
 							foreach ($urls as $name => $url) {
 								echo "<li ".(($currentPage === $name) ?"class='nav-item active' ":"class='nav-item'")."><a class='nav-link' href='$url'>$name</a></li>";
 							}
 							if ($currentPage == 'other')
 							{
-								$a = "class='nav-item dropdown active'";
+								$a = "class='nav-item dropdown active '";
 							}
 							else
 							{
@@ -65,10 +63,11 @@
 						    <div class="dropdown-menu">
 						    
 						 <?php
-							foreach ($dropdownurls as $name => $url) {
+							foreach ($dropdownurls as $name => $url)
+							{
 								echo "
-									<div class='dropdown-divider'></div>
-									<a class ='dropdown-item' href='$url'>$name</a>
+										<div class='dropdown-divider'></div>
+										<a class ='dropdown-item' href='$url'>$name</a>
 									";
 							}
 						?>

@@ -143,6 +143,7 @@
 		$phno = $_POST['phno'];
 		$email = $_POST['email'];
 		$photo = file_get_contents($_FILES['photo']['tmp_name']);
+		$photo_type = $_FILES['photo']['type'];
 
 		$sql = "SELECT `BSP` FROM `bsp_code` WHERE Branch='$branch' and Section='$section' and Program='$program'";
 		$retval = mysqli_query($conn, $sql);
@@ -151,27 +152,53 @@
 			$bsp = $row['BSP'];
 		}
 
-		$sql = "INSERT INTO `student`(`AdmissionNumber`, `RollNumber`, `FirstName`, `LastName`, `BSP`, `CBatch`, `phoneNumber`, `Email`, `Photo`, `CurrentYandS`) VALUES ('$admn_no','$roll_no','$first_name','$last_name','$branch','$bsp','$batch','$phno','$email','$photo')";
-		if (mysqli_query($conn, $sql))
+		if(substr($photo_type, 0, 5) == "image")
 		{
-			echo "
-			<div class='alert alert-success'>
-				<strong>Record Inserted Successfully</strong>
-			</div>";
-			$sql = "INSERT INTO `student_login`(`RollNumber`, `Password`) VALUES ('$roll_no','1')";
-			if (mysqli_query($conn, $sql))
+			try
 			{
+				$dbh = new PDO("mysql:host=localhost;dbname=project", "admin", "cbit");
+				$stmt = $dbh->prepare("INSERT INTO `student`(`AdmissionNumber`, `RollNumber`, `FirstName`, `LastName`, `BSP`, `CBatch`, `phoneNumber`, `Email`, `Photo`, `CurrentYandS`) VALUES (?,?,?,?,?,?,?,?,?,?)");
+				$stmt->bindParam(1, $admn_no);
+				$stmt->bindParam(2, $roll_no);
+				$stmt->bindParam(3, $first_name);
+				$stmt->bindParam(4, $last_name);
+				$stmt->bindParam(5, $bsp);
+				$stmt->bindParam(6, $batch);	
+				$stmt->bindParam(7, $phno);
+				$stmt->bindParam(8, $email);
+				$stmt->bindParam(9, $photo);
+				$stmt->bindParam(10, $currentyands);
 				
+				$stmt->execute();
+
+				echo "
+				<div class='alert alert-success'>
+					<strong>Record Inserted Successfully</strong>
+				</div>";
+				$sql = "INSERT INTO `student_login`(`RollNumber`, `Password`) VALUES ('$roll_no','1')";
+				if (mysqli_query($conn, $sql))
+				{
+					
+				}
+				else
+				{
+					echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+				}
 			}
-			else
-			{
-				echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-			}
+			catch(PDOException $e)
+		    {
+		    echo "Error: " . $e->getMessage();
+		    }
+		    $dbh = null;
 		}
 		else
 		{
-			echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+			echo "
+				<div class='alert alert-success'>
+					<strong>Only images are allowed</strong>
+				</div>";
 		}
+		
 	}
 ?>
 </div>
