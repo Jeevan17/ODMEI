@@ -3,8 +3,8 @@ Completed:
 student(Home, attendance, material)
 staff(home, add attendance, send material)
 aec(add attendance,update attendance, prepare timetable, staff registry)
-principal(student, placements)---------UI
-placements(home, company details, branch wise details------UI, add new placement batch, add company details)
+principal(student, placements)
+placements(home, company details, branch wise details, add new placement batch, add company details)
 
 
 Yet to do:
