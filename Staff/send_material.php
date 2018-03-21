@@ -10,10 +10,10 @@
 ?>
 <form action='send_material.php' method='POST' enctype='multipart/form-data'>
 	<div class='row'>
-		<div class="col-sm-1 pt-5">
+		<div class="col-sm-1 pt-2">
 			Courses: 
 		</div>	
-		<div class="col-sm-7">
+		<div class="col-sm-4">
 			<?php
 				$sql = "SELECT courses.CourseName,courses.CourseID FROM courses WHERE courses.CourseID IN (SELECT staff_teaches_courses.CourseID FROM staff_teaches_courses WHERE staff_teaches_courses.StaffID='$uname')";
 				$retval = mysqli_query($conn, $sql);
@@ -29,7 +29,7 @@
 		</div>
 		<div class="col-sm-1"></div>
 		<div class="col-sm-1 pt-2">
-			File input
+			File input:
 		</div>
 		<div class="col-sm-4">
 			<input type="file" class="form-control-file" id="material" name="material" required>
