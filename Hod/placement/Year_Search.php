@@ -1,10 +1,10 @@
 <?php include '../../dataConnections.php'; 
 
 	session_start();
-	if(!isset($_SESSION['principal'])){
+	if(!isset($_SESSION['hod'])){
 		echo "<script language='javascript'>window.location='../index.php';</script>";
 	}
-	$uname=$_SESSION['Hod'];
+	$uname=$_SESSION['hod'];
 
 	$hod_name = explode('_', $uname);
 	if (array_key_exists('yname', $_POST))

@@ -1,4 +1,4 @@
-<?php include '../dataConnections.php';
+<?php include '../../dataConnections.php';
 	session_start();
 	if(!isset($_SESSION['AEC'])){
 		echo "<script language='javascript'>window.location='../index.php';</script>";
