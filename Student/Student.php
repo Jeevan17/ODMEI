@@ -30,7 +30,7 @@
 	$attendance = 0;
 	while($row = mysqli_fetch_array($retval))
 	{
-		$attendance = $row['TotalAttended']/$row['TotalClassesHeld'] * 100;
+		$attendance = round($row['TotalAttended']/$row['TotalClassesHeld'] * 100,2);
 	}
 	$days = array('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
 	$time_slot = array('09:40:00','10:30:00','11:20:00','12:10:00','01:35:00','02:25:00','03:15:00');
@@ -125,7 +125,7 @@
 									}
 									$total = $count + $total;
 								}
-								$percent = $test / $total * 100;	
+								$percent = round($test / $total * 100,2);	
 								echo "
 								<td><center>$percent%</tr>
 							</tr>
@@ -166,7 +166,7 @@
 						if ($day == date("l"))
 						{
 							echo "
-								<tr class='table-dark'>
+								<tr class='table-info'>
 									<th>$day</th>
 							";
 						}

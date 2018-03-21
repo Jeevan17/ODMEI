@@ -18,6 +18,17 @@
 		$email = $row['EmailID'];
 		$Specialization = $row['Specialization'];
 	}
+	$days = array('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
+	$time_slot = array('09:40:00','10:30:00','11:20:00','12:10:00','01:35:00','02:25:00','03:15:00');
+
+	$data = array();
+	foreach ($days as $day)
+	{
+		foreach ($time_slot as $time)
+		{
+			$data[$day][$time] = '-';
+		}
+	}
 ?>
 <br>
 	<div class="row">
@@ -55,6 +66,77 @@
 			</table>
 		</div>
 	</div>
+	<div class="row">
+		<?php
+			$sql = "SELECT timetable.Day, timetable.Timeslot, courses.CourseName, timetable.YearandSem, bsp_code.Branch, bsp_code.Section, bsp_code.Program, timetable.Batch FROM timetable INNER JOIN courses ON courses.CourseID=timetable.CourseID INNER JOIN bsp_code ON bsp_code.BSP=timetable.BSP WHERE timetable.StaffID='$uname'";
+			$retval = mysqli_query($conn, $sql);
+			while($row = mysqli_fetch_array($retval))
+			{
+				$data[$row['Day']][$row['Timeslot']] = array($row['CourseName'],$row['Program'],$row['YearandSem'], $row['Branch'], $row['Section'],$row['Batch']);
+			}
+		?>
+		<h2><mark>Time Table</mark></h2>
+		<table class='table table-bordered table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl'>
+			<thead>
+				<tr>
+					<th></th>
+					<th>09:40:00-10:30:00</th>
+					<th>10:30:00-11:20:00</th>
+					<th>11:20:00-12:10:00</th>
+					<th>12:10:00-01:00:00</th>
+					<th>01:35:00-02:25:00</th>
+					<th>02:25:00-03:15:00</th>
+					<th>03:15:00-04:05:00</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php 
+					foreach ($data as $day => $time)
+					{
+						if ($day == date("l"))
+						{
+							echo "
+								<tr class='table-info'>
+									<th>$day</th>
+							";
+						}
+						else
+						{
+							echo "
+								<tr>
+									<th>$day</th>
+							";
+						}
+						
+						foreach ($time as $value)
+						{
+							echo "<td>";
+							if ($value != '-')
+							{
+								echo "<center>$value[0]<br>--------<br>";
+								if ($value[5] == '0')
+								{
+									echo "$value[1] $value[2] $value[3]-$value[4]</center>";
+								}
+								else
+								{
+									echo "$value[1] $value[2] $value[3]-$value[4]($value[5])</center>";
+								}
+								
+							}
+							else
+							{
+								echo "<center style='font-size:  20px;'>$value</center>";
+							}
+							echo "</td>";
+						}
+						echo "</tr>";
+					}
+				?>
+			</tbody>
+		</table>
+	</div>
+
 <div>
 </div>
 	<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>

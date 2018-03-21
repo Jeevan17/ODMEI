@@ -3,47 +3,62 @@
 	if(!isset($_SESSION['staff'])){
 		echo "<script language='javascript'>window.location='../index.php';</script>";
 	}
-	$currentPage = 'Send Material';
+	$currentPage = 'Material';
 	$uname=$_SESSION['staff'];
 	
 	include 'header.php';										
 ?>
-<form action='send_material.php' method='POST' enctype='multipart/form-data'>
-	<div class='row'>
-		<div class="col-sm-1 pt-5">
-			Courses: 
-		</div>	
-		<div class="col-sm-7">
-			<?php
-				$sql = "SELECT courses.CourseName,courses.CourseID FROM courses WHERE courses.CourseID IN (SELECT staff_teaches_courses.CourseID FROM staff_teaches_courses WHERE staff_teaches_courses.StaffID='$uname')";
-				$retval = mysqli_query($conn, $sql);
-				echo "<select class='form-control' id='courses' name='courses' onchange='loadBSP()'>
-						<option selected='selected'>-</option>
-					";
-				while($row = mysqli_fetch_array($retval))
-				{
-					echo "<option>".$row['CourseID']."--".$row['CourseName']."</option>";
-				}
-				echo "</select>";
-			?>
-		</div>
-		<div class="col-sm-1"></div>
-		<div class="col-sm-1 pt-2">
-			File input
-		</div>
-		<div class="col-sm-4">
-			<input type="file" class="form-control-file" id="material" name="material" required>
-	      	<small id="fileHelp" class="form-text text-muted">Select a File and Upload to share</small>
-	    </div>		
+<div class='row'>
+	<div class='col-sm-2'>
+		<ul class='nav nav-pills flex-column' role='tablist'>
+			<li class='nav-item'>
+				<a class='nav-link active' data-toggle='pill' href='#send'>Send Material</a>
+			</li>
+			<li class='nav-item'>
+				<a class='nav-link' data-toggle='pill' href='#delete'>Delete Material</a>
+			</li>
+		</ul>
 	</div>
-	<div id='getBSP'>
-	</div>
-	<br>
-	<hr>
-	<center>
-		<input type='submit' value='Upload' name='submit' class='btn btn-outline-info pl-5 pr-5'>
-	</center>
-</form>
+	<div class='col-sm-9'>
+		<div class='tab-content'>
+			<div id='admission' class='container tab-pane active'>
+
+	<form action='send_material.php' method='POST' enctype='multipart/form-data'>
+		<div class='row'>
+			<div class="col-sm-1 pt-2">
+				Courses: 
+			</div>	
+			<div class="col-sm-4">
+				<?php
+					$sql = "SELECT courses.CourseName,courses.CourseID FROM courses WHERE courses.CourseID IN (SELECT staff_teaches_courses.CourseID FROM staff_teaches_courses WHERE staff_teaches_courses.StaffID='$uname')";
+					$retval = mysqli_query($conn, $sql);
+					echo "<select class='form-control' id='courses' name='courses' onchange='loadBSP()'>
+							<option selected='selected'>-</option>
+						";
+					while($row = mysqli_fetch_array($retval))
+					{
+						echo "<option>".$row['CourseID']."--".$row['CourseName']."</option>";
+					}
+					echo "</select>";
+				?>
+			</div>
+			<div class="col-sm-1"></div>
+			<div class="col-sm-1 pt-2">
+				File input
+			</div>
+			<div class="col-sm-4">
+				<input type="file" class="form-control-file" id="material" name="material" required>
+		      	<small id="fileHelp" class="form-text text-muted">Select a File and Upload to share</small>
+		    </div>		
+		</div>
+		<div id='getBSP'>
+		</div>
+		<br>
+		<hr>
+		<center>
+			<input type='submit' value='Upload' name='submit' class='btn btn-outline-info pl-5 pr-5'>
+		</center>
+	</form>
 <?php
 	if(isset($_POST["submit"]))
 	{

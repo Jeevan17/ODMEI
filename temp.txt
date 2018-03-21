@@ -40,3 +40,11 @@ WHERE  timetable.YearandSem = '4/4 Sem-2' AND timetable.BSP = (SELECT bsp_code.B
 
 
 SELECT DISTINCT staff_teaches_courses.YearandSem, bsp_code.Branch, bsp_code.Program, staff_teaches_courses.Batch FROM staff_teaches_courses INNER JOIN bsp_code ON bsp_code.BSP = staff_teaches_courses.BSP WHERE StaffID='3' AND CourseID='CS471' AND Timeperiod=(SELECT max(id) FROM timeperiod)
+
+
+
+$dbhost = 'sql113.epizy.com';
+$dbuser = 'epiz_20664348';
+$dbpass = 'JaiyfboahO';
+
+$conn = mysqli_connect($dbhost, $dbuser, $dbpass,'epiz_20664348_cstar2k17');
