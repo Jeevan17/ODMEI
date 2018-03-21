@@ -51,7 +51,7 @@
 							{
 								echo "
 									<th>  
-										<input type='checkbox' name='Attendance' value='$time_slot[$q]' checked>
+										<input type='checkbox' name='Attendance' value='$time_slot[$q]' checked disabled>
 									</th>
 
 								";

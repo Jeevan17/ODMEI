@@ -21,7 +21,7 @@
 							$urls = array(
 							'Home' => 'Staff.php',
 							'Add Attendance' => 'Attendance.php',
-							'Send Material' => 'send_material.php'
+							'Material' => 'material.php'
 							);
 
 							$dropdownurls = array(
