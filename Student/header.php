@@ -6,6 +6,18 @@
 	{
 		$material_count = mysqli_num_rows($retval);
 	}
+	$news_count = null;
+	$sql = "SELECT * FROM notification WHERE Rollnumber = '$uname' AND Type='News'";
+	$retval = mysqli_query($conn, $sql);
+	while($row = mysqli_fetch_array($retval))
+	{
+		$news_count = mysqli_num_rows($retval);
+	}
+	$count = (int)$material_count+(int)$news_count;
+	if ($count == 0)
+	{
+		$count = null;
+	}
 ?>
 
 <!DOCTYPE html>
@@ -30,10 +42,6 @@
 			table.table-bordered > tbody > tr > th{
 			    border:1px solid rgba(0, 0, 0, .1);
 			}
-			select.form-control{
-				padding-left: 0px;
-				padding-right: 0px;
-			}
 		</style>
 	</head>
 	<body>
@@ -56,7 +64,8 @@
 							$dropdownurls = array(
 								'Admission Details' => 'student_admission.php',
 								'Placement Details' => 'placement.php',
-								'Material' => 'material.php'
+								'Material' => 'material.php',
+								'News' => 'news.php'
 							);
 							foreach ($urls as $name => $url) {
 								echo "<li ".(($currentPage === $name) ?"class='nav-item active' ":"class='nav-item'")."><a class='nav-link' href='$url'>$name</a></li>";
@@ -71,7 +80,7 @@
 							}
 							echo "<li $a>";
 							?>
-							<a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="width: 76px;">Other</a>
+							<a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="width: 76px;">Other <span class='badge badge-pill badge-danger'><?php echo "$count";?></span></a>
 						    <div class="dropdown-menu">
 						    
 						 <?php
@@ -82,6 +91,13 @@
 									echo "
 										<div class='dropdown-divider'></div>
 										<a class ='dropdown-item' href='$url'>$name <span class='badge badge-pill badge-danger'>$material_count</span></a>
+									";
+								}
+								elseif ($name == 'News' && $news_count > 0)
+								{
+									echo "
+										<div class='dropdown-divider'></div>
+										<a class ='dropdown-item' href='$url'>$name <span class='badge badge-pill badge-danger'>$news_count</span></a>
 									";
 								}
 								else

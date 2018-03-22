@@ -68,7 +68,7 @@
 	</div>
 	<div class="row">
 		<?php
-			$sql = "SELECT timetable.Day, timetable.Timeslot, courses.CourseName, timetable.YearandSem, bsp_code.Branch, bsp_code.Section, bsp_code.Program, timetable.Batch FROM timetable INNER JOIN courses ON courses.CourseID=timetable.CourseID INNER JOIN bsp_code ON bsp_code.BSP=timetable.BSP WHERE timetable.StaffID='$uname'";
+			$sql = "SELECT timetable.Day, timetable.Timeslot, courses.CourseName, timetable.YearandSem, bsp_code.Branch, bsp_code.Section, bsp_code.Program, timetable.Batch FROM timetable INNER JOIN courses ON courses.CourseID=timetable.CourseID INNER JOIN bsp_code ON bsp_code.BSP=timetable.BSP WHERE timetable.StaffID='$uname' ORDER BY Day,Timeslot";
 			$retval = mysqli_query($conn, $sql);
 			while($row = mysqli_fetch_array($retval))
 			{
@@ -120,7 +120,7 @@
 								}
 								else
 								{
-									echo "$value[1] $value[2] $value[3]-$value[4]($value[5])</center>";
+									echo "$value[1] $value[2] $value[3]-$value[4] B($value[5])</center>";
 								}
 								
 							}

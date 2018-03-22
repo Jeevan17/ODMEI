@@ -44,7 +44,7 @@ function loadUpdate()
 		// 	alert('absent:  '+element);
 		// });
 		//var course = document.getElementById('courses').value;
-		xhttp.open("POST", "UpdateAttendance.php", true);
+		xhttp.open("POST", "Attendance/UpdateAttendance.php", true);
 		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		xhttp.send("date="+date+"&timeslot="+JSON.stringify(timeslot)+"&rollnum="+rollnumber);
     }
@@ -66,7 +66,7 @@ function loadAttendance()
 	var branch = document.getElementById("Branch1").value;
 	var section = document.getElementById("Section1").value;
 	var date = document.getElementById("date1").value;
-	xhttp.open("POST", "Get_Attendance.php", true);
+	xhttp.open("POST", "Attendance/Get_Attendance.php", true);
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send("year="+year+"&program="+program+"&branch="+branch+"&section="+section+"&semester="+semester+"&date="+date);
 }
@@ -124,7 +124,7 @@ function loadAdd()
 	// 	alert('absent:  '+element);
 	// });
 	var course = document.getElementById('courses').value;
-	xhttp.open("POST", "Attendance.php", true);
+	xhttp.open("POST", "Attendance/Attendance.php", true);
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send("date="+date+"&present="+JSON.stringify(present)+"&absent="+JSON.stringify(absent)+"&timeslot="+JSON.stringify(timeslot)+"&course="+course+"&year="+year+"&program="+program+"&branch="+branch+"&section="+section+"&semester="+semester);
 	
@@ -154,7 +154,7 @@ function loadSubjects()
 	var branch = document.getElementById("Branch").value;
 	var section = document.getElementById("Section").value;
 	var date = document.getElementById("date").value;
-	xhttp.open("POST", "Get_subjects.php", true);
+	xhttp.open("POST", "Attendance/Get_subjects.php", true);
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send("year="+year+"&program="+program+"&branch="+branch+"&section="+section+"&semester="+semester);
 }
@@ -175,7 +175,7 @@ function loadRnum()
 	var section = document.getElementById("Section").value;
 	var date = document.getElementById("date").value;
 	var course = document.getElementById('courses').value; 
-	xhttp.open("POST", "Get_rollno.php", true);
+	xhttp.open("POST", "Attendance/Get_rollno.php", true);
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send("course="+course+"&year="+year+"&program="+program+"&branch="+branch+"&section="+section+"&semester="+semester);
 }

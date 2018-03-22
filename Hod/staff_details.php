@@ -1,7 +1,7 @@
 <?php include '../dataConnections.php'; 
 
 	session_start();
-	if(!isset($_SESSION['principal'])){
+	if(!isset($_SESSION['hod'])){
 		echo "<script language='javascript'>window.location='../index.php';</script>";
 	}
 	$currentPage = 'Staff Details';

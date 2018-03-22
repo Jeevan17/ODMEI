@@ -1,11 +1,11 @@
 <?php include '../dataConnections.php'; 
 
 	session_start();
-	if(!isset($_SESSION['Hod'])){
+	if(!isset($_SESSION['hod'])){
 		echo "<script language='javascript'>window.location='../index.php';</script>";
 	}
 	$currentPage = 'Placement';
-	$uname=$_SESSION['Hod'];
+	$uname=$_SESSION['hod'];
 
 	include 'header.php';
 	$hod_name = explode('_', $uname);						
