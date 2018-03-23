@@ -8,7 +8,7 @@ function loadDelete(id)
     	  document.getElementById("get_delete").innerHTML = xhttp.responseText;
   		}
 	};
-	xhttp.open("POST", "Material/delete.php", true);
+	xhttp.open("POST", "Circular/delete.php", true);
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send("id="+id);
 }

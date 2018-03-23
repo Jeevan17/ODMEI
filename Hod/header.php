@@ -40,7 +40,8 @@
 							);
 							//Other
 							$dropdownurls = array(
-								'Timetable' => 'timetable.php'
+								'Timetable' => 'timetable.php',
+								'Circular' => 'send_circular.php'
 							);
 							foreach ($urls as $name => $url) {
 								echo "<li ".(($currentPage === $name) ?"class='nav-item active' ":"class='nav-item'")."><a class='nav-link' href='$url'>$name</a></li>";

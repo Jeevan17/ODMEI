@@ -3,6 +3,7 @@
 	if(!isset($_SESSION['principal'])){
 		echo "<script language='javascript'>window.location='../index.php';</script>";
 	}
+	$uname=$_SESSION['hod'];
 	if (array_key_exists('id', $_POST))
 	{
 		$id = $_POST['id'];
@@ -19,7 +20,7 @@
 						</thead>
 						<tbody>
 							<?php
-								$sql = "SELECT * from news where role='Principal'";
+								$sql = "SELECT * from news where role='$uname'";
 								$retval = mysqli_query($conn, $sql);
 								while($row = mysqli_fetch_array($retval))
 								{

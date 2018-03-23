@@ -22,6 +22,12 @@
 		}
  
 	}
+	$sql = "SELECT Branch FROM student INNER JOIN bsp_code ON student.BSP = bsp_code.BSP WHERE student.RollNumber=$uname";
+	$retval = mysqli_query($conn, $sql);
+	while($row = mysqli_fetch_array($retval))
+	{
+		$branch = $row['Branch'];
+	}
 ?>
 
 <table class='table table-bordered table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl'>
@@ -33,7 +39,7 @@
 	</thead>
 	<tbody>
 		<?php
-			$sql = "SELECT * from news";
+			$sql = "SELECT * from news WHERE Role = 'Principal' OR Role='Hod_$branch'";
 			$retval = mysqli_query($conn, $sql);
 			while($row = mysqli_fetch_array($retval))
 			{
