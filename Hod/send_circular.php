@@ -1,12 +1,14 @@
 <?php include '../dataConnections.php'; 
 
 	session_start();
-	if(!isset($_SESSION['principal'])){
+	if(!isset($_SESSION['hod'])){
 		echo "<script language='javascript'>window.location='../index.php';</script>";
 	}
 	$currentPage = 'other';
-	
-	include 'header.php';							
+	$uname=$_SESSION['hod'];
+
+	include 'header.php';
+	$hod_name = explode('_', $uname);
 ?>
 <div class='row'>
 	<div class='col-sm-2'>
@@ -49,7 +51,7 @@
 						</thead>
 						<tbody>
 							<?php
-								$sql = "SELECT * from news where role='Principal'";
+								$sql = "SELECT * from news where role='$uname'";
 								$retval = mysqli_query($conn, $sql);
 								while($row = mysqli_fetch_array($retval))
 								{
@@ -91,7 +93,7 @@
 			$stmt->bindParam(3, $file_type);
 			$stmt->bindParam(4, $file_data);
 			$stmt->bindParam(5, $timeperiod);
-			$role = 'Principal';
+			$role = $uname;
 			$stmt->execute();
 
 			echo "
@@ -107,7 +109,7 @@
 	    $dbh = null;
 
 	    $sql=null;
-	    $sql = "SELECT RollNumber FROM student";
+	    $sql = "SELECT RollNumber FROM student WHERE student.BSP IN (SELECT bsp_code.BSP FROM bsp_code WHERE bsp_code.Branch = '$hod_name[1]')";
 	    $retval = mysqli_query($conn, $sql);
 		$temp = 'News';
 		while($row = mysqli_fetch_array($retval))
