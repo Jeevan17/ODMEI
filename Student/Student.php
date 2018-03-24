@@ -25,6 +25,13 @@
 		$section = $row['Section'];
 		$yands = $row['CurrentYandS'];
 	}
+	// ----------session to get rollno
+	if(!isset($_SESSION)) 
+	{ 
+		session_start(); 
+	} 
+	$_SESSION['rno'] = $rno;
+	// -------------------------------
 	$sql = "SELECT TotalAttended,TotalClassesHeld FROM attendance WHERE RollNumber='$rno' AND 	Timeperiod=(SELECT max(id) FROM timeperiod)";
 	$retval = mysqli_query($conn, $sql);
 	$attendance = 0;

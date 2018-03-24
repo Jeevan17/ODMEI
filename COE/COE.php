@@ -21,8 +21,9 @@
 		// $test = $_POST['CS421'];
 		// var_dump($test);
 		$data1 = $_SESSION['data'];
-		if(!isset($_SESSION['data'])){
-		echo "<h1>data1 not found</h1>";
+		if(!isset($_SESSION['data']))
+		{
+			echo "<h1>data1 not found</h1>";
 		}
 		$affected_rows1 = $_SESSION['affected_rows'];
 		$rno = $_SESSION['rollno'];

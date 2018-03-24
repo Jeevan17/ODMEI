@@ -39,7 +39,7 @@
 			$mark2 = $_POST[$data1[$x]."2"];
 			// $sql = "INSERT INTO sem_marks VALUES('$rno','$data[$x]','1','$mark')";
 			// $sql = "INSERT INTO `sem_marks`(`RollNumber`, `CourseID`, `Timeperiod`, `external`) VALUES ('$rno','$data1[$x]','$timeperiod','$mark')";
-			$sql = "INSERT INTO `mid_marks`(`RollNumber`, `CourseID`, `Timeperiod`, `Mid1`, `Mid2`) VALUES ('$rno','$data1[$x]','timeperiod','$mark','$mark2')";
+			$sql = "INSERT INTO `mid_marks`(`RollNumber`, `CourseID`, `Timeperiod`, `Mid1`, `Mid2`) VALUES ('$rno','$data1[$x]','$timeperiod','$mark','$mark2')";
 			
 			if (mysqli_query($conn, $sql))
 			{

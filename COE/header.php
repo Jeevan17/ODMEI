@@ -38,7 +38,8 @@
 					<ul class="navbar-nav mr-auto ">
 						<?php
 							$urls = array(
-							'External Marks' => 'COE.php'
+							'External Marks' => 'COE.php',
+							'Publish Results' => 'publish.php'
 							);
 
 							$dropdownurls = array(

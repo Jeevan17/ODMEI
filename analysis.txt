@@ -6,7 +6,7 @@ aec(add attendance, prepare timetable, staff registry, admission details, mid ma
 hod(student, placements)
 principal(student, placements)
 placements(home, company details, branch wise details, add new placement batch, add company details)
-coe(external marks)
+coe(external marks, publish results)
 
 
 Yet to do:
