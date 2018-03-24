@@ -20,8 +20,8 @@
 		$aff_rows = mysqli_affected_rows($conn);
 		if($aff_rows==0)
 		{
-			die('Data not found !! ' . mysqli_error());
-			exit();
+			// die('Data not found !! ' . mysqli_error());
+			// exit();
 		}
 		while($row = mysqli_fetch_array($retval))
 		{
@@ -41,7 +41,7 @@
 		}	
 ?>
 <center>
-<table border="1">
+<table border="2">
 	<tr>
 		<th>SNo</th>
 		<th>CourseID</th>
@@ -123,6 +123,21 @@
 				$total_points_secured+=$points_secured;
 				break;
 			}
+			else
+			{
+				if($x==7)
+				{
+					$grade=$grade_array[$x-1];
+					$status=$grade=="F"? "Fail":"Pass";
+					if($status=="Fail")
+					{
+						$result = "FAIL";
+					}
+					$points_secured = $credits*$grade_points[$grade];
+					$total_points_secured+=$points_secured;
+					break;
+				}
+			}
 		}
 	?>
 	<td><?php echo $credits; ?></td>
@@ -143,7 +158,7 @@
 </table>
 </center>
 <hr>
-<h3>SGPA: <?php $sgpa=$total_points_secured/$total_credits; echo $sgpa ?></h3>
+<h3>SGPA: <?php $sgpa=round($total_points_secured/$total_credits,2); echo $sgpa ?></h3>
 <h3>RESULT: <?php echo "<mark>".$result."</mark>" ?> </h3>
 <!-- <p>&#x2705;</p>-->
 <?php
