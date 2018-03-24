@@ -14,22 +14,22 @@
 		$yands = substr($yands,0,1).'/'.substr($yands,1,1).' Sem-'.substr($yands,-1);
 		// var_dump($new);
 		//$yands = $new;
-		$sql = "SELECT * FROM `sgpa` WHERE RollNumber='$rno' group by RollNumber";
-		$retval = mysqli_query($conn, $sql);
-		$cgpa=0;
-		$aff_rows = mysqli_affected_rows($conn);
-		if($aff_rows==0)
-		{
-			die('Data not found !! ' . mysqli_error());
-			exit();
-		}
-		while($row = mysqli_fetch_array($retval))
-		{
-			$cgpa+=$row['SGPA'];
-		}
-		$cgpa=$cgpa/$aff_rows;
-		echo "<h3>CGPA: $cgpa </h3>";
-		echo "<hr>";
+		// $sql = "SELECT * FROM `sgpa` WHERE RollNumber='$rno' group by RollNumber";
+		// $retval = mysqli_query($conn, $sql);
+		// $cgpa=0;
+		// $aff_rows = mysqli_affected_rows($conn);
+		// if($aff_rows==0)
+		// {
+		// 	die('Data not found !! ' . mysqli_error());
+		// 	exit();
+		// }
+		// while($row = mysqli_fetch_array($retval))
+		// {
+		// 	$cgpa+=$row['SGPA'];
+		// }
+		// $cgpa=$cgpa/$aff_rows;
+		// echo "<h3>CGPA: $cgpa </h3>";
+		// echo "<hr>";
 
 		$sql="SELECT * from student_marks where student_marks.RollNumber='$rno' and student_marks.YearandSem='$yands'";
 		$retval = mysqli_query($conn, $sql);
@@ -123,12 +123,27 @@
 				$total_points_secured+=$points_secured;
 				break;
 			}
+			else
+			{
+				if($x==7)
+				{
+					$grade=$grade_array[$x-1];
+					$status=$grade=="F"? "Fail":"Pass";
+					if($status=="Fail")
+					{
+						$result = "FAIL";
+					}
+					$points_secured = $credits*$grade_points[$grade];
+					$total_points_secured+=$points_secured;
+					break;
+				}
+			}
 		}
 	?>
 	<td><?php echo $credits; ?></td>
 	<td><?php echo $grade; ?></td>
-	<td><?php echo $points_secured ?></td>
-	<td><?php echo $status ?></td>
+	<td><?php echo $points_secured; ?></td>
+	<td><?php echo $status; ?></td>
 </tr>
 <?php
 }
