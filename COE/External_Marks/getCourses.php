@@ -9,6 +9,18 @@
 	{
 		echo "<hr>";
 		$rno = $_POST['rno'];
+		$sql="SELECT * from sem_marks where sem_marks.RollNumber='$rno' and sem_marks.Timeperiod=(SELECT MAX(id) from Timeperiod)";
+		$retval = mysqli_query($conn,$sql);
+		$aff_rows = mysqli_affected_rows($conn);
+		if($aff_rows==0)
+		{
+
+		}
+		else
+		{
+			 die('Data already exists !! ' . mysqli_error());
+			//exit("Data already exists !!");
+		}
 		$sql = "SELECT student_enroll_courses.CourseID,courses.CourseName from student_enroll_courses join courses on student_enroll_courses.CourseID=courses.CourseID where student_enroll_courses.RollNumber='$rno' and student_enroll_courses.YearandSem = (select CurrentYandS from student where student.RollNumber='$rno')";
 		$retval = mysqli_query($conn, $sql);
 		//var_dump($rno);

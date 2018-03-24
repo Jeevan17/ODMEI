@@ -7,8 +7,21 @@
 	$data=array();
 	if (array_key_exists('rno', $_POST))
 	{
-		echo "<hr>";
 		$rno = $_POST['rno'];
+		echo "<hr>";
+		$sql="SELECT * from mid_marks where mid_marks.RollNumber='$rno' and mid_marks.Timeperiod=(SELECT MAX(id) from Timeperiod)";
+		$retval = mysqli_query($conn,$sql);
+		$aff_rows = mysqli_affected_rows($conn);
+		if($aff_rows==0)
+		{
+
+		}
+		else
+		{
+			 die('Data already exists !! ' . mysqli_error());
+			//exit("Data already exists !!");
+		}
+
 		$sql = "SELECT student_enroll_courses.CourseID,courses.CourseName from student_enroll_courses join courses on student_enroll_courses.CourseID=courses.CourseID where student_enroll_courses.RollNumber='$rno' and student_enroll_courses.YearandSem = (select CurrentYandS from student where student.RollNumber='$rno')";
 		$retval = mysqli_query($conn, $sql);
 		//var_dump($retval);
@@ -26,7 +39,7 @@
 		 {
 
 		?>
-		<h3><mark><?php echo $rno ?></mark></h3><br>
+		<br><br><h3><mark><?php echo $rno ?></mark></h3><br>
 			<form method='POST' action='Mid_marks.php'>
 				<table>
 					<th>
