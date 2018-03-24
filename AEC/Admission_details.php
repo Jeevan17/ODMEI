@@ -127,6 +127,22 @@
 	<br>
 	<center><input type='submit' value='SUBMIT' class='btn btn-outline-success pl-5 pr-5' name='submit'></center>
 </form>
+<hr>
+<form action='Admission_details.php' method='POST' enctype='multipart/form-data'>
+	<div class="row">
+		<div class="col-sm-2"></div>
+		<div class="col-sm-1 pt-2">
+			File input
+		</div>
+		<div class="col-sm-4">
+			<input type="file" class="form-control-file" id="excel" name="excel" required>
+		  	<small id="fileHelp" class="form-text text-muted">Select a  ExcelFile and Upload</small>
+		</div>
+		<div class="col-sm-4">
+			<input type='submit' value='Upload' class='btn btn-info pl-5 pr-5' name='Upload'>
+		</div>
+	</div>
+</form>
 <br>
 <?php
 	if(isset($_POST["submit"]))
@@ -201,6 +217,55 @@
 		
 	}
 ?>
+<?php
+	$output = ''; 
+	if(isset($_POST["Upload"]))
+	{
+		$connection = mysqli_connect('localhost', 'admin', 'cbit','project');
+		$extension = explode(".", $_FILES["excel"]["name"]);
+		$allowed_extension = array("xls", "xlsx", "csv"); 
+		if(in_array($extension[1], $allowed_extension)) 
+		{
+			$file = $_FILES["excel"]["tmp_name"];
+			include("../PHPExcel/IOFactory.php"); 
+
+			$objPHPExcel = PHPExcel_IOFactory::load($file); 
+			$output .= "<center><label class='text-success'>Data Inserted</label><br></center>";
+			foreach ($objPHPExcel->getWorksheetIterator() as $worksheet)
+			{
+				$highestRow = $worksheet->getHighestRow();
+				for($row=2; $row<=$highestRow; $row++)
+				{
+					$data = array();
+					for ($i=0; $i <11 ; $i++)
+					{ 
+						array_push($data, mysqli_real_escape_string($conn, $worksheet->getCellByColumnAndRow($i,$row)->getValue()));
+					}
+					try
+					{
+						$db = new PDO("mysql:host=localhost;dbname=project", "admin", "cbit");
+						$statement = $db->prepare("SELECT BSP FROM bsp_code WHERE Program= :program and Branch= :branch and Section= :section");
+						$statement->execute(array(':program' => "$data[4]",':branch' => "$data[5]", ':section' => "$data[6]"));
+						$bsp = $statement->fetch();
+					}
+					catch(PDOException $e)
+				    {
+				    echo "Error: " . $e->getMessage();
+				    }
+				    $db = null;
+					
+					$query = "INSERT INTO student(`AdmissionNumber`, `RollNumber`, `FirstName`, `LastName`, `BSP`, `CBatch`, `phoneNumber`, `Email`, `CurrentYandS`) VALUES ('$data[0]', '$data[1]', '$data[2]', '$data[3]', '$bsp[0]', '$data[7]', '$data[8]', '$data[9]', '$data[10]')";
+					mysqli_query($conn, $query);
+					
+					$query = "INSERT INTO `student_login`(`RollNumber`, `Password`) VALUES ('$data[1]', 1)";
+					mysqli_query($conn, $query);
+				}
+			} 
+		}
+		echo "$output";
+	}
+?>
+
 </div>
 </div>
 	<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
