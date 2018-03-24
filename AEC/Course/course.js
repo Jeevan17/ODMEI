@@ -61,3 +61,35 @@ function loadSearch(str)
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send("n="+s1);
 }
+
+// function loadCourses()
+// {
+// 	var xhttp = new XMLHttpRequest();
+// 	xhttp.onreadystatechange = function()
+// 	{
+//     	if (this.readyState == 4 && this.status == 200)
+//     	{
+//     	  document.getElementById("showDetails").innerHTML = xhttp.responseText;
+//   		}
+// 	};
+// 	var cid = document.getElementById('cid').value;
+// 	xhttp.open("POST", "Course/get_subjects.php", true);
+// 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+// 	xhttp.send("cid="+cid);
+// }
+
+function loadCourses(cid)
+{
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function()
+	{
+    	if (this.readyState == 4 && this.status == 200)
+    	{
+    	  document.getElementById("showDetails").innerHTML = xhttp.responseText;
+  		}
+	};
+	//var cid = document.getElementById('cid').value;
+	xhttp.open("POST", "Course/get_subjects.php", true);
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send("cid="+cid);
+}

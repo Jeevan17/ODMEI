@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 24, 2018 at 02:30 PM
--- Server version: 10.1.29-MariaDB
--- PHP Version: 7.2.0
+-- Generation Time: Mar 24, 2018 at 05:07 PM
+-- Server version: 10.1.26-MariaDB
+-- PHP Version: 7.1.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -110,16 +110,11 @@ INSERT INTO `courses` (`CourseID`, `CourseName`, `Department`, `sessional`, `SEE
 
 CREATE TABLE `course_yands` (
   `CourseID` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Type` enum('Theory','Elective-I','Elective-II','Elective-III','Elective-IV','Lab') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Branch` enum('CSE','ECE','IT','Civil') COLLATE utf8mb4_unicode_ci NOT NULL,
   `YearandSem` enum('1/4 Sem-1','1/4 Sem-2','2/4 Sem-1','2/4 Sem-2','3/4 Sem-1','3/4 Sem-2','4/4 Sem-1','4/4 Sem-2') COLLATE utf8mb4_unicode_ci NOT NULL,
   `SyllabusType` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'R13'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `course_yands`
---
-
-INSERT INTO `course_yands` (`CourseID`, `YearandSem`, `SyllabusType`) VALUES
-('CE422', '4/4 Sem-2', 'R13');
 
 -- --------------------------------------------------------
 
@@ -266,7 +261,13 @@ INSERT INTO `mid_marks` (`RollNumber`, `CourseID`, `Timeperiod`, `Mid1`, `Mid2`)
 (160114733088, 'CS421', 1, 20, 21),
 (160114733088, 'CS422', 1, 22, 23),
 (160114733099, 'CS411', 1, 10, 11),
-(160114733099, 'CS415', 1, 12, 13);
+(160114733099, 'CS415', 1, 12, 13),
+(160114733313, 'CS421', 1, 4, 5),
+(160114733313, 'CS422', 1, 17, 18),
+(160114733313, 'CS423', 1, 15, 16),
+(160114733313, 'CS424', 1, 18, 19),
+(160114733313, 'CS471', 1, 17, 17),
+(160114733313, 'CS483', 1, 12, 13);
 
 -- --------------------------------------------------------
 
@@ -317,7 +318,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 
 CREATE TABLE `news` (
   `ID` bigint(20) NOT NULL,
-  `Role` enum('Principal','Hod') NOT NULL,
+  `Role` enum('Principal','Hod_CSE','Hod_IT') NOT NULL,
   `DocumentName` varchar(191) NOT NULL,
   `Description` varchar(191) NOT NULL,
   `File` longblob NOT NULL,
@@ -339,7 +340,7 @@ INSERT INTO `news` (`ID`, `Role`, `DocumentName`, `Description`, `File`, `Timepe
 
 CREATE TABLE `notification` (
   `Rollnumber` bigint(20) NOT NULL,
-  `Type` enum('Material','Assignment','Achievement','Feedback','News') NOT NULL
+  `Type` enum('Material','Assignment','Achievement','Feedback','News','CSE_Enroll','IT_Enroll') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -348,7 +349,9 @@ CREATE TABLE `notification` (
 
 INSERT INTO `notification` (`Rollnumber`, `Type`) VALUES
 (1, 'News'),
-(2, 'News');
+(2, 'News'),
+(1, 'CSE_Enroll'),
+(0, 'IT_Enroll');
 
 -- --------------------------------------------------------
 
@@ -415,7 +418,13 @@ INSERT INTO `sem_marks` (`RollNumber`, `CourseID`, `Timeperiod`, `External`) VAL
 (160114733088, 'CS421', 1, 72),
 (160114733088, 'CS422', 1, 73),
 (160114733099, 'CS411', 1, 65),
-(160114733099, 'CS415', 1, 66);
+(160114733099, 'CS415', 1, 66),
+(160114733313, 'CS421', 1, 20),
+(160114733313, 'CS422', 1, 60),
+(160114733313, 'CS423', 1, 65),
+(160114733313, 'CS424', 1, 54),
+(160114733313, 'CS471', 1, 56),
+(160114733313, 'CS483', 1, 67);
 
 -- --------------------------------------------------------
 
@@ -436,7 +445,8 @@ CREATE TABLE `sgpa` (
 
 INSERT INTO `sgpa` (`RollNumber`, `YearandSem`, `Timeperiod`, `SGPA`) VALUES
 (160114733088, '4/4 Sem-2', 1, 10),
-(160114733099, '4/4 Sem-1', 1, 8.8);
+(160114733099, '4/4 Sem-1', 1, 8.8),
+(160114733313, '4/4 Sem-2', 1, 5.85714);
 
 -- --------------------------------------------------------
 
@@ -728,7 +738,13 @@ INSERT INTO `student_marks` (`RollNumber`, `CourseID`, `Timeperiod`, `SyllabusTy
 (160114733088, 'CS421', 1, 'R13', '4/4 Sem-2', 20, 21, 72),
 (160114733088, 'CS422', 1, 'R13', '4/4 Sem-2', 22, 23, 73),
 (160114733099, 'CS411', 1, 'R13', '4/4 Sem-1', 10, 11, 65),
-(160114733099, 'CS415', 1, 'R13', '4/4 Sem-1', 12, 13, 66);
+(160114733099, 'CS415', 1, 'R13', '4/4 Sem-1', 12, 13, 66),
+(160114733313, 'CS421', 1, 'R13', '4/4 Sem-2', 4, 5, 20),
+(160114733313, 'CS422', 1, 'R13', '4/4 Sem-2', 17, 18, 60),
+(160114733313, 'CS423', 1, 'R13', '4/4 Sem-2', 15, 16, 65),
+(160114733313, 'CS424', 1, 'R13', '4/4 Sem-2', 18, 19, 54),
+(160114733313, 'CS471', 1, 'R13', '4/4 Sem-2', 17, 17, 56),
+(160114733313, 'CS483', 1, 'R13', '4/4 Sem-2', 12, 13, 67);
 
 -- --------------------------------------------------------
 
@@ -1012,31 +1028,26 @@ ALTER TABLE `timetable`
 --
 ALTER TABLE `material`
   MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
-
 --
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
   MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT for table `placement_batch`
 --
 ALTER TABLE `placement_batch`
   MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT for table `timeperiod`
 --
 ALTER TABLE `timeperiod`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- Constraints for dumped tables
 --

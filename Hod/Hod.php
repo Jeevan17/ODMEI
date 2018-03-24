@@ -19,9 +19,6 @@
 		</form>
 	</center>
 </div>
-</div>
-</div>
-
 			
 <!--***********************************************-->
 <?php
@@ -81,31 +78,31 @@
 										<?php echo"
 										<th rowspan='5'><img src='data:image/jpeg;base64,".base64_encode( $row['Photo'] )."' width=150px height=200px /></th>";
 										?>
-										<td class='text-info'>Name</th>
+										<td class='text-info'>Name</td>
 										<td>
 											<?php echo "{$row['FirstName']}"." "."{$row['LastName']}" ?>
 										</td>
 										
 										<tr>
-											<td class='text-info'>Roll number</th>
+											<td class='text-info'>Roll number</td>
 											<td>
 												<?php echo "{$row['RollNumber']}";?>
 											</td>
 										</tr>
 										<tr>
-											<td class='text-info'>Admission No</th>
+											<td class='text-info'>Admission No</td>
 											<td>
 												<?php echo "{$row['AdmissionNumber']}"; ?>
 											</td>
 										</tr>
 										<tr>
-											<td class='text-info'>Phone Number</th>
+											<td class='text-info'>Phone Number</td>
 											<td>
 												<?php echo "{$row['phoneNumber']}"; ?>	
 											</td>
 										</tr>
 										<tr>
-											<td class='text-info'>Email Id</th>
+											<td class='text-info'>Email Id</td>
 											<td>
 												<?php echo "{$row['Email']}"; ?>
 											</td>
@@ -143,9 +140,9 @@
 										}
 								echo"
 									</tbody>
-								</table>
-					</div>";
-					?>
+								</table>";
+							?>
+					</div>
 					<div id='marks' class='container tab-pane fade'>
 						<h1><mark>Semester Marks Details</mark></h1><br>
 						
@@ -264,6 +261,9 @@
 		}
 	}
 	?>
+
+</div>
+</div>
 	<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js'></script>
 	<script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js'></script>
