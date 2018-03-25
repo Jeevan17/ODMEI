@@ -15,7 +15,7 @@ placement(placement attendance)
 student(Admission Details, Placement details)
 aec(start courses, update attendance)
 principal(staff)
-hod(staff)
+hod(timetable, staff)
 
 -----------------------------------------------------------
 student(achievements, send feedback)
