@@ -23,15 +23,16 @@
 		}
 		$sql = "SELECT student_enroll_courses.CourseID,courses.CourseName from student_enroll_courses join courses on student_enroll_courses.CourseID=courses.CourseID where student_enroll_courses.RollNumber='$rno' and student_enroll_courses.YearandSem = (select CurrentYandS from student where student.RollNumber='$rno')";
 		$retval = mysqli_query($conn, $sql);
+		$aff_rows = mysqli_affected_rows($conn);
 		//var_dump($rno);
-		if(!$retval)
+		if($aff_rows==0)
 		{
 			//var_dump($data);
 			// echo "<script>alert('Entered RollNo does not exist!')</script>";
 			echo "<script type='text/javascript'>alert(\"testing\");</script>";
 			$message="test";
 			echo "<script type='text/javascript'>alert('$message');</script>";
-			die('Could not get data: ' . mysqli_error());
+			die('RollNumber does not exist ! ' . mysqli_error());
 		}	
 		$affected_rows = mysqli_affected_rows($conn);
 		if(mysqli_num_rows($retval) > 0)

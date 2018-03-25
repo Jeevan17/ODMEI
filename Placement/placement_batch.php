@@ -57,7 +57,7 @@
 		{
 			alert('Invalid format !!');
 			return false;
-		}
+		}	
 		return true;
 	}
 </script>
