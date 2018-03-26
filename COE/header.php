@@ -39,7 +39,8 @@
 						<?php
 							$urls = array(
 							'External Marks' => 'COE.php',
-							'Publish Results' => 'publish.php'
+							'Publish Results' => 'publish.php',
+							'Add New Courses' => 'newcourse.php'
 							);
 
 							$dropdownurls = array(

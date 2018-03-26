@@ -2,21 +2,20 @@ Completed:
 
 student(Home, attendance, material, marks details, courses enroll)
 staff(home, add attendance, send material)
-aec(add attendance, prepare timetable, staff registry, admission details, mid marks, start courses)
+aec(add attendance, prepare timetable, staff registry, admission details, faculty details, mid marks, add timeperiod)
 hod(student, placements)
 principal(student, placements)
-placements(home, company details, branch wise details, add new placement batch, add company details)
-coe(external marks, publish results)
+placements(home, company details, branch wise details, add new placement batch, add company details, add results)
+coe(external marks, publish results, add courses)
 
 
 Yet to do:
 
-placement(add results**, placement attendance)
+placement(placement attendance)
 student(Admission Details, Placement details)
-aec(faculty details(E), add timeperiod(E),update attendance)
+aec(start courses, update attendance)
 principal(staff)
-hod(staff)
-coe(add courses)(E)
+hod(timetable, staff)
 
 -----------------------------------------------------------
 student(achievements, send feedback)

@@ -40,14 +40,15 @@
 							$urls = array(
 							'Attendance' => 'AEC.php',
 							'Admission Details' => 'Admission_details.php',
+							'Faculty Details' => 'faculty_details.php',
 							'Mid Marks' => 'Mid_marks.php'
 							);
 							//Other
 							$dropdownurls = array(
 								'Prepare Time Table' => 'timetable.php',
-								'Add Time Period' => 'timePeriod.php',
 								'Staff Registry' => 'staff_teaches_courses.php',
-								'Course Details' => 'course_details.php'
+								'Course Details' => 'course_details.php',
+								'Add Timeperiod' => 'timeperiod.php'
 							);
 							foreach ($urls as $name => $url) {
 								echo "<li ".(($currentPage === $name) ?"class='nav-item active' ":"class='nav-item'")."><a class='nav-link' href='$url'>$name</a></li>";
