@@ -1,31 +1,56 @@
-function loadCourses()
+function loadAddMid1(rno)
 {
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function()
 	{
     	if (this.readyState == 4 && this.status == 200)
     	{
-    	  document.getElementById("show_courses").innerHTML = xhttp.responseText;
+    	  document.getElementById("add_mid1").innerHTML = xhttp.responseText;
   		}
 	};
-	var rno = document.getElementById('rno').value;
-	xhttp.open("POST", "Mid_marks/getCourses.php", true);
+	xhttp.open("POST", "Mid_marks/addMid1.php", true);
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send("rno="+rno);
 }
-// function loadInsert()
-// {
-// 	var xhttp = new XMLHttpRequest();
-// 	xhttp.onreadystatechange = function()
-// 	{
-//     	if (this.readyState == 4 && this.status == 200)
-//     	{
-//     	  document.getElementById("get_insert").innerHTML = xhttp.responseText;
-//   		}
-// 	};
-// 	var test = document.getElementsByName('cid');
-// 	alert(test[0].value);
-// 	xhttp.open("POST", "Mid_marks/insert.php", true);
-// 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-// 	xhttp.send("cid="+JSON.stringify(test));
-// }
+function loadAddMid2(rno)
+{
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function()
+	{
+    	if (this.readyState == 4 && this.status == 200)
+    	{
+    	  document.getElementById("add_mid2").innerHTML = xhttp.responseText;
+  		}
+	};
+	xhttp.open("POST", "Mid_marks/addMid2.php", true);
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send("rno="+rno);
+}
+function loadUpdateMid1(rno)
+{
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function()
+	{
+    	if (this.readyState == 4 && this.status == 200)
+    	{
+    	  document.getElementById("update_mid1").innerHTML = xhttp.responseText;
+  		}
+	};
+	xhttp.open("POST", "Mid_marks/updateMid1.php", true);
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send("rno="+rno);
+}
+function loadUpdateMid2(rno)
+{
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function()
+	{
+    	if (this.readyState == 4 && this.status == 200)
+    	{
+    	  document.getElementById("update_mid2").innerHTML = xhttp.responseText;
+  		}
+	};
+	xhttp.open("POST", "Mid_marks/updateMid2.php", true);
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send("rno="+rno);
+}

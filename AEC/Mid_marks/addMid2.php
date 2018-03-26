@@ -9,11 +9,23 @@
 	{
 		$rno = $_POST['rno'];
 		echo "<hr>";
-		$sql="SELECT * from mid_marks where mid_marks.RollNumber='$rno' and mid_marks.Timeperiod=(SELECT MAX(id) from Timeperiod)";
+		$sql="SELECT Mid2 from mid_marks where mid_marks.RollNumber='$rno' and mid_marks.Timeperiod=(SELECT MAX(id) from Timeperiod)";
 		$retval = mysqli_query($conn,$sql);
-		$aff_rows = mysqli_affected_rows($conn);
-
-		if($aff_rows==0)
+		$flag = 1;
+		while($row = mysqli_fetch_array($retval))
+		{
+			if (is_null($row['Mid2']))
+			{
+				$flag = $flag * 1;
+			}
+			else
+			{
+				$flag = $flag * 0;
+			}
+			
+		}
+		
+		if($flag == 1)
 		{
 			$sql = "SELECT student_enroll_courses.CourseID,courses.CourseName from student_enroll_courses join courses on student_enroll_courses.CourseID=courses.CourseID where student_enroll_courses.RollNumber='$rno' and student_enroll_courses.YearandSem = (select CurrentYandS from student where student.RollNumber='$rno')";
 			$retval = mysqli_query($conn, $sql);
@@ -37,7 +49,7 @@
 							<thead>
 								<tr>
 									<th><h5>Courses</h5></th>
-									<th><h5>Mid Marks</h5></th>
+									<th><h5>Mid2 Marks</h5></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -48,7 +60,7 @@
 										<td><?php echo "{$row['CourseID']}"."--"."{$row['CourseName']}" ?></td>
 										<td>
 											<?php $nm1=$row['CourseID']; 
-											echo "<input type='text' class='form-control' name='$nm1' placeholder='$nm1'>";
+											echo "<input type='text' class='form-control' name='$nm1' placeholder='$nm1' required>";
 											
 											array_push($data,"{$row['CourseID']}");
 											?>
@@ -57,8 +69,6 @@
 								<?php
 								}
 							
-							// var_dump($data);
-							// var_dump($affected_rows);
 							if(!isset($_SESSION)) 
 							{ 
 								session_start(); 
@@ -69,7 +79,7 @@
 							?>
 							</tbody>
 						</table><br>
-						<input type='submit' value='Submit' name='submit' class='btn ml-3 btn-outline-success pl-5 pr-5' style='display: initial;'>
+						<input type='submit' value='Submit' name='addMid2' class='btn ml-3 btn-outline-success pl-5 pr-5' style='display: initial;'>
 					</form>
 					<br>
 				<?php

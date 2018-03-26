@@ -8,9 +8,18 @@
   include 'header.php';
 ?>
 <form name="nb" action="placement_batch.php" method="post">
-	<h3><mark>New Placement Batch:</mark> <input type=textbox name="new_batch" placeholder="Eg:- 2017-2018" onblur="validateformat(this)">
-		<input type=submit name="submit" class='btn ml-3 btn-outline-primary btn-sm' style='display: initial;'>
-	</h3>
+	<div class="row">
+		<div class="col-sm-5 pt-2">
+			<h3>New Placement Batch:</h3>
+		</div>
+		<div class="col-sm-4">
+			<input type=textbox name="new_batch" class="form-control" placeholder="Eg:- 2017-2018" onblur="validateformat(this.value)">
+		</div>
+	</div>
+	<hr>
+	<center>
+		<input type="submit" name="submit" class='btn btn-outline-info pl-5 pr-5'>
+	</center>
 </form>
 <?php
 	if(isset($_POST["submit"]))
@@ -48,21 +57,23 @@
 		}
 	}
 ?>
-<script>
-	function validateformat(nbatch)
-	{
-		//var nbatch = document.forms["nb"]["new_batch"].value;
-		var regex = /[2-9][0-9]{3}\-[2-9][0-9]{3}$/;
-		if(regex.test(nbatch.value) == false)
+</div>
+</div>
+	<script>
+		function validateformat(nbatch)
 		{
-			alert('Invalid format !!');
-			return false;
+			//var nbatch = document.forms["nb"]["new_batch"].value;
+			var regex = /[2-9][0-9]{3}\-[2-9][0-9]{3}$/;
+			if(regex.test(nbatch.value) == false)
+			{
+				alert('Invalid format !!');
+				return false;
+			}
+			return true;
 		}
-		return true;
-	}
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -12,10 +12,18 @@
 		$sql="SELECT * from mid_marks where mid_marks.RollNumber='$rno' and mid_marks.Timeperiod=(SELECT MAX(id) from Timeperiod)";
 		$retval = mysqli_query($conn,$sql);
 		$aff_rows = mysqli_affected_rows($conn);
-
+		
 		if($aff_rows==0)
 		{
-			$sql = "SELECT student_enroll_courses.CourseID,courses.CourseName from student_enroll_courses join courses on student_enroll_courses.CourseID=courses.CourseID where student_enroll_courses.RollNumber='$rno' and student_enroll_courses.YearandSem = (select CurrentYandS from student where student.RollNumber='$rno')";
+			echo "
+				<div class='alert alert-dismissible alert-danger'>
+					<strong>Please Insert data before Updating</strong>
+				</div>
+			";
+		}
+		else
+		{
+			$sql = "SELECT mid_marks.CourseID,courses.CourseName,mid_marks.Mid2 FROM mid_marks INNER JOIN courses ON mid_marks.CourseID = courses.CourseID WHERE mid_marks.RollNumber='$rno' AND mid_marks.Timeperiod =(SELECT MAX(id) from Timeperiod)";
 			$retval = mysqli_query($conn, $sql);
 			
 			if(!$retval)
@@ -37,7 +45,7 @@
 							<thead>
 								<tr>
 									<th><h5>Courses</h5></th>
-									<th><h5>Mid Marks</h5></th>
+									<th><h5>Mid2 Marks</h5></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -48,7 +56,7 @@
 										<td><?php echo "{$row['CourseID']}"."--"."{$row['CourseName']}" ?></td>
 										<td>
 											<?php $nm1=$row['CourseID']; 
-											echo "<input type='text' class='form-control' name='$nm1' placeholder='$nm1'>";
+											echo "<input type='text' class='form-control' name='$nm1' value='{$row['Mid2']}' >";
 											
 											array_push($data,"{$row['CourseID']}");
 											?>
@@ -69,19 +77,11 @@
 							?>
 							</tbody>
 						</table><br>
-						<input type='submit' value='Submit' name='submit' class='btn ml-3 btn-outline-success pl-5 pr-5' style='display: initial;'>
+						<input type='submit' value='Submit' name='updateMid2' class='btn ml-3 btn-outline-success pl-5 pr-5' style='display: initial;'>
 					</form>
 					<br>
 				<?php
 			}
-		}
-		else
-		{
-			echo "
-				<div class='alert alert-dismissible alert-danger'>
-					<strong>Data Already Exists</strong>
-				</div>
-			";
 		}
 	}
 ?>

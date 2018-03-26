@@ -255,10 +255,15 @@
 				    $db = null;
 					
 					$query = "INSERT INTO student(`AdmissionNumber`, `RollNumber`, `FirstName`, `LastName`, `BSP`, `CBatch`, `phoneNumber`, `Email`, `CurrentYandS`) VALUES ('$data[0]', '$data[1]', '$data[2]', '$data[3]', '$bsp[0]', '$data[7]', '$data[8]', '$data[9]', '$data[10]')";
-					mysqli_query($conn, $query);
-					
-					$query = "INSERT INTO `student_login`(`RollNumber`, `Password`) VALUES ('$data[1]', 1)";
-					mysqli_query($conn, $query);
+					if(mysqli_query($conn, $query))
+					{
+						$query = "INSERT INTO `student_login`(`RollNumber`, `Password`) VALUES ('$data[1]', 1)";
+						mysqli_query($conn, $query);
+					}
+					else
+					{
+						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+					}
 				}
 			} 
 		}
