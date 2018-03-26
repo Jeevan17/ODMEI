@@ -20,10 +20,6 @@
 			table.table-bordered > tbody > tr > th{
 			    border:1px solid rgba(0, 0, 0, .1);
 			}
-			select.form-control{
-				padding-left: 0px;
-				padding-right: 0px;
-			}
 		</style>
 	</head>
 	<body>
@@ -46,7 +42,8 @@
 							$dropdownurls = array(
 								'Year wise Details' => 'Year_details.php',
 								'Add New Placement Batch' => 'placement_batch.php',
-								'Add Company Profile' => 'company_profile.php'
+								'Add Company Profile' => 'company_profile.php',
+								'Add Student Result' => 'Student_Result.php'
 							);
 							foreach ($urls as $name => $url) {
 								echo "<li ".(($currentPage === $name) ?"class='nav-item active' ":"class='nav-item'")."><a class='nav-link' href='$url'>$name</a></li>";

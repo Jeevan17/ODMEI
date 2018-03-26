@@ -12,6 +12,7 @@
 		$sql="SELECT * from mid_marks where mid_marks.RollNumber='$rno' and mid_marks.Timeperiod=(SELECT MAX(id) from Timeperiod)";
 		$retval = mysqli_query($conn,$sql);
 		$aff_rows = mysqli_affected_rows($conn);
+		
 
 		if($aff_rows==0)
 		{
@@ -37,7 +38,7 @@
 							<thead>
 								<tr>
 									<th><h5>Courses</h5></th>
-									<th><h5>Mid Marks</h5></th>
+									<th><h5>Mid1 Marks</h5></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -48,7 +49,7 @@
 										<td><?php echo "{$row['CourseID']}"."--"."{$row['CourseName']}" ?></td>
 										<td>
 											<?php $nm1=$row['CourseID']; 
-											echo "<input type='text' class='form-control' name='$nm1' placeholder='$nm1'>";
+											echo "<input type='text' class='form-control' name='$nm1' placeholder='$nm1' required>";
 											
 											array_push($data,"{$row['CourseID']}");
 											?>
@@ -69,7 +70,7 @@
 							?>
 							</tbody>
 						</table><br>
-						<input type='submit' value='Submit' name='submit' class='btn ml-3 btn-outline-success pl-5 pr-5' style='display: initial;'>
+						<input type='submit' value='Submit' name='addMid1' class='btn ml-3 btn-outline-success pl-5 pr-5' style='display: initial;'>
 					</form>
 					<br>
 				<?php

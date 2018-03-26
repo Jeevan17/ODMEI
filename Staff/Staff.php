@@ -3,7 +3,7 @@
 	if(!isset($_SESSION['staff'])){
 		echo "<script language='javascript'>window.location='../index.php';</script>";
 	}
-	$currentPage = 'Staff';
+	$currentPage = 'Home';
 	$uname=$_SESSION['staff'];
 	
 	include 'header.php';										
@@ -33,6 +33,7 @@
 <br>
 	<div class="row">
 		<div class="col-sm-6">
+			<h2><mark>Profile</mark></h2>
 			<table class="table table-bordered table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl">
 				<tbody>
 					<tr>

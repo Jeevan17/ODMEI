@@ -6,18 +6,17 @@
   }
   $currentPage = 'Home';
   include 'header.php';
-?>
-  <?php
-    $max = "SELECT Batch_name from placement_batch order by id asc";
-    $batch='';
-    if($res=mysqli_query($conn,$max))
+
+  $max = "SELECT Batch_name from placement_batch order by id asc";
+  $batch='';
+  if($res=mysqli_query($conn,$max))
+  {
+    while($row = mysqli_fetch_row($res))
     {
-      while($row = mysqli_fetch_row($res))
-      {
-        $batch=$row[0];
-      }
+      $batch=$row[0];
     }
-  ?>
+  }
+?>
   <h2>Placement Batch: <mark><?php echo"$batch";?></mark></h2><br>
     <?php
       $sql="SELECT student_attend_placements.CompanyName, bsp_code.Branch ,count(bsp_code.Branch) as Count FROM student INNER JOIN student_attend_placements ON student.RollNumber=student_attend_placements.RollNumber INNER JOIN bsp_code ON student.BSP=bsp_code.BSP where student_attend_placements.Result='Placed' and PBatch= (select id from placement_batch order by id desc) GROUP BY student_attend_placements.CompanyName, bsp_code.Branch ORDER BY student_attend_placements.CompanyName";

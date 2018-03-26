@@ -7,28 +7,63 @@
   $currentPage = 'other';
   include 'header.php';
 ?>
-<style>
-input[type='submit']:hover {
-    background-color: grey;
-    cursor: pointer;
-    color: white;
-    
-}
-.button5 {background-color: grey; color: white;}
-</style>
 <form action="company_profile.php" method="post">
-<h3><mark>New Company Details:</mark><br><br>
-	<input type='text' class='form-control' id='cname' placeholder='Enter company name' name='company_name' required style=' width: 200px; display: initial;'><br>
-	<textarea rows="3" cols="50" class='form-control' placeholder='Enter description' name='description' required style=' width: 300px; display: initial;'></textarea><br>
-	<input type='file'  class='form-control' placeholder='Upload logo' name='logo' required style=' width: 300px; display: initial;'><br>
-	<h5><small id="fileHelp" class="form-text text-muted">Click "Choose File" and select company's logo</small></h5>
-	<input type='text' class='form-control' id='cname' placeholder='CutOff GPA' name='cutoff' required style=' width: 200px; display: initial;'><br>
-	<select name="ctype" class='form-control' required style=' width: 250px; display: initial;'>
-		<option value="FullTime">FullTime</option>
-		<option value="Internship">Internship</option>
-	</select><br><br>
-	<input type='submit' value='SUBMIT' class='form-control button5' name='submit' required style=' width: 150px;' display: initial;>
-</h3>
+	
+	<h3><mark>New Company Details:</mark></h3>
+	<hr>
+	<div class="row">
+		<div class="col-sm-3 pt-2">
+			<h5>Company Name:</h5>
+		</div>
+		<div class="col-sm-5">
+			<input type='text' class='form-control' id='cname' placeholder='Enter company name' name='company_name' required>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-sm-3 pt-2">
+			<h5>Company Description:</h5>
+		</div>
+		<div class="col-sm-5">
+			<textarea rows="3" cols="50" class='form-control' placeholder='Enter description' name='description' required></textarea>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-sm-3 pt-2">
+			<h5>Company Logo:</h5>
+		</div>
+		<div class="col-sm-5">
+			<input type="file" class="form-control-file" id="material" name="logo" required>
+	      	<small id="fileHelp" class="form-text text-muted">Click "Choose File" and select company's logo(Max: 64KiB)</small>
+	    </div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-sm-3 pt-2">
+			<h5>Cut Off:</h5>
+		</div>
+		<div class="col-sm-5">
+			<input type='text' class='form-control' id='cname' placeholder='CutOff GPA' name='cutoff' required>
+	    </div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-sm-3 pt-2">
+			<h5>Job Type:</h5>
+		</div>
+		<div class="col-sm-5">
+			<select name="ctype" class='form-control' required>
+				<option>FullTime</option>
+				<option>Internship</option>
+			</select>
+	    </div>
+	</div>
+	<hr>
+	<center>
+		<input type='submit' value='SUBMIT' class='btn btn-outline-danger pl-5 pr-5' name='submit'>
+	</center>
+	<br>
 </form>
 <?php
 	if(isset($_POST["submit"]))
@@ -63,7 +98,6 @@ input[type='submit']:hover {
 ?>
 </div>
 </div>
-	<script src="Attendance/AEC.js"></script>
 	<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js'></script>
 	<script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js'></script>
