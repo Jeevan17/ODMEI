@@ -27,7 +27,7 @@
 		if($_POST['sid']!=null)
 		{
 			//session_start();
-			if(!isset($_SESSION['principal'])){
+			if(!isset($_SESSION['hod'])){
 				echo "<script language='javascript'>window.location='index.php';</script>";
 			}
 			$sid = $_POST['sid'];
