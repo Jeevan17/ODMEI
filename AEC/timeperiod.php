@@ -12,7 +12,7 @@
 	<div class='row'>
 		<div class="col-sm-4"></div>
 		<div class="col-sm-4">
-			<input type="text" onkeyup="validateTP()" class='form-control' id='tp' placeholder='Eg: NOVEMBER-2017, APRIL-2018, MAY-2018' name='tp' required  >
+			<input type="text" style="text-transform: uppercase;" onkeyup="validateTP()" class='form-control' id='tp' placeholder='Eg: NOVEMBER-2017, APRIL-2018, MAY-2018' name='tp' required  >
 		</div>
 		<div id="val_tp" class="col-sm-0 pt-3"></div>
 	</div><br>

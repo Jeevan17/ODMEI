@@ -1,24 +1,42 @@
 Completed:
+----------------------------------------------------------------------
+student(home, attendance, marks details, admission details, placement details, receive material, news, enroll courses, achievements)
 
-student(Home, attendance, material, marks details, courses enroll)
-staff(home, add attendance, send material)
-aec(add attendance, prepare timetable, staff registry, admission details, faculty details, mid marks, add timeperiod)
-hod(student, placements)
-principal(student, placements)
-placements(home, company details, branch wise details, add new placement batch, add company details, add results)
-coe(external marks, publish results, add courses)
+staff(home, add attendance, send material, achievements)
 
+aec(add attendance, admission details, faculty details, mid marks, prepare timetable, staff registry, start courses, add timeperiod)
+
+hod(student, placement, staff details, send_circular, enable_courses)
+
+principal(student, placement, staff details, send_circular)
+
+placements(home, company details, branch wise details, year wise details, add new placement batch, add company profile, add student results)
+
+coe(external marks, publish results, add new courses)
+------------------------------------------------------------------------
 
 Yet to do:
-
+------------------------------------------------------------------------
 placement(placement attendance)
-student(Admission Details, Placement details)
-aec(start courses, update attendance)
-principal(staff)
-hod(timetable, staff)
-
------------------------------------------------------------
-student(achievements, send feedback)
-staff(achievements, receive feedback)
+aec(update attendance)
+hod(timetable)
+student(give feedback)
+staff(check feedback)
 library
 bus
+sessions
+pwa
+security
+---------------------------------------------------------------------------
+
+
+New year/Semester-1 started:
+----------------------------------------------------------------------------
+1. AEC----student_admissions, add_timeperiod
+2. COE----add_new_courses(if any)
+3. HOD----add_courses, staff_registry, prepare_timetable, enable_std_enroll_courses
+4. STUDENT----enroll_courses
+5. STAFF----add_attendance, send_material(if any)
+6. AEC----update_attendance(if any), add_mid_marks(update if any)
+7. COE----add_external_marks
+----------------------------------------------------------------------------
