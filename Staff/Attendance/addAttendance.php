@@ -16,8 +16,7 @@
 
 		$time_slot = array('09:40:00','10:30:00','11:20:00','12:10:00','01:35:00','02:25:00','03:15:00');
 		
-
-		$sql = "SELECT date FROM dailyattendance WHERE Date='$date' and CourseID='$cid[0]'";
+		$sql = "SELECT `Date` FROM `dailyattendance` WHERE CourseID='$cid[0]' AND Date = '$date'";
 		$retval = mysqli_query($conn, $sql);
 		if (!(mysqli_num_rows($retval) > 0))
 		{
@@ -33,6 +32,8 @@
 				{
 					$sql = "SELECT attendance.TotalAttended, attendance.TotalClassesHeld FROM attendance WHERE attendance.RollNumber = '$rno' and attendance.YearandSem='$yands' AND attendance.Timeperiod = $Timeperiod";
 					global $TCH,$TCA;
+					$TCH = null;
+					$TCA = null;
 					$retval = mysqli_query($conn, $sql);
 					while ($row = mysqli_fetch_array($retval))
 					{
@@ -89,14 +90,16 @@
 				{
 					$sql = "SELECT attendance.TotalAttended, attendance.TotalClassesHeld FROM attendance WHERE attendance.RollNumber = '$rno' and attendance.YearandSem='$yands' AND attendance.Timeperiod = $Timeperiod";
 					global $TCH,$TCA;
+					$TCH = null;
+					$TCA = null;
 					$retval = mysqli_query($conn, $sql);
 					while ($row = mysqli_fetch_array($retval))
 					{
 						$TCH = $row['TotalClassesHeld'];
 						$TCA = $row['TotalAttended'];
 					}
-				 			
-					for ($i=0; $i <7 ; $i++)
+				 	
+				 	for ($i=0; $i <7 ; $i++)
 					{
 						if ($timeslot[$i] == 1)
 				 		{
@@ -118,7 +121,7 @@
 				 						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 				 					}
 							    }
-							    elseif (!is_null($TCH) and !is_null($TCA))
+							    else
 							    {
 									$TCH = $TCH +1;
 							    	$TCA = $TCA +1;

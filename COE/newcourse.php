@@ -37,6 +37,7 @@
 			<option>IT</option>
 			<option>ECE</option>
 			<option>Civil</option>
+			<option>All</option>
 		</select>
 	</div>
 </div>
@@ -70,6 +71,8 @@
 <br>
 <center><input type='submit' value='SUBMIT' onclick="addCourse()" class='btn btn-outline-success pl-5 pr-5' name='submit'></center>
 <div id="addcourse"> </div>
+
+<br>
 </div>
 </div>
 	<script src="New_Course/newcourse.js"></script>

@@ -13,9 +13,7 @@
 		$program = $_POST['program'];
 		$date = $_POST['date'];
 		
-		$sql="SELECT dailyattendance.RollNumber,dailyattendance.Timeslot,dailyattendance.Attendance
-			  from dailyattendance
-			  WHERE dailyattendance.Date='$date' AND dailyattendance.RollNumber IN (SELECT student.RollNumber from student where student.CurrentYandS='$year/4 Sem-$semester' AND student.BSP=(SELECT bsp_code.BSP from bsp_code where bsp_code.Branch = '$branch' AND  bsp_code.Section = '$section' AND bsp_code.Program = '$program' ))";
+		$sql="SELECT dailyattendance.RollNumber,dailyattendance.Timeslot,dailyattendance.Attendance from dailyattendance WHERE dailyattendance.Date='$date' AND dailyattendance.RollNumber IN (SELECT student.RollNumber from student where student.CurrentYandS='$year/4 Sem-$semester' AND student.BSP=(SELECT bsp_code.BSP from bsp_code where bsp_code.Branch = '$branch' AND  bsp_code.Section = '$section' AND bsp_code.Program = '$program' ))";
 		$retval = mysqli_query($conn, $sql);
 		$data = array();
 		$timeslot = array('09:40:00','10:30:00','11:20:00','12:10:00','01:35:00','02:25:00','03:15:00');
@@ -67,7 +65,6 @@
 						echo "
 							<td><input type='checkbox' name='$rollnum' ></td>
 						";
-					
 					}
 					else
 					{

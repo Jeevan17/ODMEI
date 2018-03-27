@@ -3,13 +3,15 @@
     if(!isset($_SESSION['AEC'])){
         echo "<script language='javascript'>window.location='../index.php';</script>";
     }
-    if (array_key_exists('cid', $_POST))
+    if (array_key_exists('cid', $_POST) and array_key_exists('branch', $_POST))
     {
         $cid = $_POST['cid'];
-        
+        $branch = $_POST['branch'];
+
         $_SESSION['cid'] = $cid;
+        $_SESSION['Branch'] = $branch;
         
-        $sql = "SELECT * FROM course_yands WHERE CourseID='$cid'";
+        $sql = "SELECT * FROM course_yands WHERE CourseID='$cid' AND Branch = '$branch'";
         $retval = mysqli_query($conn, $sql);
         if(mysqli_num_rows($retval)>0)
         {
@@ -64,20 +66,6 @@
                                 <option>Elective-III</option>
                                 <option>Elective-IV</option>
                                 <option>Lab</option>
-                            </select>
-                        </div>
-                    </div>
-                    <br>
-                    <div class='row'>
-                        <div class='col-sm-2 pt-2'>
-                            Select Branch:
-                        </div>
-                        <div class='col-sm-4'>
-                            <select class='form-control' name='Branch'>
-                                <option>CSE</option>
-                                <option>IT</option>
-                                <option>ECE</option>
-                                <option>Civil</option>
                             </select>
                         </div>
                     </div>

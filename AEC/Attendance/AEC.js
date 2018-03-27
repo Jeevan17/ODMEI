@@ -17,11 +17,10 @@ function loadUpdate()
 	
 	var rno = document.getElementsByName("rollnumber");
     var len = rno.length;
-    for (var r = 0; r < len; r++) {
+    for (var r = 0; r < len; r++)
+    {
     	var rollnumber = rno[r].innerHTML;
-    	var present = new Array();
-	    var absent = new Array();
-	    var timeslot = new Array();
+    	var timeslot = new Array();
 		var time = document.getElementsByName(rollnumber);
 	    
 	 	len=time.length;

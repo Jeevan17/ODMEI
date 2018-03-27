@@ -10,193 +10,81 @@
 		$date=$_POST['date'];
 		$rollnum = $_POST['rollnum'];
 		
+		$time_slot = array('09:40:00','10:30:00','11:20:00','12:10:00','01:35:00','02:25:00','03:15:00');
+
+		$sql = "SELECT CurrentYandS FROM student WHERE RollNumber='$rollnum'";
+		$retval = mysqli_query($conn, $sql);
+		while ($row = mysqli_fetch_array($retval))
+		{
+			$yands = $row['CurrentYandS'];
+		}
+
+		$sql = "SELECT max(id) AS id FROM timeperiod";
+		$retval = mysqli_query($conn, $sql);
+		while ($row = mysqli_fetch_array($retval))
+		{
+			$Timeperiod = $row['id'];
+		}
+
+		$sql = "SELECT attendance.TotalAttended, attendance.TotalClassesHeld FROM attendance WHERE attendance.RollNumber = '$rollnum' and attendance.YearandSem='$yands' AND attendance.Timeperiod = $Timeperiod";
+		global $TCH,$TCA;
+		$retval = mysqli_query($conn, $sql);
+		while ($row = mysqli_fetch_array($retval))
+		{
+			$TCH = $row['TotalClassesHeld'];
+			$TCA = $row['TotalAttended'];
+		}
 		for ($i=0; $i <7 ; $i++)
 		{
-			switch ($i)
-			{
-			 	case 0:
-			 		if ($timeslot[$i] == 1)
-			 		{
-			 			$sql = "UPDATE dailyattendance SET Attendance='Present' WHERE RollNumber='$rollnum' and Date ='$date' and Timeslot='09:40:00'";
-				 			if (mysqli_query($conn, $sql))
-				 			{
-							    //echo "New record created successfully";
-							}
-							else
-							{
-							    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-							}
-				 	}
-				 	else if ($timeslot[$i] == 0)
-			 		{
-			 			$sql = "UPDATE dailyattendance SET Attendance='Absent' WHERE RollNumber='$rollnum' and Date ='$date' and Timeslot='09:40:00'";
-				 			if (mysqli_query($conn, $sql))
-				 			{
-							    //echo "New record created successfully";
-							}
-							else
-							{
-							    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-							}
-				 	}
-				 	break;
-			 	case 1:
-			 		if ($timeslot[$i] == 1)
-			 		{
-			 			$sql = "UPDATE dailyattendance SET Attendance='Present' WHERE RollNumber='$rollnum' and Date ='$date' and Timeslot='10:30:00'";
-				 			if (mysqli_query($conn, $sql))
-				 			{
-							    //echo "New record created successfully";
-							}
-							else
-							{
-							    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-							}
-				 	}
-				 	else if ($timeslot[$i] == 0)
-			 		{
-			 			$sql = "UPDATE dailyattendance SET Attendance='Absent' WHERE RollNumber='$rollnum' and Date ='$date' and Timeslot='10:30:00'";
-				 			if (mysqli_query($conn, $sql))
-				 			{
-							    //echo "New record created successfully";
-							}
-							else
-							{
-							    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-							}
-				 	}
-			 		break;
-			 	case 2:
-			 		if ($timeslot[$i] == 1)
-			 		{
-			 			$sql = "UPDATE dailyattendance SET Attendance='Present' WHERE RollNumber='$rollnum' and Date ='$date' and Timeslot='11:20:00'";
-				 			if (mysqli_query($conn, $sql))
-				 			{
-							    //echo "New record created successfully";
-							}
-							else
-							{
-							    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-							}
-				 	}
-				 	else if ($timeslot[$i] == 0)
-			 		{
-			 			$sql = "UPDATE dailyattendance SET Attendance='Absent' WHERE RollNumber='$rollnum' and Date ='$date' and Timeslot='11:20:00'";
-				 			if (mysqli_query($conn, $sql))
-				 			{
-							    //echo "New record created successfully";
-							}
-							else
-							{
-							    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-							}
-				 	}
-			 		break;
-			 	case 3:
-			 		if ($timeslot[$i] == 1)
-			 		{
-			 			$sql = "UPDATE dailyattendance SET Attendance='Present' WHERE RollNumber='$rollnum' and Date ='$date' and Timeslot='12:10:00'";
-				 			if (mysqli_query($conn, $sql))
-				 			{
-							    //echo "New record created successfully";
-							}
-							else
-							{
-							    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-							}
-				 	}
-				 	else if ($timeslot[$i] == 0)
-			 		{
-			 			$sql = "UPDATE dailyattendance SET Attendance='Absent' WHERE RollNumber='$rollnum' and Date ='$date' and Timeslot='12:10:00'";
-				 			if (mysqli_query($conn, $sql))
-				 			{
-							    //echo "New record created successfully";
-							}
-							else
-							{
-							    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-							}
-				 	}
-			 		break;
-			 	case 4:
-			 		if ($timeslot[$i] == 1)
-			 		{
-			 			$sql = "UPDATE dailyattendance SET Attendance='Present' WHERE RollNumber='$rollnum' and Date ='$date' and Timeslot='01:35:00'";
-				 			if (mysqli_query($conn, $sql))
-				 			{
-							    //echo "New record created successfully";
-							}
-							else
-							{
-							    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-							}
-				 	}
-				 	else if ($timeslot[$i] == 0)
-			 		{
-			 			$sql = "UPDATE dailyattendance SET Attendance='Absent' WHERE RollNumber='$rollnum' and Date ='$date' and Timeslot='01:35:00'";
-				 			if (mysqli_query($conn, $sql))
-				 			{
-							    //echo "New record created successfully";
-							}
-							else
-							{
-							    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-							}
-				 	}
-			 		break;
-			 	case 5:
-			 		if ($timeslot[$i] == 1)
-			 		{
-			 			$sql = "UPDATE dailyattendance SET Attendance='Present' WHERE RollNumber='$rollnum' and Date ='$date' and Timeslot='02:25:00'";
-				 			if (mysqli_query($conn, $sql))
-				 			{
-							    //echo "New record created successfully";
-							}
-							else
-							{
-							    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-							}
-				 	}
-				 	else if ($timeslot[$i] == 0)
-			 		{
-			 			$sql = "UPDATE dailyattendance SET Attendance='Absent' WHERE RollNumber='$rollnum' and Date ='$date' and Timeslot='02:25:00'";
-				 			if (mysqli_query($conn, $sql))
-				 			{
-							    //echo "New record created successfully";
-							}
-							else
-							{
-							    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-							}
-				 	}
-			 		break;
-			 	case 6:
-			 		if ($timeslot[$i] == 1)
-			 		{
-			 			$sql = "UPDATE dailyattendance SET Attendance='Present' WHERE RollNumber='$rollnum' and Date ='$date' and Timeslot='03:15:00'";
-				 			if (mysqli_query($conn, $sql))
-				 			{
-							    //echo "New record created successfully";
-							}
-							else
-							{
-							    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-							}
-				 	}
-				 	else if ($timeslot[$i] == 0)
-			 		{
-			 			$sql = "UPDATE dailyattendance SET Attendance='Absent' WHERE RollNumber='$rollnum' and Date ='$date' and Timeslot='03:15:00'";
-				 			if (mysqli_query($conn, $sql))
-				 			{
-							    //echo "New record created successfully";
-							}
-							else
-							{
-							    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-							}
-				 	}
-			 		break;
-			}
+			if ($timeslot[$i] == 1)
+	 		{
+	 			$sql = "UPDATE dailyattendance SET Attendance='Present' WHERE RollNumber='$rollnum' and Date ='$date' and Timeslot='$time_slot[$i]'";
+	 			if (mysqli_query($conn, $sql))
+	 			{
+				    if (!is_null($TCH) and !is_null($TCA))
+				    {
+						$TCH = $TCH + 1;
+				    	$TCA = $TCA + 1;
+				    	$sql = "UPDATE attendance SET TotalAttended=$TCA,TotalClassesHeld=$TCH WHERE RollNumber='$rollnum' AND timeperiod='$Timeperiod' AND YearandSem='$yands'";
+				    	if (mysqli_query($conn, $sql))
+	 					{
+				    		//echo "New record created successfully";
+	 					}
+	 					else
+	 					{
+	 						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	 					}
+				    }
+				}
+				else
+				{
+				    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+				}
+		 	}
+		 	else if ($timeslot[$i] == 0)
+	 		{
+	 			$sql = "UPDATE dailyattendance SET Attendance='Absent' WHERE RollNumber='$rollnum' and Date ='$date' and Timeslot='$time_slot[$i]'";
+	 			if (mysqli_query($conn, $sql))
+	 			{
+				    if (!is_null($TCH) and !is_null($TCA))
+				    {
+				    	$TCH = $TCH +1;
+				    	$sql = "UPDATE attendance SET TotalClassesHeld=$TCH WHERE RollNumber='$rollnum' AND timeperiod='$Timeperiod' AND YearandSem='$yands'";
+				    	if (mysqli_query($conn, $sql))
+	 					{
+				    		//echo "New record created successfully";
+	 					}
+	 					else
+	 					{
+	 						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	 					}
+				    }
+				}
+				else
+				{
+				    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+				}
+		 	}
 		}        
 	}
 ?>

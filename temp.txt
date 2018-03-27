@@ -8,18 +8,4 @@ $conn = mysqli_connect($dbhost, $dbuser, $dbpass,'epiz_20664348_cstar2k17');
 
 database changes
 --------------------
-news-->Hod_Branch
-
-notification-->Branch_Enroll
-
-course_yands-->add electives
-
-student login
-
-
-SELECT timetable.Day, timetable.Timeslot, courses.CourseName, timetable.StaffID, staff.FullName, timetable.Batch, course_yands.Type
-FROM timetable 
-INNER JOIN staff ON staff.StaffID = timetable.StaffID 
-INNER JOIN courses ON courses.CourseID = timetable.CourseID 
-INNER JOIN course_yands ON course_yands.CourseID = timetable.CourseID
-WHERE timetable.YearandSem = '$yands' AND timetable.BSP = (SELECT bsp_code.BSP FROM bsp_code WHERE bsp_code.Branch='$hod_name[1]' AND bsp_code.Section='$section' AND bsp_code.Program='$program') ORDER BY Day,Timeslot
+courses-->placement, SUDHEE , SHRUTHI 
