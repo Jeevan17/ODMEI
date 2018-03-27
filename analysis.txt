@@ -32,7 +32,7 @@ security
 
 New year/Semester-1 started:
 ----------------------------------------------------------------------------
-1. AEC----student_admissions, add_timeperiod
+1. AEC----add timeperiod, student_admissions
 2. COE----add_new_courses(if any)
 3. HOD----add_courses, staff_registry, prepare_timetable, enable_std_enroll_courses
 4. STUDENT----enroll_courses

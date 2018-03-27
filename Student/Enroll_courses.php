@@ -139,6 +139,13 @@
                 ";
 			$_SESSION['temp'] = $temp;
 		}
+		else
+		{
+			echo "
+				<div class='alert alert-danger'>
+					<strong>You Cant Enroll Now</strong>
+				</div>";
+		}
 	}
 ?>
 

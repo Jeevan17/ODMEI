@@ -27,29 +27,60 @@
 			die('Could not get data: ' . mysqli_error());
 		}
 		$count=0;
-		while($row = mysqli_fetch_array($retval))
+		if(mysqli_num_rows($retval) > 0)
 		{
-			$rno = $row['RollNumber'];
-			$cid = $row['CourseID'];
-			$syllabus = $row['SyllabusType'];
-			$yands = $row['YearandSem'];
-			$mid1 = $row['Mid1'];
-			$mid2 = $row['Mid2'];
-			$external = $row['External'];
+			while($row = mysqli_fetch_array($retval))
+			{
+				$rno = $row['RollNumber'];
+				$cid = $row['CourseID'];
+				$syllabus = $row['SyllabusType'];
+				$yands = $row['YearandSem'];
+				$mid1 = $row['Mid1'];
+				$mid2 = $row['Mid2'];
+				$external = $row['External'];
 
-			$count+=1;
-			$sql = "INSERT INTO `student_marks`(`RollNumber`, `CourseID`, `Timeperiod`, `SyllabusType`, `YearandSem`, `MidExam1`, `MidExam2`, `External`) VALUES ('$rno','$cid','$id','$syllabus','$yands','$mid1','$mid2','$external')";
-			if (mysqli_query($conn, $sql))
-			{
-				//echo "<h3><mark>New record inserted successfully</mark</h3>";
+				$count+=1;
+				$sql = "UPDATE student_marks SET SyllabusType='$syllabus',YearandSem='$yands',MidExam1='$mid1',MidExam2='$mid2',External='$external' WHERE RollNumber = '$rno' AND CourseID = '$cid' AND Timeperiod = '$id'";
+				if (mysqli_query($conn, $sql))
+				{
+					//echo "<h3><mark>New record inserted successfully</mark</h3>";
+				}
+				else
+				{
+					echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+				}
+				if($count==$affected_rows)
+				{
+					echo "<h3><mark>Results has been declared successfully !!</mark</h3>";
+				}
 			}
-			else
+		}
+		else
+		{
+			while($row = mysqli_fetch_array($retval))
 			{
-				echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-			}
-			if($count==$affected_rows)
-			{
-				echo "<h3><mark>Results has been declared successfully !!</mark</h3>";
+				$rno = $row['RollNumber'];
+				$cid = $row['CourseID'];
+				$syllabus = $row['SyllabusType'];
+				$yands = $row['YearandSem'];
+				$mid1 = $row['Mid1'];
+				$mid2 = $row['Mid2'];
+				$external = $row['External'];
+
+				$count+=1;
+				$sql = "INSERT INTO `student_marks`(`RollNumber`, `CourseID`, `Timeperiod`, `SyllabusType`, `YearandSem`, `MidExam1`, `MidExam2`, `External`) VALUES ('$rno','$cid','$id','$syllabus','$yands','$mid1','$mid2','$external')";
+				if (mysqli_query($conn, $sql))
+				{
+					//echo "<h3><mark>New record inserted successfully</mark</h3>";
+				}
+				else
+				{
+					echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+				}
+				if($count==$affected_rows)
+				{
+					echo "<h3><mark>Results has been declared successfully !!</mark</h3>";
+				}
 			}
 		}
 	}

@@ -6,6 +6,7 @@
 	$currentPage = 'Publish Results';
 
 	include 'header.php';
+
 	$sql="SELECT * FROM `timeperiod` order by id DESC limit 1";
 	$retval = mysqli_query($conn, $sql);
 	if(!$retval)
