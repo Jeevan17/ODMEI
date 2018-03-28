@@ -36,7 +36,18 @@
 			<option>CSE</option>
 			<option>IT</option>
 			<option>ECE</option>
+			<option>EEE</option>
 			<option>Civil</option>
+			<option>Mechanical</option>
+			<option>Production</option>
+			<option>Chemical</option>
+			<option>BioTech</option>
+			<option>Physics</option>
+			<option>Chemistry</option>
+			<option>Mathematics and Humanity</option>
+			<option>MCA</option>
+			<option>Management Studies</option>
+			<option>English</option>
 			<option>All</option>
 		</select>
 	</div>

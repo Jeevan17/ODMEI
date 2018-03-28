@@ -1,4 +1,4 @@
-<?php include '../dataConnections.php'; 
+	<?php include '../dataConnections.php'; 
 
 	session_start();
 	if(!isset($_SESSION['student'])){
@@ -23,7 +23,7 @@
 	$retval = mysqli_query($conn, $sql);
 	while($row = mysqli_fetch_array($retval))
 	{
-		$flag = $row['Rollnumber'];
+		$flag = $row['RollNumber'];
 	}
 	if(mysqli_num_rows($retval)>0)
 	{

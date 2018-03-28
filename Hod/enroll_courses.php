@@ -4,19 +4,21 @@
 	if(!isset($_SESSION['hod'])){
 		echo "<script language='javascript'>window.location='../index.php';</script>";
 	}
-	$currentPage = 'Home';
+	$currentPage = 'other';
 	$uname=$_SESSION['hod'];
 
 	include 'header.php';
 	$hod_name = explode('_', $uname);
 	$enroll = $hod_name[1].'_Enroll';
+	//var_dump($enroll);
 	$sql = "SELECT * from notification Where Type = '$enroll'";
 	$retval=mysqli_query($conn,$sql);
 	$flag=null;
 	while ($row = mysqli_fetch_array($retval))
 	{
-		$flag = $row['Rollnumber'];
+		$flag = $row['RollNumber'];
 	}
+	// var_dump($flag);
 ?>
 
 <br><br>
