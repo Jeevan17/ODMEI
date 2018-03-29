@@ -4,7 +4,7 @@
 	if(!isset($_SESSION['hod'])){
 		echo "<script language='javascript'>window.location='../index.php';</script>";
 	}
-	$currentPage = 'Home';
+	$currentPage = 'other';
 	$uname=$_SESSION['hod'];
 
 	include 'header.php';

@@ -83,17 +83,27 @@
 							<?php
 								$sql="SELECT * FROM `student_achievements` WHERE RollNumber='$uname'";
 								$retval = mysqli_query($conn, $sql);
-								while($row=mysqli_fetch_array($retval))
+								if(mysqli_num_rows($retval) > 0)
 								{
-									echo "
-										<tr>
-											<td>{$row['Title']}</td>
-											<td>{$row['Description']}</td>
-											<td>{$row['DocumentName']}</td>
-											<td><a href='material/download_std_achievements.php?id={$row['id']}' class='btn btn-success'/>Download</a> </td>
-										</tr>
-									";
+									while($row=mysqli_fetch_array($retval))
+									{
+										echo "
+											<tr>
+												<td>{$row['Title']}</td>
+												<td>{$row['Description']}</td>
+												<td>{$row['DocumentName']}</td>
+												<td><a href='material/download_std_achievements.php?id={$row['id']}' class='btn btn-success'/>Download</a> </td>
+											</tr>
+										";
+									}
 								}
+								else
+								{
+									echo "<div class='alert alert-info'>
+										<strong>Please Upload Your Achievements to Visible</strong>
+									</div>";
+								}
+								
 							?>
 						</tbody>
 					</table>

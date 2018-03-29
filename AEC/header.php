@@ -41,10 +41,10 @@
 							'Attendance' => 'AEC.php',
 							'Admission Details' => 'Admission_details.php',
 							'Faculty Details' => 'faculty_details.php',
-							'Mid Marks' => 'Mid_marks.php'
 							);
 							//Other
 							$dropdownurls = array(
+								'Mid Marks' => 'Mid_marks.php',
 								'Prepare Time Table' => 'timetable.php',
 								'Staff Registry' => 'staff_teaches_courses.php',
 								'Course Details' => 'course_details.php',
