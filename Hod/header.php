@@ -42,7 +42,7 @@
 							);
 							//Other
 							$dropdownurls = array(
-								'Timetable' => 'timetable.php',
+								//'Timetable' => 'timetable.php',
 								'Circular' => 'send_circular.php',
 								'Enroll Courses' => 'enroll_courses.php'
 							);

@@ -49,7 +49,21 @@
 		{
 			$data[$day][$time] = '-';
 		}
-	}		
+	}
+	$sql = "SELECT * FROM `sgpa` WHERE RollNumber='$rno' group by RollNumber";
+		$retval = mysqli_query($conn, $sql);
+		$cgpa=0;
+		$aff_rows = mysqli_affected_rows($conn);
+		if($aff_rows==0)
+		{
+			// die('Data not found !! ' . mysqli_error());
+			// exit();
+		}
+		while($row = mysqli_fetch_array($retval))
+		{
+			$cgpa+=$row['SGPA'];
+		}
+		$cgpa=$cgpa/$aff_rows;		
 ?>
 	<div class="row">
 		<div class="col-sm-6">
@@ -88,7 +102,7 @@
 					    </tr>
 					    <tr>
 					      <th scope="row">CGPA</th>
-					      <td><?php echo "--" ?></td>
+					      <td><?php echo round($cgpa,2); ?></td>
 					    </tr>
 					</tr>
 				</tbody>

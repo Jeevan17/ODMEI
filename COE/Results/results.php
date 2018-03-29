@@ -22,9 +22,9 @@
 		$retval = mysqli_query($conn, $sql);
 		$affected_rows = mysqli_affected_rows($conn);
 		// var_dump($affected_rows);
-		if(!$retval)
+		if($affected_rows==0)
 		{
-			die('Could not get data: ' . mysqli_error());
+			die('No data found to release !! ' . mysqli_error());
 		}
 		$count=0;
 		while($row = mysqli_fetch_array($retval))

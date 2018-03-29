@@ -6,11 +6,12 @@
 	$currentPage = 'Publish Results';
 
 	include 'header.php';
+
 	$sql="SELECT * FROM `timeperiod` order by id DESC limit 1";
 	$retval = mysqli_query($conn, $sql);
-	if(!$retval)
+	if(mysqli_affected_rows($conn)==0)
 	{
-		die('Could not get data: ' . mysqli_error());
+		die('No data found !! ' . mysqli_error());
 	}
 	while($row = mysqli_fetch_array($retval))
 	{

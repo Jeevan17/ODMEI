@@ -20,10 +20,6 @@
 			table.table-bordered > tbody > tr > th{
 			    border:1px solid rgba(0, 0, 0, .2);
 			}
-			select.form-control{
-				padding-left: 0px;
-				padding-right: 0px;
-			}
 		</style>
 	</head>
 	<body>
