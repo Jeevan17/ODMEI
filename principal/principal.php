@@ -144,7 +144,7 @@
 						<h1><mark>Semester Marks Details</mark></h1><br>
 						
 						<?php
-							$sql="SELECT * FROM `student_marks_grade` WHERE RollNumber='$rno' ORDER by YearandSem";
+							$sql="SELECT * FROM `sgpa` WHERE RollNumber='$rno' ORDER by YearandSem";
 							$retval = mysqli_query($conn, $sql);
 							echo "
 								<table class='table table-bordered table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl'>
@@ -155,25 +155,26 @@
 										</tr>
 									<tbody class='text-primary'>
 										";
-										// $CGPA =0;
-										// $count=0;
-										// while($row = mysqli_fetch_array($retval))
-										// {
-										// 	$CGPA = $row['SGPA'] + $CGPA;
-										// 	$count++;
-										// 	echo "
-										// 	<tr>
-										// 		<td>{$row['YearandSem']}</td>
-										// 		<td>{$row['SGPA']}</td>
-										// 	</tr>
-										// 	";
-										// }
-										// $CGPA=$CGPA/$count;
-										// <tr>
-										// 	<td class='text-info'>CGPA</th>
-										// 	<td>$CGPA</td>
-										// </tr>
+										$CGPA =0;
+										$count=0;
+										while($row = mysqli_fetch_array($retval))
+										{
+											$CGPA = $row['SGPA'] + $CGPA;
+											$count++;
+											echo "
+											<tr>
+												<td>{$row['YearandSem']}</td>
+												<td>{$row['SGPA']}</td>
+											</tr>
+											";
+										}
+										if($count!=0)
+											$CGPA=$CGPA/$count;
 								echo"
+										<tr>
+											<td class='text-info'>CGPA</th>
+											<td>$CGPA</td>
+										</tr>
 									</tbody>
 								</table>
 							";

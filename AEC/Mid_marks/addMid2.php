@@ -27,7 +27,7 @@
 		
 		if($flag == 1)
 		{
-			$sql = "SELECT student_enroll_courses.CourseID,courses.CourseName from student_enroll_courses join courses on student_enroll_courses.CourseID=courses.CourseID where student_enroll_courses.RollNumber='$rno' and student_enroll_courses.YearandSem = (select CurrentYandS from student where student.RollNumber='$rno')";
+			$sql = "SELECT student_enroll_courses.CourseID,courses.CourseName, course_yands.Type FROM student_enroll_courses INNER JOIN courses on student_enroll_courses.CourseID = courses.CourseID INNER JOIN course_yands ON course_yands.CourseID = student_enroll_courses.CourseID where student_enroll_courses.RollNumber='$rno' and student_enroll_courses.YearandSem = (select CurrentYandS from student where student.RollNumber='$rno') ORDER BY Type";
 			$retval = mysqli_query($conn, $sql);
 			
 			if(!$retval)

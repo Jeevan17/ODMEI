@@ -19,9 +19,9 @@
 		$timeperiod=$row[1];
 	}
 ?>
-<?php $results="Release".$timeperiod."results";?>
+<?php $results="Release $timeperiod results";?>
 <center>
-<h2><input type=button onclick="loadResults(<?php echo $id; ?>)" value=<?php echo $results;?>></h2>
+<h2><input type=button class="btn btn-success pl-5 pr-5" onclick="loadResults(<?php echo $id; ?>)" value='<?php echo $results;?>'></h2>
 </center>
 <div id="show_results">
 </div>

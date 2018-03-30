@@ -49,8 +49,12 @@
 			}
 			if($count==$affected_rows)
 			{
-				echo "<h3><mark>Results has been declared successfully !!</mark</h3>";
+				echo "<hr><center><h3><mark>Results has been declared successfully !!</mark</h3></center>";
 			}
 		}
+		$sql = "DELETE FROM mid_marks";
+		mysqli_query($conn, $sql);
+		$sql = "DELETE FROM sem_marks";
+		mysqli_query($conn, $sql);
 	}
 ?>

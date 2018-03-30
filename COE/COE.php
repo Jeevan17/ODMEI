@@ -49,7 +49,7 @@
 			}
 			if($x==$affected_rows1-1)
 			{
-				echo "<h3><mark>New record inserted successfully</mark</h3>";
+				echo "<hr><center><h3><mark>New record inserted successfully</mark</h3></center>";
 			}
 		}
 	}
