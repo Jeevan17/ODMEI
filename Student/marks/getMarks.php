@@ -29,7 +29,7 @@
 		echo "<h3>CGPA: $cgpa </h3>";
 		echo "<hr>";
 
-		$sql="SELECT * from student_marks where student_marks.RollNumber='$rno' and student_marks.YearandSem='$yands'";
+		$sql="SELECT student_marks.RollNumber, student_marks.CourseID, student_marks.Timeperiod, student_marks.SyllabusType, student_marks.YearandSem, student_marks.MidExam1, student_marks.MidExam2, student_marks.External, course_yands.Type FROM student_marks INNER JOIN course_yands ON course_yands.CourseID = student_marks.CourseID WHERE student_marks.RollNumber='$rno' AND student_marks.YearandSem='$yands' Group BY CourseID ORDER BY Type";
 		$retval = mysqli_query($conn, $sql);
 		$affected_rows = mysqli_affected_rows($conn);
 		if($affected_rows==0)
@@ -45,7 +45,7 @@
 				<th>SNo</th>
 				<th>CourseID</th>
 				<th>CourseName</th>
-				<th>Timeperiod</th>
+				<th>Month & Year</th>
 				<th>Syllabus Type </th>
 				<th>Credits</th>
 				<th>Final Grade</th>
@@ -68,8 +68,7 @@
 			<td><?php echo $row['CourseID'];?></td>
 			<?php
 				$cid=$row['CourseID'];
-				$sql2="SELECT * FROM courses 
-				where courses.CourseID='$cid'";
+				$sql2="SELECT * FROM courses where courses.CourseID='$cid'";
 				$retval2 = mysqli_query($conn, $sql2);
 				while($row2 = mysqli_fetch_array($retval2))
 				{
@@ -172,15 +171,6 @@
 	    color: black;
 	}
 	</style>
-	<?php
-		$sql="INSERT INTO `sgpa`(`RollNumber`, `YearandSem`, `Timeperiod`, `SGPA`) VALUES ('$rno','$yands','$id','$sgpa')";
-		$retval = mysqli_query($conn, $sql);
-		if(!$retval)
-		{
-			// die('Could not get data: ' . mysqli_error());
-		}
-	}
-	else {
-		echo "<h1>Test</h1>";
+<?php	
 	}
 ?>

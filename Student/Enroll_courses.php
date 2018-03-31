@@ -236,6 +236,9 @@
 				}
 			}
 		}
+		echo "
+			<script language='javascript'>window.location='Enroll_courses.php';</script>
+			";
 	}
 ?>
 

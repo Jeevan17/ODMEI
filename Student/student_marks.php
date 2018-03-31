@@ -20,13 +20,12 @@
 	
 	<div class="row">
 		<?php 
-			while($row = mysqli_fetch_array($retval))
-			{?>
-					<div class='col-sm-1'>
-						<input type=button id="<?php echo $row['YearandSem'] ?>" class='btn btn-info' value="<?php echo $row['YearandSem'] ?>"	onclick="load42('<?php echo $rno ?>' , '<?php echo $row['YearandSem'] ?>')">
-					</div>
-			<?php } ?>
-		?>
+		while($row = mysqli_fetch_array($retval))
+		{?>
+				<div class='col-sm-1'>
+					<input type=button id="<?php echo $row['YearandSem'] ?>" class='btn btn-info' value="<?php echo $row['YearandSem'] ?>"	onclick="load42('<?php echo $rno ?>' , '<?php echo $row['YearandSem'] ?>')">
+				</div>
+		<?php } ?>
 	</div>
 	<div id='show_marks'>
 	</div>
