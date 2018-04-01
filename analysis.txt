@@ -13,6 +13,8 @@ principal(student, placement, staff details, send_circular)
 placements(home, company details, branch wise details, year wise details, add new placement batch, add company profile, add student results, placement attendance)
 
 coe(external marks, publish results, add new courses)
+new timeperiod
+marks in principal
 ------------------------------------------------------------------------
 
 Yet to do:
@@ -20,8 +22,6 @@ Yet to do:
 hod(timetable)(J)
 student(give feedback)(J)
 staff(check feedback)(J)
-marks in principal(J)
-new timeperiod(J)
 
 library(E)
 bus(E)
