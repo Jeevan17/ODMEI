@@ -26,16 +26,22 @@ function loadUpdate()
 	 	len=time.length;
 	 	for (var i=0; i<len; i++)
 	 	{
-	 	 	if(time[i].checked==true)
+	 	 	if(time[i].disabled==true)
 	 	 	{
-	 	 		timeslot[i]=1;
+	 	 		timeslot[i]=null;
 	 	 	}
-	 	 	if(time[i].checked==false)
+	 	 	else
 	 	 	{
-	 	 		timeslot[i]=0;
-	 	 	}
+		 	 	if(time[i].checked==true)
+		 	 	{
+		 	 		timeslot[i]=1;
+		 	 	}
+		 	 	if(time[i].checked==false)
+		 	 	{
+		 	 		timeslot[i]=0;
+		 	 	}
+		 	 }
 	 	}
-	 			
 	 // 	present.forEach(function(element) {
 		// 	alert('present:  '+element);
 		// });

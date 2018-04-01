@@ -3,7 +3,7 @@
 	if(!isset($_SESSION['AEC'])){
 		echo "<script language='javascript'>window.location='../index.php';</script>";
 	}
-	$currentPage = 'Mid Marks';
+	$currentPage = 'other';
 
 	include 'header.php';										
 ?>

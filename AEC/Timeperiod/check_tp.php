@@ -13,22 +13,22 @@
 		if($tp=="")
 		{
 			echo "
-					<div class='alert alert-danger'>
-							<strong>Empty Timeperiod cannot be added!</strong>
-						</div>
-						";
-						exit();
+				<div class='alert alert-danger'>
+					<strong>Empty Timeperiod cannot be added!</strong>
+				</div>
+			";
+			exit();
 		}
 		if($affected_rows>0)
 		{
 			//echo "<script type='text/javascript'>alert('testing');</script>";
 			//echo "<h4>Timeperiod already exists !!</h4>";
 			echo "
-					<div class='alert alert-danger'>
-							<strong>Timeperiod already exists!</strong>
-						</div>
-						";
-						exit();
+				<div class='alert alert-danger'>
+					<strong>Timeperiod already exists!</strong>
+				</div>
+			";
+			exit();
 		}
 		else
 		{
@@ -42,9 +42,20 @@
 			{
 				echo "
 					<div class='alert alert-success'>
-							<strong>New Timeperiod added successfully!</strong>
-						</div>
-						";
+						<strong>New Timeperiod added successfully!</strong>
+					</div>
+				";
+				$sql = "DELETE FROM `dailyattendance`";
+				mysqli_query($conn, $sql);
+
+				$sql = "DELETE FROM `material`";
+				mysqli_query($conn, $sql);
+
+				$sql = "DELETE FROM `timetable`";
+				mysqli_query($conn, $sql);
+				
+				$sql = "DELETE FROM `notification` WHERE Type = 'Material' OR Type = 'Assignment' OR Type = 'Feedback'";
+				mysqli_query($conn, $sql);
 			}
 		}
 	}

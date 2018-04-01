@@ -1,4 +1,4 @@
-	<?php include '../dataConnections.php'; 
+<?php include '../dataConnections.php'; 
 
 	session_start();
 	if(!isset($_SESSION['student'])){
@@ -29,115 +29,127 @@
 	{
 		if($flag == 1)
 		{
-			$sql = "SELECT course_yands.CourseID, Type, courses.CourseName FROM course_yands INNER JOIN courses ON courses.CourseID = course_yands.CourseID WHERE Branch='$branch' AND YearandSem='$yands'";
+			$sql ="SELECT * FROM `student_enroll_courses` WHERE RollNumber='$uname' AND YearandSem='$yands'";
 			$retval = mysqli_query($conn, $sql);
-			$data = array();
-			while($row = mysqli_fetch_array($retval))
+			if(!(mysqli_num_rows($retval)>0))
 			{
-				$data[$row['Type']][$row['CourseID']] = $row['CourseName'];
-			}
-			
-			echo "<h1>Enroll Your Subjects</h1>";
-			echo "<hr>";
-			echo "<form method='POST' action='Enroll_courses.php'>";
-			$temp = array();
-			foreach ($data as $type => $courses)
-			{
-				if($type == 'Theory')
+				$sql = "SELECT course_yands.CourseID, Type, courses.CourseName FROM course_yands INNER JOIN courses ON courses.CourseID = course_yands.CourseID WHERE Branch='$branch' AND YearandSem='$yands'";
+				$retval = mysqli_query($conn, $sql);
+				$data = array();
+				while($row = mysqli_fetch_array($retval))
 				{
-					echo "<h3><mark>Theory</mark></h3>";
-					echo "<br>";
-					foreach ($courses as $cid => $cname)
+					$data[$row['Type']][$row['CourseID']] = $row['CourseName'];
+				}
+				
+				echo "<h1>Enroll Your Subjects</h1>";
+				echo "<hr>";
+				echo "<form method='POST' action='Enroll_courses.php'>";
+				$temp = array();
+				foreach ($data as $type => $courses)
+				{
+					if($type == 'Theory')
 					{
+						echo "<h3><mark>Theory</mark></h3>";
+						echo "<br>";
+						foreach ($courses as $cid => $cname)
+						{
+							echo "<div class='col-sm-6'>";
+							echo "
+							  <input class='form-control' name='$cid' type='text' disabled value='$cname'>
+							";
+							echo "</div><br>";
+							array_push($temp, $cid);
+						}
+					}
+					elseif($type == 'Elective-I')
+					{
+						echo "<h3><mark>Elective-I</mark></h3>";
+						echo "<br>";
 						echo "<div class='col-sm-6'>";
-						echo "
-						  <input class='form-control' name='$cid' type='text' disabled value='$cname'>
-						";
-						echo "</div><br>";
-						array_push($temp, $cid);
+							echo "<select class='form-control' name='Elective-I'>";
+							foreach ($courses as $cid => $cname)
+							{
+								echo "
+									<option>$cid--$cname</option>
+								";
+							}
+							echo "</select><br>";
+						echo "</div>";
+					}
+					elseif($type == 'Elective-II')
+					{
+						echo "<h3><mark>Elective-II</mark></h3>";
+						echo "<br>";
+						echo "<div class='col-sm-6'>";
+							echo "<select class='form-control' name='Elective-II'>";
+							foreach ($courses as $cid => $cname)
+							{
+								echo "
+									<option>$cid--$cname</option>
+								";
+							}
+							echo "</select><br>";
+						echo "</div>";
+					}
+					elseif($type == 'Elective-III')
+					{
+						echo "<h3><mark>Elective-III</mark></h3>";
+						echo "<br>";
+						echo "<div class='col-sm-6'>";
+							echo "<select class='form-control' name='Elective-III'>";
+							foreach ($courses as $cid => $cname)
+							{
+								echo "
+									<option>$cid--$cname</option>
+								";
+							}
+							echo "</select><br>";
+						echo "</div>";
+					}
+					elseif($type == 'Elective-IV')
+					{
+						echo "<h3><mark>Elective-IV</mark></h3>";
+						echo "<br>";
+						echo "<div class='col-sm-6'>";
+							echo "<select class='form-control' name='Elective-IV'>";
+							foreach ($courses as $cid => $cname)
+							{
+								echo "
+									<option>$cid--$cname</option>
+								";
+							}
+							echo "</select><br>";
+						echo "</div>";
+					}
+					elseif($type == 'Lab')
+					{
+						echo "<h3><mark>Lab</mark></h3>";
+						echo "<br>";
+						foreach ($courses as $cid => $cname)
+						{
+							echo "<div class='col-sm-6'>";
+							echo "
+							  <input class='form-control' name='lab' type='text' disabled value='$cname'>
+							";
+							echo "</div><br>";
+							array_push($temp, $cid);
+						}
 					}
 				}
-				elseif($type == 'Elective-I')
-				{
-					echo "<h3><mark>Elective-I</mark></h3>";
-					echo "<br>";
-					echo "<div class='col-sm-6'>";
-						echo "<select class='form-control' name='Elective-I'>";
-						foreach ($courses as $cid => $cname)
-						{
-							echo "
-								<option>$cid--$cname</option>
-							";
-						}
-						echo "</select><br>";
-					echo "</div>";
-				}
-				elseif($type == 'Elective-II')
-				{
-					echo "<h3><mark>Elective-II</mark></h3>";
-					echo "<br>";
-					echo "<div class='col-sm-6'>";
-						echo "<select class='form-control' name='Elective-II'>";
-						foreach ($courses as $cid => $cname)
-						{
-							echo "
-								<option>$cid--$cname</option>
-							";
-						}
-						echo "</select><br>";
-					echo "</div>";
-				}
-				elseif($type == 'Elective-III')
-				{
-					echo "<h3><mark>Elective-III</mark></h3>";
-					echo "<br>";
-					echo "<div class='col-sm-6'>";
-						echo "<select class='form-control' name='Elective-III'>";
-						foreach ($courses as $cid => $cname)
-						{
-							echo "
-								<option>$cid--$cname</option>
-							";
-						}
-						echo "</select><br>";
-					echo "</div>";
-				}
-				elseif($type == 'Elective-IV')
-				{
-					echo "<h3><mark>Elective-IV</mark></h3>";
-					echo "<br>";
-					echo "<div class='col-sm-6'>";
-						echo "<select class='form-control' name='Elective-IV'>";
-						foreach ($courses as $cid => $cname)
-						{
-							echo "
-								<option>$cid--$cname</option>
-							";
-						}
-						echo "</select><br>";
-					echo "</div>";
-				}
-				elseif($type == 'Lab')
-				{
-					echo "<h3><mark>Lab</mark></h3>";
-					echo "<br>";
-					foreach ($courses as $cid => $cname)
-					{
-						echo "<div class='col-sm-6'>";
-						echo "
-						  <input class='form-control' name='lab' type='text' disabled value='$cname'>
-						";
-						echo "</div><br>";
-						array_push($temp, $cid);
-					}
-				}
+				echo "<br>
+	                    <center><input type='submit' value='Enroll' class='btn btn-outline-info pl-5 pr-5' name='submit'></center>
+	                </form>
+	                <br>
+	                ";
+				$_SESSION['temp'] = $temp;
 			}
-			echo "<br>
-                    <center><input type='submit' value='Enroll' class='btn btn-outline-info pl-5 pr-5' name='submit'></center>
-                </form>
-                <br>
-                ";
-			$_SESSION['temp'] = $temp;
+			else
+			{
+				echo "
+				<div class='alert alert-danger'>
+					<strong>Already Enrolled!</strong>
+				</div>";
+			}
 		}
 		else
 		{
@@ -224,6 +236,9 @@
 				}
 			}
 		}
+		echo "
+			<script language='javascript'>window.location='Enroll_courses.php';</script>
+			";
 	}
 ?>
 

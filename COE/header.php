@@ -6,21 +6,6 @@
 		<meta name='viewport' content='width=device-width, initial-scale=1'>
 		<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css'>
 		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0-beta.3/lux/bootstrap.min.css">
-		<style type="text/css">
-			table.table-bordered{
-			    border:1px solid rgba(0, 0, 0, .2);//#ff0040;
-			    margin-top:20px;
-			}
-			table.table-bordered > thead > tr > th{
-			    border:1px solid rgba(0, 0, 0, .2);
-			}
-			table.table-bordered > tbody > tr > td{
-			    border:1px solid rgba(0, 0, 0, .2);
-			}
-			table.table-bordered > tbody > tr > th{
-			    border:1px solid rgba(0, 0, 0, .2);
-			}
-		</style>
 	</head>
 	<body>
 		<header>

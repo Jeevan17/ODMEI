@@ -23,7 +23,7 @@
 		}
 		else
 		{
-			$sql = "SELECT mid_marks.CourseID,courses.CourseName,mid_marks.Mid1 FROM mid_marks INNER JOIN courses ON mid_marks.CourseID = courses.CourseID WHERE mid_marks.RollNumber='$rno' AND mid_marks.Timeperiod =(SELECT MAX(id) from Timeperiod)";
+			$sql = "SELECT mid_marks.CourseID,courses.CourseName,mid_marks.Mid1 FROM mid_marks INNER JOIN courses ON mid_marks.CourseID = courses.CourseID INNER JOIN course_yands ON course_yands.CourseID = mid_marks.CourseID WHERE mid_marks.RollNumber='$rno' AND mid_marks.Timeperiod =(SELECT MAX(id) from Timeperiod) ORDER BY Type";
 			$retval = mysqli_query($conn, $sql);
 			
 			if(!$retval)

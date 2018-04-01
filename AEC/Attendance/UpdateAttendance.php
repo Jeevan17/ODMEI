@@ -25,9 +25,11 @@
 		{
 			$Timeperiod = $row['id'];
 		}
-
 		$sql = "SELECT attendance.TotalAttended, attendance.TotalClassesHeld FROM attendance WHERE attendance.RollNumber = '$rollnum' and attendance.YearandSem='$yands' AND attendance.Timeperiod = $Timeperiod";
 		global $TCH,$TCA;
+		
+		$TCH = null;
+		$TCA = null;
 		$retval = mysqli_query($conn, $sql);
 		while ($row = mysqli_fetch_array($retval))
 		{
@@ -36,55 +38,84 @@
 		}
 		for ($i=0; $i <7 ; $i++)
 		{
-			if ($timeslot[$i] == 1)
-	 		{
-	 			$sql = "UPDATE dailyattendance SET Attendance='Present' WHERE RollNumber='$rollnum' and Date ='$date' and Timeslot='$time_slot[$i]'";
-	 			if (mysqli_query($conn, $sql))
-	 			{
-				    if (!is_null($TCH) and !is_null($TCA))
-				    {
-						$TCH = $TCH + 1;
-				    	$TCA = $TCA + 1;
-				    	$sql = "UPDATE attendance SET TotalAttended=$TCA,TotalClassesHeld=$TCH WHERE RollNumber='$rollnum' AND timeperiod='$Timeperiod' AND YearandSem='$yands'";
-				    	if (mysqli_query($conn, $sql))
-	 					{
-				    		//echo "New record created successfully";
-	 					}
-	 					else
-	 					{
-	 						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-	 					}
-				    }
-				}
-				else
-				{
-				    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-				}
-		 	}
-		 	else if ($timeslot[$i] == 0)
-	 		{
-	 			$sql = "UPDATE dailyattendance SET Attendance='Absent' WHERE RollNumber='$rollnum' and Date ='$date' and Timeslot='$time_slot[$i]'";
-	 			if (mysqli_query($conn, $sql))
-	 			{
-				    if (!is_null($TCH) and !is_null($TCA))
-				    {
-				    	$TCH = $TCH +1;
-				    	$sql = "UPDATE attendance SET TotalClassesHeld=$TCH WHERE RollNumber='$rollnum' AND timeperiod='$Timeperiod' AND YearandSem='$yands'";
-				    	if (mysqli_query($conn, $sql))
-	 					{
-				    		//echo "New record created successfully";
-	 					}
-	 					else
-	 					{
-	 						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-	 					}
-				    }
-				}
-				else
-				{
-				    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-				}
-		 	}
+			if(!is_null($timeslot[$i]))
+			{
+				if ($timeslot[$i] == 1)
+		 		{
+		 			$sql = "SELECT Attendance, Timeslot FROM dailyattendance WHERE RollNumber='$rollnum' and Date = '$date'";
+					$retval = mysqli_query($conn, $sql);
+					$AT = array();
+					while ($row = mysqli_fetch_array($retval))
+					{
+						$AT[$row['Timeslot']] = $row['Attendance']; 
+					}
+					if($AT[$time_slot[$i]] == 'Present')
+					{
+					}
+					else
+					{
+						$sql = "UPDATE dailyattendance SET Attendance='Present' WHERE RollNumber='$rollnum' and Date ='$date' and Timeslot='$time_slot[$i]'";
+			 			if (mysqli_query($conn, $sql))
+			 			{
+						    if (!is_null($TCH) and !is_null($TCA))
+						    {
+								//$TCH = $TCH + 1;
+						    	$TCA = $TCA + 1;
+						    	$sql = "UPDATE attendance SET TotalAttended=$TCA WHERE RollNumber='$rollnum' AND timeperiod='$Timeperiod' AND YearandSem='$yands'";
+						    	if (mysqli_query($conn, $sql))
+			 					{
+						    		//echo "New record created successfully";
+			 					}
+			 					else
+			 					{
+			 						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+			 					}
+						    }
+						}
+						else
+						{
+						    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+						}
+					}
+			 	}
+			 	else if ($timeslot[$i] == 0)
+		 		{
+		 			$sql = "SELECT Attendance, Timeslot FROM dailyattendance WHERE RollNumber='$rollnum' and Date = '$date'";
+					$retval = mysqli_query($conn, $sql);
+					while ($row = mysqli_fetch_array($retval))
+					{
+						$AT[$row['Timeslot']] = $row['Attendance']; 
+					}
+					if($AT[$time_slot[$i]] == 'Absent')
+					{
+					}
+					else
+					{
+						$sql = "UPDATE dailyattendance SET Attendance='Absent' WHERE RollNumber='$rollnum' and Date ='$date' and Timeslot='$time_slot[$i]'";
+			 			if (mysqli_query($conn, $sql))
+			 			{
+						    if (!is_null($TCH) and !is_null($TCA))
+						    {
+						    	//$TCH = $TCH + 1;
+						    	$TCA = $TCA - 1;
+						    	$sql = "UPDATE attendance SET TotalAttended=$TCA WHERE RollNumber='$rollnum' AND timeperiod='$Timeperiod' AND YearandSem='$yands'";
+						    	if (mysqli_query($conn, $sql))
+			 					{
+						    		//echo "New record created successfully";
+			 					}
+			 					else
+			 					{
+			 						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+			 					}
+						    }
+						}
+						else
+						{
+						    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+						}
+					}
+			 	}
+			}
 		}        
 	}
 ?>

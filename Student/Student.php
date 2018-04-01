@@ -63,7 +63,10 @@
 		{
 			$cgpa+=$row['SGPA'];
 		}
-		$cgpa=$cgpa/$aff_rows;		
+		if ($aff_rows != 0 )
+		{
+			$cgpa=$cgpa/$aff_rows;		
+		}
 ?>
 	<div class="row">
 		<div class="col-sm-6">
