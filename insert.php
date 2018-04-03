@@ -1,7 +1,7 @@
 <?php include 'dataConnections.php';
-	$branch = 'CSE';
-	$yands = '1/4 Sem-1';
-	$timeperiod = '2';
+	$branch = 'IT';
+	$yands = '2/4 Sem-2';
+	$timeperiod = '6';
 	$syllabustype = 'R13';
 
 	$sql = "SELECT CourseID FROM course_yands WHERE Branch='$branch' AND YearandSem='$yands'";
