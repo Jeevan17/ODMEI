@@ -11,7 +11,7 @@
 		$rno = $_POST['rno'];
 		$yands = $_POST['yands'];
 		
-		$sql = "SELECT * FROM `sgpa` WHERE RollNumber='$rno' group by RollNumber";
+		$sql = "SELECT * FROM `sgpa` WHERE RollNumber='$rno'";
 		$retval = mysqli_query($conn, $sql);
 		$cgpa=0;
 		$aff_rows = mysqli_affected_rows($conn);
