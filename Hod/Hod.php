@@ -9,6 +9,18 @@
 
 	include 'header.php';
 	$hod_name = explode('_', $uname);
+
+	$days = array('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
+	$time_slot = array('09:40:00','10:30:00','11:20:00','12:10:00','01:35:00','02:25:00','03:15:00');
+
+	$data = array();
+	foreach ($days as $day)
+	{
+		foreach ($time_slot as $time)
+		{
+			$data[$day][$time] = '-';
+		}
+	}
 ?>
 <div>
 	<center>
@@ -27,7 +39,7 @@
 		if($_POST['rollno']!=null)
 		{
 			//session_start();
-			if(!isset($_SESSION['Hod'])){
+			if(!isset($_SESSION['hod'])){
 				echo "<script language='javascript'>window.location='index.php';</script>";
 			}
 			$rno = $_POST['rollno'];
@@ -49,6 +61,9 @@
 					<li class='nav-item'>
 						<a class='nav-link active' data-toggle='pill' href='#admission'>Admission Details</a>
 					</li>
+					<!-- <li class='nav-item'>
+						<a class='nav-link' data-toggle='pill' href='#timetable'>TimeTable</a>
+					</li> -->
 					<li class='nav-item'>
 						<a class='nav-link' data-toggle='pill' href='#Attendance'>Attendance</a>
 					</li>
@@ -66,10 +81,11 @@
 			<div class='col-sm-8'>
 				<div class='tab-content'>
 					<div id='admission' class='container tab-pane active'>
-						
 						<?php
 						while($row = mysqli_fetch_array($retval))
-						{ ?>
+						{ 	$batch = $row['CBatch'];
+							$yands = $row['CurrentYandS'];
+							?>
 						
 							<h1><mark>Admission Details</mark></h1><br>
 							<table class='table table-bordered table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl'>
@@ -114,6 +130,68 @@
 				  		} 
 				  	?>
 					</div>
+					<!-- <div id='timetable' class='container tab-pane fade'>
+					    <?php
+							// $sql = "SELECT timetable.Day,timetable.Timeslot,timetable.StaffID,staff.FullName, timetable.CourseID, courses.CourseName FROM timetable INNER JOIN staff ON timetable.StaffID = staff.StaffID INNER JOIN courses ON timetable.CourseID = courses.CourseID WHERE timetable.YearandSem = '$yands' AND timetable.BSP = (SELECT student.BSP FROM student WHERE student.RollNumber = '$rno') AND timetable.CourseID IN (SELECT student_enroll_courses.CourseID FROM student_enroll_courses WHERE student_enroll_courses.RollNumber='$rno') AND (timetable.Batch = '$batch' OR timetable.Batch = '0') ORDER BY Day,Timeslot";
+							// $retval = mysqli_query($conn, $sql);
+							// while($row = mysqli_fetch_array($retval))
+							// {
+							// 	$data[$row['Day']][$row['Timeslot']] = array($row['StaffID'],$row['FullName'], $row['CourseID'], $row['CourseName']);
+							// }
+						?>
+						<h2><mark>Time Table</mark></h2>
+						<table class='table table-bordered table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl'>
+							<thead>
+								<tr>
+									<th></th>
+									<th>09:40:00-10:30:00</th>
+									<th>10:30:00-11:20:00</th>
+									<th>11:20:00-12:10:00</th>
+									<th>12:10:00-01:00:00</th>
+									<th>01:35:00-02:25:00</th>
+									<th>02:25:00-03:15:00</th>
+									<th>03:15:00-04:05:00</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php 
+									// foreach ($data as $day => $time)
+									// {
+									// 	if ($day == date("l"))
+									// 	{
+									// 		echo "
+									// 			<tr class='table-info'>
+									// 				<th>$day</th>
+									// 		";
+									// 	}
+									// 	else
+									// 	{
+									// 		echo "
+									// 			<tr>
+									// 				<th>$day</th>
+									// 		";
+									// 	}
+										
+									// 	foreach ($time as $value)
+									// 	{
+									// 		echo "<td>";
+									// 		if ($value != '-')
+									// 		{
+									// 			echo "<center>$value[3]<br>--------<br>";
+									// 			echo "$value[1]</center>";
+									// 		}
+									// 		else
+									// 		{
+									// 			echo "<center style='font-size:  20px;'>$value</center>";
+									// 		}
+									// 		echo "</td>";
+									// 	}
+									// 	echo "</tr>";
+									// }
+								?>
+							</tbody>
+						</table>
+					</div> -->
 					<div id='Attendance' class='container tab-pane fade'>
 					    <h1><mark>Attendance Details</mark></h1><br>
 						<?php 
@@ -147,7 +225,7 @@
 						<h1><mark>Semester Marks Details</mark></h1><br>
 						
 						<?php
-							$sql="SELECT * FROM `student_marks_grade` WHERE RollNumber='$rno' ORDER by YearandSem";
+							$sql="SELECT * FROM `sgpa` WHERE RollNumber='$rno' ORDER by YearandSem";
 							$retval = mysqli_query($conn, $sql);
 							echo "
 								<table class='table table-bordered table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl'>
@@ -158,25 +236,25 @@
 										</tr>
 									<tbody class='text-primary'>
 										";
-										// $CGPA =0;
-										// $count=0;
-										// while($row = mysqli_fetch_array($retval))
-										// {
-										// 	$CGPA = $row['SGPA'] + $CGPA;
-										// 	$count++;
-										// 	echo "
-										// 	<tr>
-										// 		<td>{$row['YearandSem']}</td>
-										// 		<td>{$row['SGPA']}</td>
-										// 	</tr>
-										// 	";
-										// }
-										// $CGPA=$CGPA/$count;
-										// <tr>
-										// 	<td class='text-info'>CGPA</th>
-										// 	<td>$CGPA</td>
-										// </tr>
+										$CGPA =0;
+										$count=0;
+										while($row = mysqli_fetch_array($retval))
+										{
+											$CGPA = $row['SGPA'] + $CGPA;
+											$count++;
+											echo "
+											<tr>
+												<td>{$row['YearandSem']}</td>
+												<td>{$row['SGPA']}</td>
+											</tr>
+											";
+										}
+										$CGPA=$CGPA/$count;
 								echo"
+										<tr>
+											<td class='text-info'>CGPA</th>
+											<td>$CGPA</td>
+										</tr>
 									</tbody>
 								</table>
 							";
