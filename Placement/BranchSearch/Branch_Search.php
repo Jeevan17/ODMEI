@@ -11,7 +11,7 @@
 		echo "<hr><h3><mark>$bname</mark></h3><br>";
 		$sql="SELECT placement_batch.Batch_name, student_attend_placements.CompanyName, COUNT(student_attend_placements.CompanyName) AS Count FROM student_attend_placements 
 			INNER JOIN placement_batch ON placement_batch.ID = student_attend_placements.PBatch
-			WHERE student_attend_placements.RollNumber IN (SELECT student.RollNumber FROM student WHERE student.BSP IN (SELECT bsp_code.BSP FROM bsp_code WHERE bsp_code.Branch='$bname'))GROUP BY Batch_name, CompanyName";
+			WHERE student_attend_placements.Result='Placed' AND student_attend_placements.RollNumber IN (SELECT student.RollNumber FROM student WHERE student.BSP IN (SELECT bsp_code.BSP FROM bsp_code WHERE bsp_code.Branch='$bname'))GROUP BY Batch_name, CompanyName";
 		$data = array();
 		$retval = mysqli_query($conn, $sql);
 		while($row = mysqli_fetch_array($retval))

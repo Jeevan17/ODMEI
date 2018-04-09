@@ -1,11 +1,10 @@
 <?php include 'dataConnections.php';
-
 	session_start();
-	if(isset($_SESSION['staff'])) {
-		unset($_SESSION['staff']);
-		session_destroy();
-		echo "<script language='javascript'>window.location='index.php';</script>";
-	}
+	// if(isset($_SESSION['staff'])) {
+	// 	unset($_SESSION['staff']);
+	// 	session_destroy();
+	// 	echo "<script language='javascript'>window.location='index.php';</script>";
+	// }
 	
 ?>
 

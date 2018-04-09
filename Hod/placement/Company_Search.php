@@ -14,7 +14,7 @@
 		echo "<hr><h3><mark>$cname</mark></h3><br>";
 		$sql="SELECT placement_batch.Batch_name, count(bsp_code.Branch) as Count FROM student INNER JOIN student_attend_placements ON student.RollNumber=student_attend_placements.RollNumber INNER JOIN bsp_code ON student.BSP=bsp_code.BSP INNER JOIN placement_batch ON placement_batch.ID = student_attend_placements.PBatch where student_attend_placements.Result='Placed' and student_attend_placements.CompanyName='$cname' AND bsp_code.BSP IN (SELECT bsp_code.BSP FROM bsp_code WHERE bsp_code.Branch ='$hod_name[1]') GROUP BY student_attend_placements.CompanyName, bsp_code.Branch ORDER BY student_attend_placements.CompanyName";
 		$retval = mysqli_query($conn, $sql);
-		if(mysqli_num_rows($retval) > 0)
+		if(mysqli_num_rows($retval) >= 0)
 		{
 			$data = array();
 			while($row = mysqli_fetch_array($retval))
@@ -54,13 +54,13 @@
 				</table>
 				";
 		}
-		else
-		{
-			echo "
-				<div class='alert alert-danger'>
-					<strong>No Data Found</strong>
-				</div>
-			";
-		}
+		// else
+		// {
+		// 	echo "
+		// 		<div class='alert alert-danger'>
+		// 			<strong>No Data Found</strong>
+		// 		</div>
+		// 	";
+		// }
 	}
 ?>

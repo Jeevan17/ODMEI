@@ -13,10 +13,10 @@
 		$retval = mysqli_query($conn, $sql);
 		
 		$data = array();
-		$brch = array('CSE','ECE','IT');
+		$brch = array('CSE','IT');
 		while($row = mysqli_fetch_array($retval))
 		{
-			for ($i=0; $i<3 ; $i++)
+			for ($i=0; $i<2 ; $i++)
 			{ 
 				$data[$row['CompanyName']][$brch[$i]] = '-';
 			}
@@ -33,7 +33,6 @@
 					<tr>
 						<th>Company Name</th>
 						<th>CSE</th>
-						<th>ECE</th>
 						<th>IT</th>
 					</tr>
 				</thead>

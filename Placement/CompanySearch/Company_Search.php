@@ -19,10 +19,10 @@ if (array_key_exists('cname', $_POST))
 	$retval = mysqli_query($conn, $sql);
 	
 	$data = array();
-	$brch = array('CSE','ECE','IT');
+	$brch = array('CSE','IT');
 	while($row = mysqli_fetch_array($retval))
 	{
-		for ($i=0; $i<3 ; $i++)
+		for ($i=0; $i<2 ; $i++)
 		{ 
 			$data[$row['Batch_name']][$brch[$i]] = '-';
 		}
@@ -38,7 +38,6 @@ if (array_key_exists('cname', $_POST))
 				<tr>
 					<th>Placement Batch</th>
 					<th>CSE</th>
-					<th>ECE</th>
 					<th>IT</th>
 				</tr>
 			</thead>

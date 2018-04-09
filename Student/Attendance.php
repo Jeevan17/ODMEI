@@ -49,9 +49,18 @@
 					";
 					foreach ($value as $time => $attendance)
 					{
-						echo "
-							<td><center>$attendance</center></td>
-						";	
+						if($attendance=='Absent')
+						{
+							echo "
+								<td class='text-danger'><center>$attendance</center></td>
+							";
+						}
+						else
+						{
+							echo "
+								<td><center>$attendance</center></td>
+							";
+						}
 					}
 						echo "</tr>";
 				}

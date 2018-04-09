@@ -35,10 +35,10 @@
 						$retval = mysqli_query($conn, $sql);
 						
 						$data = array();
-						$brch = array('CSE','ECE','IT');
+						$brch = array('CSE','IT');
 						while($row = mysqli_fetch_array($retval))
 						{
-							for ($i=0; $i<3 ; $i++)
+							for ($i=0; $i<2 ; $i++)
 							{ 
 								$data[$row['CompanyName']][$brch[$i]] = '-';
 							}
@@ -56,7 +56,6 @@
 									<tr>
 										<th>Company Name</th>
 										<th>CSE</th>
-										<th>ECE</th>
 										<th>IT</th>
 									</tr>
 								</thead>
@@ -84,8 +83,7 @@
 				<div id='company' class='container tab-pane fade'>
 					<center>
 						<label for='cname'>Enter Company Name</label>
-						<input type='text' class='form-control' id='cname' placeholder='eg:- Google' name='company_name' required style=' width: 200px;     display: initial;'>
-						<input type='button' name='Search' value='Search' class='btn ml-3 btn-outline-primary btn-sm' style='display: initial;' onclick='loadCompany()'>
+						<input type='text' class='form-control' id='cname' placeholder='eg:- Google' name='company_name' required style=' width: 200px;     display: initial;' onkeyup="loadCompany()">
 					</center>
 				  	<div id='company_details'>
 				  	</div>
@@ -94,8 +92,7 @@
 				<div id='branch' class='container tab-pane fade'>
 					<center>
 						<label for='bname'>Enter Branch Name</label>
-						<input type='text' class='form-control' id='bname' placeholder='eg:- CSE' name='branch_name' required style=' width: 200px;     display: initial;'>
-						<input type='button' name='Search' value='Search' class='btn ml-3 btn-outline-primary btn-sm' style='display: initial;' onclick='loadBranch()'>
+						<input type='text' class='form-control' id='bname' placeholder='eg:- CSE' name='branch_name' required style=' width: 200px;     display: initial;' onkeyup="loadBranch()">
 					</center>
 				  	<div id='branch_details'>
 				  	</div>
@@ -104,8 +101,7 @@
 				<div id='year' class='container tab-pane fade'>
 					<center>
 						<label for='yname'>Enter Placement Batch</label>
-						<input type='text' class='form-control' id='yname' placeholder='eg:- 2017-2018' name='year_name' required style=' width: 200px;     display: initial;'>
-						<input type='button' name='Search' value='Search' class='btn ml-3 btn-outline-primary btn-sm' style='display: initial;' onclick='loadYear()'>
+						<input type='text' class='form-control' id='yname' placeholder='eg:- 2017-2018' name='year_name' required style=' width: 200px;     display: initial;' onkeyup="loadYear()">
 					</center>
 				  	<div id='year_details'>
 					</div>

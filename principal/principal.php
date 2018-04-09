@@ -121,7 +121,7 @@
 									<thead>
 										<tr>
 											<th class='text-info'>Year and Sem</th>
-											<th class='text-info'>Attendance</th>
+											<th class='text-info'>Attendance(%)</th>
 										</tr>
 									</thead>
 									<tbody class='text-primary'>";
@@ -137,7 +137,7 @@
 										}
 								echo"
 									</tbody>
-								</table>
+								</table><br><br><br>
 					</div>";
 					?>
 					<div id='marks' class='container tab-pane fade'>
@@ -170,14 +170,12 @@
 										}
 										if($count!=0)
 											$CGPA=$CGPA/$count;
+										$CGPA=round($CGPA,2);
 								echo"
-										<tr>
-											<td class='text-info'>CGPA</th>
-											<td>$CGPA</td>
-										</tr>
 									</tbody>
 								</table>
 							";
+							echo "<h3>CGPA: $CGPA</h3><br><br><br>";
 						?>
 					</div>
 					
@@ -228,16 +226,29 @@
 										</tr>";
 										while($row = mysqli_fetch_array($retval))
 										{
-											echo "
+											if($row['Result']=='Placed')
+											{
+												echo "
+											<tr>
+												<td><h5><font color='green'>{$row['CompanyName']}</font></h5></td>
+												<td><h4><font color='green'>{$row['Result']}</font></h4></td>
+											</tr>
+											";
+											}
+											else
+											{
+												echo "
 											<tr>
 												<td>{$row['CompanyName']}</td>
 												<td>{$row['Result']}</td>
 											</tr>
 											";
+											}
+											
 										}
 								echo"
 									</tbody>
-								</table>
+								</table><br><br><br>
 							";
 						?>
 					</div>

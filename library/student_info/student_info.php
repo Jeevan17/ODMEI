@@ -12,6 +12,7 @@
 		$retval = mysqli_query($conn, $sql);
 		$aff_rows = mysqli_affected_rows($conn);
 ?>
+<form action="student_info/student_info.php" method="POST">
 	<table border="1">
 	<tr>
 		<th>SNo</th>
@@ -19,7 +20,6 @@
 		<th>Title</th>
 		<th>Author</th>
 		<th>CheckedOutDate</th>
-		<th>ReturnedDate</th>
 	</tr>
 <?php
 		$count=0;
@@ -33,13 +33,14 @@
 				<td><?php echo $row['Title'] ?></td>
 				<td><?php echo $row['Author'] ?></td>
 				<td><?php echo $row['CheckedOutDate'] ?></td>
-				<td><?php echo $row['ReturnedDate'] ?></td>
+				<td><input type="submit" id="<?php echo $row['BookID'] ?>" name="<?php echo $row['BookID'] ?>" value="<?php echo $row['BookID']."--Returned" ?>"></td>
 			</tr>
 
 <?php
 }
 ?>
 </table>
+</form>
 <?php
 echo "<hr><h4>Total books taken: $count<h4><hr>";
 if($count>=4)
@@ -50,7 +51,10 @@ else
 {
 	echo "<input type=button value=\"Issue book\">";
 }
-
-
+}
+if(isset($_POST["submit"]))
+{
+	$book_id=$_POST['submit'];
+	var_dump($book_id);
 }
 ?>

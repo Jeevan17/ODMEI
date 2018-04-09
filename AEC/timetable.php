@@ -40,7 +40,6 @@
 		<div class="col-sm-4">
 			<select class="form-control" id="Branch">
 			    <option selected="selected">CSE</option>
-			    <option>ECE</option>
 			    <option>IT</option>
 			</select>
 		</div>

@@ -54,7 +54,7 @@
 									<option selected="selected">-</option>
 									<?php
 										$sql = "SELECT courses.CourseID,courses.CourseName FROM courses
-												INNER JOIN student_enroll_courses
+												NATURAL JOIN student_enroll_courses
 												WHERE student_enroll_courses.YearandSem='$year/4 Sem-$semester' AND student_enroll_courses.Timeperiod = (SELECT max(timeperiod.id) FROM timeperiod) AND student_enroll_courses.RollNumber IN (SELECT student.RollNumber FROM student WHERE student.BSP = (SELECT bsp_code.BSP FROM bsp_code WHERE bsp_code.Branch='$branch' AND bsp_code.Section = '$section' AND bsp_code.Program = '$program'))
 												GROUP BY courses.CourseID";
 										$retval = mysqli_query($conn, $sql);

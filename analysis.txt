@@ -35,9 +35,19 @@ New year/Semester-1 started:
 ----------------------------------------------------------------------------
 1. AEC----add timeperiod, student_admissions
 2. COE----add_new_courses(if any)
-3. HOD----add_courses, staff_registry, prepare_timetable, enable_std_enroll_courses
+3. HOD----add_courses, staff_registry, enable_std_enroll_courses
 4. STUDENT----enroll_courses
-5. STAFF----add_attendance, send_material(if any)
-6. AEC----update_attendance(if any), add_mid_marks(update if any)
-7. COE----add_external_marks
+5. HOD---prepare_timetable
+6. STAFF----add_attendance, send_material(if any)
+7. AEC----update_attendance(if any), add_mid_marks(update if any)
+8. COE----add_external_marks
 ----------------------------------------------------------------------------
+
+
+
+
+1. add timeperiod
+2. change current_yands to 3/4 Sem-1 and run insert for CSE and IT
+3. add timeperiod
+4. change current_yands to 3/4 Sem-2 and run insert for CSE and IT
+5. script for placement

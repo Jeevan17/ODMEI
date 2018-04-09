@@ -22,10 +22,10 @@
       $sql="SELECT student_attend_placements.CompanyName, bsp_code.Branch ,count(bsp_code.Branch) as Count FROM student INNER JOIN student_attend_placements ON student.RollNumber=student_attend_placements.RollNumber INNER JOIN bsp_code ON student.BSP=bsp_code.BSP where student_attend_placements.Result='Placed' and PBatch= (select id from placement_batch order by id desc) GROUP BY student_attend_placements.CompanyName, bsp_code.Branch ORDER BY student_attend_placements.CompanyName";
       $retval = mysqli_query($conn, $sql);
       $data = array();
-      $brch = array('CSE','ECE','IT');
+      $brch = array('CSE','IT');
       while($row = mysqli_fetch_array($retval))
       {
-        for ($i=0; $i<3 ; $i++)
+        for ($i=0; $i<2 ; $i++)
         { 
           $data[$row['CompanyName']][$brch[$i]] = '-';
         }
@@ -41,7 +41,6 @@
             <tr>
               <th>Company Name</th>
               <th>CSE</th>
-              <th>ECE</th>
               <th>IT</th>
             </tr>
           </thead>

@@ -21,9 +21,6 @@
 					<a class='nav-link' data-toggle='pill' href='#company'>Company wise search</a>
 				</li>
 				<li class='nav-item'>
-					<a class='nav-link' data-toggle='pill' href='#branch'>Branch wise search</a>
-				</li>
-				<li class='nav-item'>
 					<a class='nav-link' data-toggle='pill' href='#year'>Year wise search</a>
 				</li>
 			</ul>
@@ -33,7 +30,7 @@
 				<div id='placement' class='container tab-pane active'>
 					<h2>Placement Batch: <mark>2017-2018</mark></h2><br>
 					<?php
-						$sql="SELECT student_attend_placements.CompanyName, COUNT(student_attend_placements.CompanyName) AS Count FROM student_attend_placements INNER JOIN placement_batch ON placement_batch.ID = student_attend_placements.PBatch WHERE student_attend_placements.RollNumber IN (SELECT student.RollNumber FROM student WHERE student.BSP IN (SELECT bsp_code.BSP FROM bsp_code WHERE bsp_code.Branch='$hod_name[1]')) AND student_attend_placements.PBatch=(SELECT MAX(placement_batch.ID) FROM placement_batch) GROUP BY Batch_name, CompanyName";
+						$sql="SELECT student_attend_placements.CompanyName, COUNT(student_attend_placements.CompanyName) AS Count FROM student_attend_placements INNER JOIN placement_batch ON placement_batch.ID = student_attend_placements.PBatch WHERE student_attend_placements.Result='Placed' AND student_attend_placements.RollNumber IN (SELECT student.RollNumber FROM student WHERE student.BSP IN (SELECT bsp_code.BSP FROM bsp_code WHERE bsp_code.Branch='$hod_name[1]')) AND student_attend_placements.PBatch=(SELECT MAX(placement_batch.ID) FROM placement_batch) GROUP BY Batch_name, CompanyName";
 						$retval = mysqli_query($conn, $sql);
 						
 						$data = array();
@@ -79,67 +76,15 @@
 				<div id='company' class='container tab-pane fade'>
 					<center>
 						<label for='cname'>Enter Company Name</label>
-						<input type='text' class='form-control' id='cname' placeholder='eg:- Google' name='company_name' required style=' width: 200px;     display: initial;'>
-						<input type='button' name='Search' value='Search' class='btn ml-3 btn-outline-primary btn-sm' style='display: initial;' onclick='loadCompany()'>
+						<input type='text' class='form-control' id='cname' placeholder='eg:- Google' name='company_name' required style=' width: 200px;     display: initial;' onkeyup="loadCompany()">
 					</center>
 				  	<div id='company_details'>
 				  	</div>
 				</div>
-						
-				<div id='branch' class='container tab-pane fade'>
-					<?php 
-						$sql="SELECT placement_batch.Batch_name, student_attend_placements.CompanyName, COUNT(student_attend_placements.CompanyName) AS Count FROM student_attend_placements INNER JOIN placement_batch ON placement_batch.ID = student_attend_placements.PBatch WHERE student_attend_placements.RollNumber IN (SELECT student.RollNumber FROM student WHERE student.BSP IN (SELECT bsp_code.BSP FROM bsp_code WHERE bsp_code.Branch='$hod_name[1]'))GROUP BY Batch_name, CompanyName";
-						$data = array();
-						$retval = mysqli_query($conn, $sql);
-						while($row = mysqli_fetch_array($retval))
-						{
-							$data[$row['Batch_name']][$row['CompanyName']] = '-';
-						}
-						//var_dump($data);
-						$retval = mysqli_query($conn, $sql);
-						while($row = mysqli_fetch_array($retval))
-						{
-							$data[$row['Batch_name']][$row['CompanyName']] = $row['Count'];
-						}
-				
-						echo "
-								<table class='table table-bordered table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl'>
-									<thead class='thead-dark'>
-										<tr>
-											<th>Placement Batch</th>
-											";
-											foreach ($data as $Pbatch => $value)
-											{
-												foreach ($value as $Cname => $count)
-												{
-													echo "<th>$Cname</th>";
-												}
-											}
-										echo "
-										</tr>
-									</thead>
-									<tbody class='table-secondary'>
-							";
-										foreach ($data as $Pbatch => $value)
-										{
-											echo "<th class='text-info'>$Pbatch</th>";
-											foreach ($value as $Cname => $count)
-											{
-												echo "<td>$count</th>";
-											}
-										}
-						echo "
-									</tbody>
-								</table>
-							";
-					?>
-			  	</div>
-
 				<div id='year' class='container tab-pane fade'>
 					<center>
 						<label for='yname'>Enter Placement Batch</label>
-						<input type='text' class='form-control' id='yname' placeholder='eg:- 2017-2018' name='year_name' required style=' width: 200px;     display: initial;'>
-						<input type='button' name='Search' value='Search' class='btn ml-3 btn-outline-primary btn-sm' style='display: initial;' onclick='loadYear()'>
+						<input type='text' class='form-control' id='yname' placeholder='eg:- 2017-2018' name='year_name' required style=' width: 200px;     display: initial;' onkeyup="loadYear()">
 					</center>
 				  	<div id='year_details'>
 					</div>

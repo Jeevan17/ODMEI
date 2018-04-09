@@ -61,9 +61,9 @@
 							array_push($temp, $cid);
 						}
 					}
-					elseif($type == 'Elective-I')
+					elseif($type == 'Elective-1')
 					{
-						echo "<h3><mark>Elective-I</mark></h3>";
+						echo "<h3><mark>Elective-1</mark></h3>";
 						echo "<br>";
 						echo "<div class='col-sm-6'>";
 							echo "<select class='form-control' name='Elective-I'>";
@@ -76,9 +76,9 @@
 							echo "</select><br>";
 						echo "</div>";
 					}
-					elseif($type == 'Elective-II')
+					elseif($type == 'Elective-2')
 					{
-						echo "<h3><mark>Elective-II</mark></h3>";
+						echo "<h3><mark>Elective-2</mark></h3>";
 						echo "<br>";
 						echo "<div class='col-sm-6'>";
 							echo "<select class='form-control' name='Elective-II'>";
@@ -91,9 +91,9 @@
 							echo "</select><br>";
 						echo "</div>";
 					}
-					elseif($type == 'Elective-III')
+					elseif($type == 'Elective-3')
 					{
-						echo "<h3><mark>Elective-III</mark></h3>";
+						echo "<h3><mark>Elective-3</mark></h3>";
 						echo "<br>";
 						echo "<div class='col-sm-6'>";
 							echo "<select class='form-control' name='Elective-III'>";
@@ -106,9 +106,9 @@
 							echo "</select><br>";
 						echo "</div>";
 					}
-					elseif($type == 'Elective-IV')
+					elseif($type == 'Elective-4')
 					{
-						echo "<h3><mark>Elective-IV</mark></h3>";
+						echo "<h3><mark>Elective-4</mark></h3>";
 						echo "<br>";
 						echo "<div class='col-sm-6'>";
 							echo "<select class='form-control' name='Elective-IV'>";
