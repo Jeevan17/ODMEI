@@ -172,10 +172,14 @@
 											$CGPA=$CGPA/$count;
 										$CGPA=round($CGPA,2);
 								echo"
+										<tr>
+											<td class='text-info'>CGPA</th>
+											<td>$CGPA</td>
+										</tr>
 									</tbody>
 								</table>
 							";
-							echo "<h3>CGPA: $CGPA</h3><br><br><br>";
+							//echo "<h3>CGPA: $CGPA</h3><br><br><br>";
 						?>
 					</div>
 					
@@ -229,22 +233,30 @@
 											if($row['Result']=='Placed')
 											{
 												echo "
-											<tr>
-												<td><h5><font color='green'>{$row['CompanyName']}</font></h5></td>
-												<td><h4><font color='green'>{$row['Result']}</font></h4></td>
-											</tr>
+												<tr class='table-success'>
+													<td>{$row['CompanyName']}</td>
+													<td>{$row['Result']}</td>
+												</tr>
+											";
+											}
+											elseif($row['Result'] == 'NotPlaced')
+											{
+												echo "
+												<tr class='table-danger'>
+													<td>{$row['CompanyName']}</td>
+													<td>{$row['Result']}</td>
+												</tr>
 											";
 											}
 											else
 											{
 												echo "
-											<tr>
-												<td>{$row['CompanyName']}</td>
-												<td>{$row['Result']}</td>
-											</tr>
+												<tr>
+													<td>{$row['CompanyName']}</td>
+													<td>{$row['Result']}</td>
+												</tr>
 											";
 											}
-											
 										}
 								echo"
 									</tbody>

@@ -9,51 +9,39 @@
 
 	include 'header.php';
 	$hod_name = explode('_', $uname);
+
+	$days = array('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
+	$staff = array();
+
+	$sql = "SELECT staff.FullName, timetable.YearandSem, bsp_code.Program, bsp_code.Branch, bsp_code.Section, timetable.Day, timetable.Timeslot, courses.CourseName FROM timetable NATURAL JOIN staff NATURAL JOIN bsp_code NATURAL JOIN courses WHERE staff.Department='$hod_name[1]' ORDER BY timetable.Day,timetable.Timeslot";
+	$data = array();
+	$retval = mysqli_query($conn, $sql);
+	while($row = mysqli_fetch_array($retval))
+	{
+		array_push($staff, $row['FullName']);
+	}
+
+	foreach ($days as $day)
+	{
+		foreach ($staff as $name)
+		{
+			$data[$day][$name] = '-';
+		}
+	}
+	var_dump($data);
+
+	$sql = "SELECT staff.FullName, timetable.YearandSem, bsp_code.Program, bsp_code.Branch, bsp_code.Section, timetable.Day, timetable.Timeslot, courses.CourseName FROM timetable NATURAL JOIN staff NATURAL JOIN bsp_code NATURAL JOIN courses WHERE staff.Department='$hod_name[1]' ORDER BY timetable.Day,timetable.Timeslot";
+	$data = array();
+	$retval = mysqli_query($conn, $sql);
+	while($row = mysqli_fetch_array($retval))
+	{
+		array_push($data[$row['Day']][$row['FullName']], array($row['CourseName'],$row['YearandSem'],$row['Program'],$row['Branch'],$row['Section']));
+	}
+	echo "<br><hr>";
+	var_dump($data);	
 ?>
 
-<div class='row'>
-	<div class="col-sm-1 pt-2">
-		Program: 
-	</div>
-	<div class="col-sm-4">
-		<select class="form-control" id="Program">
-			<option>BE</option>
-			<option>ME</option>
-		</select>
-	</div>
-	<div class="col-sm-1"></div>
-	<div class="col-sm-1 pt-2">
-		YandS: 
-	</div>
-	<div class="col-sm-4">
-		<select class="form-control" id="yands">
-			<option>1/4 Sem-1</option>
-			<option>1/4 Sem-2</option>
-			<option>2/4 Sem-1</option>
-			<option>2/4 Sem-2</option>
-			<option>3/4 Sem-1</option>
-			<option>3/4 Sem-2</option>
-			<option>4/4 Sem-1</option>
-			<option>4/4 Sem-2</option>
-		</select>
-	</div>
-</div>
-<br>
-<div class='row'>
-	<div class="col-sm-1 pt-2">
-		Section: 
-	</div>
-	<div class="col-sm-4">
-		<select class="form-control" id="Section">
-			<option>1</option>
-			<option>2</option>
-			<option>3</option>
-		</select>
-	</div>
-</div>
-<hr>
-<center><button onclick='loadTimetable()' class='btn btn-info'>Get Time Table</button></center>
-<div id="getTimetable"></div>
+
 </div>
 </div>
 		<script src='timetable/timetable.js'></script>

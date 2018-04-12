@@ -18,15 +18,34 @@
 <?php
 	while($row=mysqli_fetch_array($retval))
 	{
-		$color='';
 		if($row['Result']=='Placed')
 		{
-			$color='#66ff66';
+			echo "
+			<tr class='table-success'>
+				<td>{$row['CompanyName']}</td>
+				<td>{$row['Result']}</td>
+			</tr>
+		";
 		}
-?>
-	<tr bgcolor=<?php echo $color?>><td><?php echo $row['CompanyName'] ?></td><td><?php echo $row['Result'] ?></td></tr>
-<?php
-}
+		elseif($row['Result'] == 'NotPlaced')
+		{
+			echo "
+			<tr class='table-danger'>
+				<td>{$row['CompanyName']}</td>
+				<td>{$row['Result']}</td>
+			</tr>
+		";
+		}
+		else
+		{
+			echo "
+			<tr>
+				<td>{$row['CompanyName']}</td>
+				<td>{$row['Result']}</td>
+			</tr>
+		";
+		}
+	}
 ?>
 </table>
 </div>
