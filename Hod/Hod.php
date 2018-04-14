@@ -252,8 +252,11 @@
 										if($count!=0)
 											$CGPA=$CGPA/$count;
 										$CGPA=round($CGPA,2);
+<<<<<<< HEAD
 
 										$CGPA=$CGPA/$count;
+=======
+>>>>>>> 0c55819c43a4847b84773e8cad2df2a75a283f22
 								echo"
 										<tr>
 											<td class='text-info'>CGPA</th>
@@ -262,7 +265,7 @@
 									</tbody>
 								</table>
 							";
-							echo "<h3>CGPA: $CGPA</h3><br><br><br>";
+							//echo "<h3>CGPA: $CGPA</h3><br><br><br>";
 						?>
 					</div>
 					
@@ -313,12 +316,33 @@
 										</tr>";
 										while($row = mysqli_fetch_array($retval))
 										{
-											echo "
-											<tr>
-												<td>{$row['CompanyName']}</td>
-												<td>{$row['Result']}</td>
-											</tr>
+											if($row['Result']=='Placed')
+											{
+												echo "
+												<tr class='table-success'>
+													<td>{$row['CompanyName']}</td>
+													<td>{$row['Result']}</td>
+												</tr>
 											";
+											}
+											elseif($row['Result'] == 'NotPlaced')
+											{
+												echo "
+												<tr class='table-danger'>
+													<td>{$row['CompanyName']}</td>
+													<td>{$row['Result']}</td>
+												</tr>
+											";
+											}
+											else
+											{
+												echo "
+												<tr>
+													<td>{$row['CompanyName']}</td>
+													<td>{$row['Result']}</td>
+												</tr>
+											";
+											}
 										}
 								echo"
 									</tbody>
