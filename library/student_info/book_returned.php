@@ -1,3 +1,8 @@
+<html>
+<head>
+	<script src="jquery-3.3.1.min.js"></script>
+</head>
+<body>
 <?php include '../../dataConnections.php';
 	session_start();
 	if(!isset($_SESSION['library'])){
@@ -11,8 +16,14 @@
 		$sql = "UPDATE `student_takes_books` SET `ReturnedDate`=CURRENT_DATE WHERE RollNumber='$rno' AND BookID='$bid'";
 		if(mysqli_query($conn, $sql))
 		{
-			echo "Success";
-			echo "<script language='javascript'>window.location='./library.php';</script>";	
+			?>
+			<div>
+			<?php
+			echo "Success------Refresh the page";
+			echo "<script type='text/javascript'>alert('$rno');</script>";
+			?>
+			</div>
+		<?php
 		}
 		else
 		{
@@ -20,3 +31,12 @@
 		}
 	}
 ?>
+<script>
+$(document).ready(function(){
+    $("div").load(function(){
+        
+    });
+});
+</script>
+</body>
+</html>

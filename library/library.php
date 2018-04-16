@@ -60,7 +60,7 @@
 				<div class='tab-content'>
 					<div id='current_books' class='container tab-pane active'>
 						<?php
-						$sql = "SELECT * from library NATURAL JOIN student_takes_books WHERE student_takes_books.RollNumber='160114733313' AND student_takes_books.ReturnedDate IS NULL";
+						$sql = "SELECT * from library NATURAL JOIN student_takes_books WHERE student_takes_books.RollNumber='$rno' AND student_takes_books.ReturnedDate IS NULL";
 						$retval = mysqli_query($conn, $sql); 
 						?>
 							<h1><mark>Current Books Taken</mark></h1><br>
@@ -97,7 +97,6 @@
 				  		echo "<hr><h4>Total books taken: $count<h4><hr>"; 
 				  	?>
 				  	<div id="book_r">
-				  		
 				  	</div>
 					</div>
 					<div id='issue_books' class='container tab-pane fade'>
@@ -108,12 +107,13 @@
 							for($i=1;$i<=$max;$i++)
 							{
 								echo "
-									<input type=\"text\" class=\"form-control\" placeholder=\"Enter Book ID\">
-									<input type=\"button\" class='btn btn-outline-info pl-5 pr-5' value=\"Issue\"><br><br>
+									<input type=\"text\" class=\"form-control\" placeholder=\"Enter Book ID\" id='bi' name='bi'>
+									<input type=\"button\" onclick=\"bookIssue()\" class='btn btn-outline-info pl-5 pr-5' value=\"Issue\"><br><br>
 								";
 							}
 						?>
 					</div>
+					<div id="book_i"></div>
 					<div id='books_history' class='container tab-pane fade'>
 						<h1><mark>Books History</mark></h1><br>
 						<?php

@@ -252,6 +252,11 @@
 										if($count!=0)
 											$CGPA=$CGPA/$count;
 										$CGPA=round($CGPA,2);
+<<<<<<< HEAD
+
+										$CGPA=$CGPA/$count;
+=======
+>>>>>>> 0c55819c43a4847b84773e8cad2df2a75a283f22
 								echo"
 										<tr>
 											<td class='text-info'>CGPA</th>
