@@ -65,7 +65,7 @@
 						{
 							echo "
 								<tr>
-									<td>$companyname</div>
+									<td>$companyname</td>
 							";
 							foreach ($value as $branch => $count)
 							{

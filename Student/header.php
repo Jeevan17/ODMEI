@@ -67,7 +67,8 @@
 								'Material' => 'material.php',
 								'News' => 'news.php',
 								'Enroll Courses' => 'Enroll_Courses.php',
-								'Achievements' => 'student_achievements.php'
+								'Achievements' => 'student_achievements.php',
+								'Feedback' => 'feedback.php'
 							);
 							foreach ($urls as $name => $url) {
 								echo "<li ".(($currentPage === $name) ?"class='nav-item active' ":"class='nav-item'")."><a class='nav-link' href='$url'>$name</a></li>";

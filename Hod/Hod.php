@@ -76,6 +76,9 @@
 					<li class='nav-item'>
 						<a class='nav-link' data-toggle='pill' href='#placement'>Placement</a>
 					</li>
+					<li class='nav-item'>
+						<a class='nav-link' data-toggle='pill' href='#achievement'>Achievements</a>
+					</li>
 				</ul>
 			</div>
 			<div class='col-sm-8'>
@@ -344,6 +347,46 @@
 								</table><br><br><br><br>
 							";
 						?>
+					</div>
+					<div id='achievement' class='container tab-pane fade'>
+						<h1><mark>Achievements</mark></h1><br>
+						<table class='table table-bordered table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl'>
+							<thead>
+								<tr>
+									<th>Title</th>
+									<th>Description</th>
+									<th>Document Name</th>
+									<th>Download</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php
+									$sql="SELECT * FROM `student_achievements` WHERE RollNumber='$rno'";
+									$retval = mysqli_query($conn, $sql);
+									if(mysqli_num_rows($retval) > 0)
+									{
+										while($row=mysqli_fetch_array($retval))
+										{
+											echo "
+												<tr>
+													<td>{$row['Title']}</td>
+													<td>{$row['Description']}</td>
+													<td>{$row['DocumentName']}</td>
+													<td><a href='material/download_std_achievements.php?id={$row['id']}' class='btn btn-success'/>Download</a> </td>
+												</tr>
+											";
+										}
+									}
+									else
+									{
+										echo "<div class='alert alert-info'>
+											<strong>Please Upload Your Achievements to Visible</strong>
+										</div>";
+									}
+									
+								?>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>

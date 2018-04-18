@@ -33,7 +33,7 @@
 			$retval = mysqli_query($conn, $sql);
 			if(!(mysqli_num_rows($retval)>0))
 			{
-				$sql = "SELECT course_yands.CourseID, Type, courses.CourseName FROM course_yands INNER JOIN courses ON courses.CourseID = course_yands.CourseID WHERE Branch='$branch' AND YearandSem='$yands'";
+				$sql = "SELECT course_yands.CourseID, Type, courses.CourseName FROM course_yands INNER JOIN courses ON courses.CourseID = course_yands.CourseID WHERE Branch='$branch' AND YearandSem='$yands' ORDER BY Type";
 				$retval = mysqli_query($conn, $sql);
 				$data = array();
 				while($row = mysqli_fetch_array($retval))

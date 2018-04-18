@@ -9,9 +9,9 @@
 
 	include 'header.php';
 	$hod_name = explode('_', $uname);
-	$enroll = $hod_name[1].'_Enroll';
-	//var_dump($enroll);
-	$sql = "SELECT * from notification Where Type = '$enroll'";
+	$feedback = $hod_name[1].'_feedback';
+	
+	$sql = "SELECT * from notification Where Type = '$feedback'";
 	$retval=mysqli_query($conn,$sql);
 	$flag=null;
 	while ($row = mysqli_fetch_array($retval))
@@ -24,11 +24,11 @@
 <br><br>
 <div class="row">
 	<div class="col-sm-6 pt-2">
-		<h3>Enable Student Enroll Courses : </h3>
+		<h3>Enable Staff Feedback : </h3>
 	</div>
 	<div class="col-sm-1">
 	</div>
-		<input type='checkbox' id='enroll' data-toggle='toggle' data-on='Ready' data-off='Not Ready' data-onstyle='success' data-offstyle='danger' onchange="loadToggle()"
+		<input type='checkbox' id='feedback' data-toggle='toggle' data-on='Ready' data-off='Not Ready' data-onstyle='success' data-offstyle='danger' onchange="loadToggle()"
 		<?php 
 			if($flag == 0)
 			{
@@ -47,7 +47,7 @@
 
 </div>
 </div>
-	<script src='Enroll/enroll.js'></script>
+	<script src='Feedback/feedback.js'></script>
 	<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js'></script>
 	<script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js'></script>

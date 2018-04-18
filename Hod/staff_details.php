@@ -91,6 +91,36 @@
 				</tbody>
 			</table>
 		</div>
+		<?php 
+			$sql = "SELECT * FROM `feedback` WHERE StaffID = '$sid'";
+			$retval = mysqli_query($conn, $sql);
+			$n = mysqli_affected_rows($conn);
+			if($n > 0)
+			{
+				$n = $n * 5;
+				$sql = "SELECT `CourseID`, SUM(Communication) AS Communication, SUM(Methodology) AS Methodology, SUM(controlloverclass) AS controlloverclass, SUM(Punctuality) AS Punctuality, SUM(Clarification) AS Clarification FROM `feedback` WHERE StaffID = '$sid' GROUP BY CourseID";
+				$retval = mysqli_query($conn, $sql);
+				$dataPoints = array();
+				while($row = mysqli_fetch_array($retval))
+				{
+					array_push($dataPoints, array("label"=> "Communication", "y"=> (($row['Communication']/$n)*100)));
+					array_push($dataPoints, array("label"=> "Methodology", "y"=> (($row['Methodology']/$n)*100)));
+					array_push($dataPoints, array("label"=> "Controll Over Class", "y"=> (($row['controlloverclass']/$n)*100)));
+					array_push($dataPoints, array("label"=> "Punctuality", "y"=> (($row['Punctuality']/$n)*100)));
+					array_push($dataPoints, array("label"=> "Doubt Clarification", "y"=> (($row['Clarification']/$n)*100)));
+				}
+				
+				// echo "<pre>";
+				// var_dump($dataPoints);
+				// echo "</pre>";
+		?>
+				<div class="col">
+					<h2><mark>Feedback</mark></h2>
+					<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+				</div>
+		<?php
+			}
+		?>
 	</div>
 	<div class="row">
 		<?php
@@ -101,6 +131,34 @@
 				$data[$row['Day']][$row['Timeslot']] = array($row['CourseName'],$row['Program'],$row['YearandSem'], $row['Branch'], $row['Section'],$row['Batch']);
 			}
 		?>
+		<h2><mark>Achievements</mark></h2>
+		<table class='table table-bordered table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl'>
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>Description</th>
+					<th>Document Name</th>
+					<th>Download</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php
+					$sql="SELECT * FROM `staff_achievements` WHERE StaffID='$sid'";
+					$retval = mysqli_query($conn, $sql);
+					while($row=mysqli_fetch_array($retval))
+					{
+						echo "
+							<tr>
+								<td>{$row['Title']}</td>
+								<td>{$row['Description']}</td>
+								<td>{$row['DocumentName']}</td>
+								<td><a href='material/download_staff_achievements.php?id={$row['id']}' class='btn btn-success'/>Download</a> </td>
+							</tr>
+						";
+					}
+				?>
+			</tbody>
+		</table>
 		<h2><mark>Time Table</mark></h2>
 		<table class='table table-bordered table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl'>
 			<thead>
@@ -178,6 +236,33 @@
 ?>
 </div>
 </div>
+	<script>
+		window.onload = function () {
+		 
+		var chart = new CanvasJS.Chart("chartContainer", {
+			animationEnabled: true,
+			exportEnabled: true,
+			title:{
+				text: "Feedback"
+			},
+			// subtitles: [{
+			// 	text: "Currency Used: Thai Baht (฿)"
+			// }],
+			data: [{
+				type: "pie",
+				showInLegend: "true",
+				legendText: "{label}",
+				indexLabelFontSize: 16,
+				indexLabel: "{label} - #percent%",
+				yValueFormatString: "##'%'",
+				dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+			}]
+		});
+		chart.render();
+		 
+		}
+	</script>
+	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 	<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js'></script>
 	<script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js'></script>

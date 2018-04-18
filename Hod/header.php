@@ -44,7 +44,8 @@
 							$dropdownurls = array(
 								'Timetable' => 'timetable.php',
 								'Circular' => 'send_circular.php',
-								'Enroll Courses' => 'enroll_courses.php'
+								'Enroll Courses' => 'enroll_courses.php',
+								'Enable Feedback' => 'feedback.php'
 							);
 							foreach ($urls as $name => $url) {
 								echo "<li ".(($currentPage === $name) ?"class='nav-item active' ":"class='nav-item'")."><a class='nav-link' href='$url'>$name</a></li>";
