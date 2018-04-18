@@ -1,5 +1,13 @@
 <?php include 'dataConnections.php';
-	session_start();
+	// session_start();
+	// session_unset();
+	// session_destroy();	
+	//  if(isset($_SESSION['department'])) {
+	//  	unset($_SESSION['staff']);
+	//  	session_destroy();
+	//  	echo "<script language='javascript'>window.location='index.php';</script>";
+	//  }
+
 ?>
 
 <!--***********************************************-->

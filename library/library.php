@@ -1,12 +1,10 @@
 <?php include '../dataConnections.php'; 
-
 	session_start();
 	if(!isset($_SESSION['library'])){
 		echo "<script language='javascript'>window.location='../index.php';</script>";
 	}
 	$currentPage = 'Home';
 	$uname=$_SESSION['library'];
-
 	include 'header.php';
 	$hod_name = explode('_', $uname);
 ?>
