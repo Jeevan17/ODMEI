@@ -9,46 +9,46 @@
 
 	include 'header.php';
 
-	// $sql = "SELECT TotalAttended,TotalClassesHeld FROM attendance WHERE RollNumber='$uname' AND 	Timeperiod=(SELECT max(id) FROM timeperiod)";
-	// $retval = mysqli_query($conn, $sql);
-	// $attendance = 0;
-	// while($row = mysqli_fetch_array($retval))
-	// {
-	// 	$attendance = round($row['TotalAttended']/$row['TotalClassesHeld'] * 100,2);
-	// }
+	$sql = "SELECT TotalAttended,TotalClassesHeld FROM attendance WHERE RollNumber='$uname' AND 	Timeperiod=(SELECT max(id) FROM timeperiod)";
+	$retval = mysqli_query($conn, $sql);
+	$attendance = 0;
+	while($row = mysqli_fetch_array($retval))
+	{
+		$attendance = round($row['TotalAttended']/$row['TotalClassesHeld'] * 100,2);
+	}
 
-	// if ($attendance >= 75 and $attendance < 80 )
-	// {
-	// 	echo "<center>
-	// 			<h1>$attendance%</h1><br>
-	// 			<p class='text-warning'>You have adequate attendance. Improve further</p>
-	// 		</center>
-	// 		";
-	// }
-	// else if($attendance >= 80)
-	// {
-	// 	echo "<center>
-	// 			<h1>$attendance%</h1><br>
-	// 			<p class='text-success'>Your attendance is Good</p>
-	// 		</center>
-	// 		";
-	// }
-	// else if($attendance < 65)
-	// {
-	// 	echo "<center>
-	// 			<h1>$attendance%</h1><br>
-	// 			<p class='text-danger'>Your attendance is Poor. You are likely to be detained. Attend regularly and improve your attendance</p>
-	// 		</center>
-	// 		";
-	// }
-	// else if($attendance >= 65 and $attendance < 75)
-	// {
-	// 	echo "<center>
-	// 			<h1>$attendance%</h1><br>
-	// 			<p class='text-info'>You are likely to be detained. Attend regularly and improve your attendance</p>
-	// 		</center>
-	// 		";
-	// }
+	if ($attendance >= 75 and $attendance < 80 )
+	{
+		echo "<center>
+				<h1>$attendance%</h1><br>
+				<p class='text-warning'>You have adequate attendance. Improve further</p>
+			</center>
+			";
+	}
+	else if($attendance >= 80)
+	{
+		echo "<center>
+				<h1>$attendance%</h1><br>
+				<p class='text-success'>Your attendance is Good</p>
+			</center>
+			";
+	}
+	else if($attendance < 65)
+	{
+		echo "<center>
+				<h1>$attendance%</h1><br>
+				<p class='text-danger'>Your attendance is Poor. You are likely to be detained. Attend regularly and improve your attendance</p>
+			</center>
+			";
+	}
+	else if($attendance >= 65 and $attendance < 75)
+	{
+		echo "<center>
+				<h1>$attendance%</h1><br>
+				<p class='text-info'>You are likely to be detained. Attend regularly and improve your attendance</p>
+			</center>
+			";
+	}
 
 	
 ?>

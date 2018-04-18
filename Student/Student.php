@@ -2,7 +2,7 @@
 
 	session_start();
 	if(!isset($_SESSION['student'])){
-		echo "<script language='javascript'>window.location='../student_login.php';</script>";
+		echo "<script language='javascript'>window.location='../index.php';</script>";
 	}
 	$currentPage = 'Home';
 	$uname=$_SESSION['student'];
