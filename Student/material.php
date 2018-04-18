@@ -20,8 +20,8 @@
 		{
 		    echo "<h1>Error</h1>";
 		}
- 
 	}
+	
 	$sql = "SELECT BSP,CBatch,CurrentYandS FROM student WHERE RollNumber='$uname'
 ";
 	$retval = mysqli_query($conn, $sql);

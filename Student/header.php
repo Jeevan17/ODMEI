@@ -6,6 +6,7 @@
 	{
 		$material_count = mysqli_num_rows($retval);
 	}
+	
 	$news_count = null;
 	$sql = "SELECT * FROM notification WHERE Rollnumber = '$uname' AND Type='News'";
 	$retval = mysqli_query($conn, $sql);
@@ -13,7 +14,24 @@
 	{
 		$news_count = mysqli_num_rows($retval);
 	}
-	$count = (int)$material_count+(int)$news_count;
+
+	$enroll_count = null;
+	$sql = "SELECT * FROM notification WHERE Rollnumber = '$uname' AND Type='Enroll'";
+	$retval = mysqli_query($conn, $sql);
+	while($row = mysqli_fetch_array($retval))
+	{
+		$enroll_count = mysqli_num_rows($retval);
+	}
+
+	$feedback_count = null;
+	$sql = "SELECT * FROM notification WHERE Rollnumber = '$uname' AND Type='Feedback'";
+	$retval = mysqli_query($conn, $sql);
+	while($row = mysqli_fetch_array($retval))
+	{
+		$feedback_count = mysqli_num_rows($retval);
+	}
+
+	$count = (int)$material_count + (int)$news_count + (int)$enroll_count + (int)$feedback_count;
 	if ($count == 0)
 	{
 		$count = null;
@@ -101,6 +119,20 @@
 									echo "
 										<div class='dropdown-divider'></div>
 										<a class ='dropdown-item' href='$url'>$name <span class='badge badge-pill badge-danger'>$news_count</span></a>
+									";
+								}
+								elseif ($name == 'Enroll Courses' && $enroll_count > 0)
+								{
+									echo "
+										<div class='dropdown-divider'></div>
+										<a class ='dropdown-item' href='$url'>$name <span class='badge badge-pill badge-danger'>$enroll_count</span></a>
+									";
+								}
+								elseif ($name == 'Feedback' && $feedback_count > 0)
+								{
+									echo "
+										<div class='dropdown-divider'></div>
+										<a class ='dropdown-item' href='$url'>$name <span class='badge badge-pill badge-danger'>$feedback_count</span></a>
 									";
 								}
 								else

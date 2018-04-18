@@ -9,6 +9,19 @@
 
 	include 'header.php';
 
+	if ($feedback_count > 0)
+	{
+		$sql = "DELETE FROM notification WHERE Rollnumber='$uname' AND Type='Feedback'";
+
+		if ($conn->query($sql) === TRUE)
+		{
+		}
+		else
+		{
+		    echo "<h1>Error</h1>";
+		}
+	}
+
 	$sql = "SELECT Branch,CurrentYandS,CBatch FROM student INNER JOIN bsp_code ON student.BSP = bsp_code.BSP WHERE student.RollNumber=$uname";
 	$retval = mysqli_query($conn, $sql);
 	while($row = mysqli_fetch_array($retval))
