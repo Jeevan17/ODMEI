@@ -61,7 +61,11 @@
 						$sql = "SELECT * from library NATURAL JOIN student_takes_books WHERE student_takes_books.RollNumber='$rno' AND student_takes_books.ReturnedDate IS NULL";
 						$retval = mysqli_query($conn, $sql); 
 						?>
-							<h1><mark>Current Books Taken</mark></h1><br>
+							<h2>
+								<mark>
+									Current Books Taken--<?php echo $rno?>
+								</mark>
+							</h2><br>
 							<table class='table table-bordered table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl'>
 								<tr>
 								<th>SNo</th>
@@ -92,13 +96,13 @@
 								</table>
 				  	<?php 
 				  		}
-				  		echo "<hr><h4>Total books taken: $count<h4><hr>"; 
+				  		echo "<hr><h4>Total books taken: $count<h4><hr><br><br>"; 
 				  	?>
 				  	<div id="book_r">
 				  	</div>
 					</div>
 					<div id='issue_books' class='container tab-pane fade'>
-					    <h1><mark>Issue new books</mark></h1><br>
+					    <h2><mark>Issue new books -- <?php echo $rno?></mark></h2><br>
 						<?php
 							$max = 4-$count;
 							echo "<h3>$max"." more books can be issued</h3><hr>";
@@ -106,17 +110,49 @@
 							{
 								echo "
 									<input type=\"text\" class=\"form-control\" placeholder=\"Enter Book ID\" id='bi' name='bi'>
-									<input type=\"button\" onclick=\"bookIssue()\" class='btn btn-outline-info pl-5 pr-5' value=\"Issue\"><br><br>
+									<input type=\"button\" onclick=\"bookIssue('$rno')\" class='btn btn-outline-info pl-5 pr-5' value=\"Issue\"><br><br>
 								";
 							}
 						?>
+					<div id="book_i">
 					</div>
-					<div id="book_i"></div>
+					</div>
 					<div id='books_history' class='container tab-pane fade'>
-						<h1><mark>Books History</mark></h1><br>
+						<h2><mark>Books History -- <?php echo $rno?></mark></h2><br>
 						<?php
-							
+						$sql = "SELECT * from library NATURAL JOIN student_takes_books WHERE student_takes_books.RollNumber='$rno' AND student_takes_books.ReturnedDate IS NOT NULL";
+						$retval = mysqli_query($conn, $sql); 
 						?>
+							<table class='table table-bordered table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl'>
+								<tr>
+								<th>SNo</th>
+								<th>BookID</th>
+								<th>Title</th>
+								<th>Author</th>
+								<th>CheckedOutDate</th>
+								<th>ReturnedDate</th>
+								</tr>
+								<?php
+								$count=0;
+								while($row = mysqli_fetch_array($retval))
+								{
+									$count++;
+									?>
+									<tr>
+										<td><?php echo $count ?></td>
+										<td><?php echo $row['BookID'] ?></td>
+										<td><?php echo $row['Title'] ?></td>
+										<td><?php echo $row['Author'] ?></td>
+										<td><?php echo $row['CheckedOutDate'] ?></td>
+										<td><?php echo $row['ReturnedDate'] ?></td>
+									</tr>
+								<?php
+								}
+								?>
+								</table>
+				  	<?php 
+				  		echo "<hr><h4>Total books taken so far: $count<h4><hr><br><br>"; 
+				  	?>
 					</div>
 				</div>
 			</div>

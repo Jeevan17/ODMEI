@@ -20,7 +20,7 @@
 			<div>
 			<?php
 			echo "Success------Refresh the page";
-			echo "<script type='text/javascript'>alert('$rno');</script>";
+			//echo "<script type='text/javascript'>alert('$rno');</script>";
 			?>
 			</div>
 		<?php
