@@ -8,18 +8,62 @@
 	$uname=$_SESSION['student'];
 
 	include 'header.php';
+
+	// $sql = "SELECT TotalAttended,TotalClassesHeld FROM attendance WHERE RollNumber='$uname' AND 	Timeperiod=(SELECT max(id) FROM timeperiod)";
+	// $retval = mysqli_query($conn, $sql);
+	// $attendance = 0;
+	// while($row = mysqli_fetch_array($retval))
+	// {
+	// 	$attendance = round($row['TotalAttended']/$row['TotalClassesHeld'] * 100,2);
+	// }
+
+	// if ($attendance >= 75 and $attendance < 80 )
+	// {
+	// 	echo "<center>
+	// 			<h1>$attendance%</h1><br>
+	// 			<p class='text-warning'>You have adequate attendance. Improve further</p>
+	// 		</center>
+	// 		";
+	// }
+	// else if($attendance >= 80)
+	// {
+	// 	echo "<center>
+	// 			<h1>$attendance%</h1><br>
+	// 			<p class='text-success'>Your attendance is Good</p>
+	// 		</center>
+	// 		";
+	// }
+	// else if($attendance < 65)
+	// {
+	// 	echo "<center>
+	// 			<h1>$attendance%</h1><br>
+	// 			<p class='text-danger'>Your attendance is Poor. You are likely to be detained. Attend regularly and improve your attendance</p>
+	// 		</center>
+	// 		";
+	// }
+	// else if($attendance >= 65 and $attendance < 75)
+	// {
+	// 	echo "<center>
+	// 			<h1>$attendance%</h1><br>
+	// 			<p class='text-info'>You are likely to be detained. Attend regularly and improve your attendance</p>
+	// 		</center>
+	// 		";
+	// }
+
+	
 ?>
+	<br>
 	<table class='table table-bordered table-hover table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl'>
 		<thead>
 			<tr>
-				<th class='text-danger'>Date</th>
-				<th class='text-danger'>09:40-10:30</th>
-				<th class='text-danger'>10:30-11:20</th>
-				<th class='text-danger'>11:20-12:10</th>
-				<th class='text-danger'>12:10-01:00</th>
-				<th class='text-danger'>01:35-02:25</th>
-				<th class='text-danger'>02:25-03:15</th>
-				<th class='text-danger'>03:15-04:05</th>
+				<th class='text-primary'>Date</th>
+				<th class='text-primary'>09:40-10:30</th>
+				<th class='text-primary'>10:30-11:20</th>
+				<th class='text-primary'>11:20-12:10</th>
+				<th class='text-primary'>12:10-01:00</th>
+				<th class='text-primary'>01:35-02:25</th>
+				<th class='text-primary'>02:25-03:15</th>
+				<th class='text-primary'>03:15-04:05</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -53,6 +97,12 @@
 						{
 							echo "
 								<td class='text-danger'><center>$attendance</center></td>
+							";
+						}
+						elseif($attendance == 'Present')
+						{
+							echo "
+								<td class='text-success'><center>$attendance</center></td>
 							";
 						}
 						else

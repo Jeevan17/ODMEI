@@ -26,6 +26,7 @@
 		}
 		if($aff_rows!=0)
 			$cgpa=$cgpa/$aff_rows;
+		 $cgpa = round($cgpa,2);
 		echo "<h3>CGPA: $cgpa </h3>";
 		echo "<hr>";
 

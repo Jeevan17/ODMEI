@@ -18,15 +18,22 @@
 	$retval = mysqli_query($conn, $sql);
 ?>
 	
-	<div class="row">
-		<?php 
-		while($row = mysqli_fetch_array($retval))
-		{?>
-				<div class='col-sm-1'>
-					<input type=button id="<?php echo $row['YearandSem'] ?>" class='btn btn-info' value="<?php echo $row['YearandSem'] ?>"	onclick="load42('<?php echo $rno ?>' , '<?php echo $row['YearandSem'] ?>')">
-				</div>
-		<?php } ?>
-	</div>
+	<table class="table table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl">
+		<tbody>
+			<tr>
+				<?php 
+					while($row = mysqli_fetch_array($retval))
+					{
+				?>
+						<td>
+							<input type=button id="<?php echo $row['YearandSem'] ?>" class='btn btn-info' value="<?php echo $row['YearandSem'] ?>"	onclick="load42('<?php echo $rno ?>' , '<?php echo $row['YearandSem'] ?>')">
+						</td>
+				<?php
+					}
+				?>
+			</tr>
+		</tbody>
+	</table>
 	<div id='show_marks'>
 	</div>
 

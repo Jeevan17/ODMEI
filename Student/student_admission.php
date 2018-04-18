@@ -8,8 +8,7 @@
 	$uname=$_SESSION['student'];
 
 	include 'header.php';
-?>
-<?php
+
 	$sql="SELECT * from student NATURAL join student_details where RollNumber='$uname'";
 	$retval=mysqli_query($conn, $sql);
 	while($row = mysqli_fetch_array($retval))
