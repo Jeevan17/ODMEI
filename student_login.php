@@ -1,3 +1,7 @@
+<?php
+	session_start();
+	session_destroy();
+?>
 <?php include 'dataConnections.php';
 	session_start();
 	// if(isset($_SESSION['student'])) {

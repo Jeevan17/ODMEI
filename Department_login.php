@@ -1,5 +1,9 @@
+<?php
+	session_start();
+	session_destroy();
+?>
 <?php include 'dataConnections.php';
-	// session_start();
+	session_start();
 	// session_unset();
 	// session_destroy();	
 	//  if(isset($_SESSION['department'])) {
